@@ -491,6 +491,124 @@
     }
 
     /* ========================================
+       Scenario Flow
+       ======================================== */
+    .scenario-group {
+      margin-bottom: 24px;
+    }
+
+    .scenario-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .scenario-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .scenario-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: #d42a2a;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .scenario-number.blue {
+      background: #5B7FFF;
+    }
+
+    .scenario-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .scenario-subtitle {
+      font-size: 13px;
+      color: #888;
+      font-weight: 400;
+      margin-left: 4px;
+    }
+
+    .scenario-context {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #f8f9fb;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .scenario-context .context-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .scenario-flow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .scenario-flow .sf-item {
+      background: #f8f8f8;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #555;
+      white-space: nowrap;
+    }
+
+    .scenario-flow .sf-item.active {
+      background: #d42a2a;
+      border-color: #d42a2a;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .scenario-flow .sf-item.blue {
+      background: #5B7FFF;
+      border-color: #5B7FFF;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .scenario-flow .sf-item.highlight {
+      background: #fff3e0;
+      border-color: #ffb74d;
+      color: #e65100;
+      font-weight: 600;
+    }
+
+    .scenario-flow .sf-arrow {
+      color: #ccc;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .scenario-divider {
+      height: 1px;
+      background: #f0f0f0;
+      margin: 20px 0;
+    }
+
+    /* ========================================
        Responsive
        ======================================== */
     @media (max-width: 960px) {
@@ -589,43 +707,74 @@
         <span class="doc-badge">STEP 1 OF 8</span>
         <span class="step-badge">앱 진입점</span>
         <h1>메뉴 홈</h1>
-        <p class="subtitle">사용자가 앱에 진입했을 때 가장 먼저 만나는 메뉴 허브 화면</p>
+        <p class="subtitle">루틴한 주문과 다같이 주문, 두 가지 시나리오의 공통 시작점</p>
       </div>
 
-      <!-- ① 플로우 위치 -->
+      <!-- ① 사용자 시나리오 플로우 -->
       <div class="doc-section">
-        <h2><span class="icon">📍</span> 전체 플로우 위치</h2>
-        <div class="flow-map">
-          <div class="step"><span class="step-dot active">1</span></div>
-          <span class="step-line"></span>
-          <div class="step"><span class="step-dot">2</span></div>
-          <span class="step-line"></span>
-          <div class="step"><span class="step-dot">3</span></div>
-          <span class="step-line"></span>
-          <div class="step"><span class="step-dot">4</span></div>
-          <span class="step-line"></span>
-          <div class="step"><span class="step-dot">5</span></div>
-          <span class="step-line"></span>
-          <div class="step"><span class="step-dot">6</span></div>
-          <span class="step-line"></span>
-          <div class="step"><span class="step-dot">7</span></div>
-          <span class="step-line"></span>
-          <div class="step"><span class="step-dot">8</span></div>
+        <h2><span class="icon">📍</span> 사용자 시나리오 플로우</h2>
+        <p style="margin-bottom:20px;">이 앱은 두 가지 핵심 사용자 시나리오를 기반으로 설계되었습니다. 메뉴 홈은 두 시나리오의 공통 진입점입니다.</p>
+
+        <!-- 시나리오 1 -->
+        <div class="scenario-group">
+          <div class="scenario-header">
+            <span class="scenario-number">1</span>
+            <span class="scenario-title">루틴한 주문 <span class="scenario-subtitle">— 빠르게 반복 주문</span></span>
+          </div>
+          <div class="scenario-context">
+            <span class="context-icon">🚶</span>
+            <span><strong>출근 시간</strong> — 매일 아침 출근길에 같은 메뉴를 빠르게 주문하는 직장인. 최소한의 탭으로 주문을 완료하고 싶다.</span>
+          </div>
+          <div class="scenario-flow">
+            <span class="sf-item active">ORDER</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">퀵오더</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">최근 주문</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">결제화면</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">결제완료</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item highlight">광고</span>
+          </div>
         </div>
-        <div class="flow-map-labels">
-          <span class="step-label active">메뉴홈</span>
-          <span class="step-label">카테고리</span>
-          <span class="step-label">메뉴상세</span>
-          <span class="step-label">즐겨찾기</span>
-          <span class="step-label">매장선택</span>
-          <span class="step-label">장바구니</span>
-          <span class="step-label">주문정보</span>
-          <span class="step-label">주문완료</span>
+
+        <div class="scenario-divider"></div>
+
+        <!-- 시나리오 2 -->
+        <div class="scenario-group">
+          <div class="scenario-header">
+            <span class="scenario-number blue">2</span>
+            <span class="scenario-title">다같이 주문 <span class="scenario-subtitle">— 여러 메뉴 탐색 후 주문</span></span>
+          </div>
+          <div class="scenario-context">
+            <span class="context-icon">👥</span>
+            <span><strong>점심 시간</strong> — 동료들과 함께 주문할 때, 여러 메뉴를 탐색하고 장바구니에 담아 한 번에 주문하는 시나리오.</span>
+          </div>
+          <div class="scenario-flow">
+            <span class="sf-item blue">ORDER</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">NEW</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">커피/음료</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">주문하기</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">바텀시트</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">결제화면</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item">결제완료</span>
+            <span class="sf-arrow">→</span>
+            <span class="sf-item highlight">광고</span>
+          </div>
         </div>
-        <table class="info-table" style="margin-top:16px;">
+
+        <table class="info-table" style="margin-top:20px;">
           <tr><th>화면명</th><td>메뉴 메인 (Menu Home)</td></tr>
           <tr><th>파일명</th><td><code>menu.html</code></td></tr>
-          <tr><th>역할</th><td>앱의 메인 랜딩 페이지, 전체 주문 동선의 시작점</td></tr>
+          <tr><th>역할</th><td>앱의 메인 랜딩 페이지, 두 시나리오의 공통 진입점</td></tr>
         </table>
       </div>
 
@@ -647,11 +796,11 @@
 
         <div class="doc-divider"></div>
 
-        <h3>사용자 시나리오</h3>
+        <h3>사용자 시나리오별 설계 포인트</h3>
         <table class="info-table">
-          <tr><th>반복 고객</th><td>Quick Order → 주문하기 → 결제 (3단계 완료)</td></tr>
-          <tr><th>탐색 고객</th><td>카테고리 탭 → 메뉴 리스트 → 상세 → 장바구니 → 결제</td></tr>
-          <tr><th>프로모션 유입</th><td>배너 클릭 → 해당 메뉴 상세 → 주문</td></tr>
+          <tr><th>시나리오 1<br><span style="font-weight:400;color:#888;font-size:12px;">루틴한 주문</span></th><td>출근길에 매일 같은 메뉴를 주문하는 사용자를 위해 <strong>Quick Order → 최근 주문 → 결제</strong>의 최단 경로를 제공합니다. 최소 탭으로 주문 완료가 가능하도록 설계했습니다.</td></tr>
+          <tr><th>시나리오 2<br><span style="font-weight:400;color:#888;font-size:12px;">다같이 주문</span></th><td>점심시간에 동료들과 함께 주문하는 사용자를 위해 <strong>카테고리 탐색 → 메뉴 상세 → 디저트 추천 바텀시트 → 결제</strong>로 여러 메뉴를 편리하게 담을 수 있도록 설계했습니다.</td></tr>
+          <tr><th>공통</th><td>두 시나리오 모두 결제 완료 후 <strong>광고 화면</strong>을 노출하여 프로모션 인지도를 높입니다.</td></tr>
         </table>
       </div>
 

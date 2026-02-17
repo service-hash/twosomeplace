@@ -159,6 +159,26 @@
       </div>
     </div>
 
+    <!-- 디저트 추천 바텀시트 -->
+    <div class="bs-overlay" id="bsOverlay">
+      <div class="bs-sheet" id="bsSheet">
+        <div class="bs-header">
+          <h2 class="bs-title">함께 주문하면 더 좋아요!</h2>
+          <button class="bs-close" id="bsClose" aria-label="닫기">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M18 6L6 18M6 6l12 12" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="bs-body" id="bsBody">
+          <!-- JS에서 동적 생성 -->
+        </div>
+        <div class="bs-footer">
+          <button class="bs-btn-order" id="bsOrderBtn">함께 주문하기</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script src="menu-data.js"></script>
@@ -312,19 +332,23 @@
       });
     }
 
+    // 주문 URL 저장용 변수
+    let pendingOrderUrl = '';
+
     function updateSubmitButton(item) {
       const submitBtn = document.getElementById('orderSubmitBtn');
       submitBtn.classList.remove('disabled');
       submitBtn.textContent = `${formatPrice(item.price)} 주문하기`;
 
-      // 선택된 옵션 수집 후 order.html로 링크
+      // 선택된 옵션 수집 후 URL 저장 (바로 이동하지 않음)
       const selectedOptions = [];
       document.querySelectorAll('.option-group').forEach(group => {
         const activeBtn = group.querySelector('.option-btn.active');
         if (activeBtn) selectedOptions.push(activeBtn.textContent);
       });
-      submitBtn.href = `docs/order-doc.html?id=${item.id}&qty=${orderQty}&options=${encodeURIComponent(selectedOptions.join('|'))}`;
-      submitBtn.target = '_top';
+      pendingOrderUrl = `docs/order-doc.html?id=${item.id}&qty=${orderQty}&options=${encodeURIComponent(selectedOptions.join('|'))}`;
+      submitBtn.href = '#';
+      submitBtn.removeAttribute('target');
 
       // 아이콘 버튼 활성화
       document.querySelectorAll('.action-btn').forEach(btn => {
@@ -359,9 +383,139 @@
       document.body.style.overflow = '';
     }
 
+    // ====== 장바구니 데이터 (localStorage) ======
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem('twosome_cart') || '[]');
+      } catch(e) {
+        return [];
+      }
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('twosome_cart', JSON.stringify(cart));
+    }
+
+    function findItemById(menuId) {
+      let item = MENU_DATA.find(m => m.id === menuId);
+      if (item) return { ...item, imgSrc: `./assets/images/${item.image}` };
+      item = DESSERT_DATA.find(d => d.id === menuId);
+      if (item) return { ...item, imgSrc: item.imgUrl };
+      return null;
+    }
+
+    // ====== 디저트 추천 바텀시트 ======
+    function openRecommendSheet() {
+      const body = document.getElementById('bsBody');
+      const cart = getCart();
+      let html = '<div class="bs-grid">';
+      DESSERT_DATA.forEach((item, i) => {
+        const alreadyIn = cart.some(ci => ci.menuId === item.id);
+        html += `
+          <div class="bs-item" data-bs-index="${i}">
+            <div class="bs-thumb">
+              <img src="${item.imgUrl}" alt="${item.name}" onerror="this.src='https://mcdn.twosome.co.kr/resources/images/svg/img_goods_no.svg?width=276&height=276&q=100';">
+              <button class="bs-add-btn ${alreadyIn ? 'added' : ''}" data-dessert-id="${item.id}" aria-label="추가" ${alreadyIn ? 'style="pointer-events:none"' : ''}>
+                ${alreadyIn
+                  ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#d42a2a"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+                  : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#222"/><path d="M12 7v10M7 12h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>'
+                }
+              </button>
+            </div>
+            <p class="bs-item-name">${item.name}</p>
+            <p class="bs-item-price">${formatPrice(item.price)}</p>
+          </div>
+        `;
+      });
+      html += '</div>';
+      body.innerHTML = html;
+
+      updateBsOrderBtn();
+
+      const overlay = document.getElementById('bsOverlay');
+      overlay.classList.add('show');
+      setTimeout(() => {
+        document.getElementById('bsSheet').classList.add('show');
+      }, 10);
+
+      // + 버튼 클릭 → 장바구니에 디저트 추가
+      body.addEventListener('click', function(e) {
+        const addBtn = e.target.closest('.bs-add-btn');
+        if (!addBtn || addBtn.classList.contains('added')) return;
+        const dessertId = addBtn.dataset.dessertId;
+        const dessert = DESSERT_DATA.find(d => d.id === dessertId);
+        if (!dessert) return;
+        const cart = getCart();
+        cart.push({ menuId: dessert.id, qty: 1, options: [], checked: true });
+        saveCart(cart);
+        addBtn.classList.add('added');
+        addBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#d42a2a"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        addBtn.style.pointerEvents = 'none';
+        updateBsOrderBtn();
+      });
+    }
+
+    function updateBsOrderBtn() {
+      const cart = getCart();
+      let total = 0;
+      cart.forEach(ci => {
+        if (ci.checked !== false) {
+          const item = findItemById(ci.menuId);
+          if (item) total += item.price * ci.qty;
+        }
+      });
+      const btn = document.getElementById('bsOrderBtn');
+      btn.textContent = `${formatPrice(total)} 함께 주문하기`;
+    }
+
+    function closeRecommendSheet() {
+      document.getElementById('bsSheet').classList.remove('show');
+      setTimeout(() => {
+        document.getElementById('bsOverlay').classList.remove('show');
+      }, 300);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       loadMenuDetail();
       initQuantityControl();
+
+      // 주문하기 버튼 → 바텀시트 열기
+      document.getElementById('orderSubmitBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (this.classList.contains('disabled')) return;
+
+        // 현재 메뉴를 장바구니에 추가
+        const menuId = getMenuId();
+        const item = MENU_DATA.find(m => m.id === menuId);
+        if (item) {
+          const selectedOptions = [];
+          document.querySelectorAll('.option-group').forEach(group => {
+            const activeBtn = group.querySelector('.option-btn.active');
+            if (activeBtn) selectedOptions.push(activeBtn.textContent);
+          });
+          const cart = getCart();
+          cart.push({ menuId: item.id, qty: orderQty, options: selectedOptions, checked: true });
+          saveCart(cart);
+        }
+
+        openRecommendSheet();
+      });
+
+      // 바텀시트 닫기
+      document.getElementById('bsClose').addEventListener('click', closeRecommendSheet);
+      document.getElementById('bsOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeRecommendSheet();
+      });
+
+      // 바텀시트 주문하기 → 주문 페이지 이동
+      document.getElementById('bsOrderBtn').addEventListener('click', function() {
+        closeRecommendSheet();
+        const cart = getCart();
+        const checked = cart.filter(ci => ci.checked !== false);
+        if (checked.length === 0) return;
+        localStorage.setItem('twosome_order', JSON.stringify(checked));
+        window.top.location.href = pendingOrderUrl || 'docs/order-doc.html?from=cart';
+      });
     });
   </script>
 </body>

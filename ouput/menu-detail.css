@@ -531,3 +531,158 @@
     font-size: 15px;
   }
 }
+
+/* ========================================
+   디저트 추천 바텀시트
+   ======================================== */
+.bs-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 200;
+}
+
+.bs-overlay.show {
+  display: block;
+}
+
+.bs-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: 100%;
+  max-width: 430px;
+  max-height: 75vh;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-out;
+}
+
+.bs-sheet.show {
+  transform: translate(-50%, 0);
+}
+
+.bs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 20px 16px;
+  flex-shrink: 0;
+}
+
+.bs-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #222;
+}
+
+.bs-close {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.bs-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 12px;
+}
+
+.bs-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.bs-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.bs-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bs-add-btn {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.bs-item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  margin-top: 8px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bs-item-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #222;
+  margin-top: 3px;
+}
+
+.bs-footer {
+  padding: 12px 20px 24px;
+  flex-shrink: 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.bs-btn-order {
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.bs-btn-order:active {
+  background: #000;
+}

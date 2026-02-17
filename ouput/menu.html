@@ -117,7 +117,20 @@
           </div>
         </section>
         <!-- Quick Order -->
-        <section class="quick-order-section" id="quickOrderSection">
+        <section class="quick-order-section" id="quickOrderSection" style="position:relative;">
+          <!-- 영역 표시용 깜빡임 오버레이 -->
+          <div style="
+            position:absolute; top:0; left:0; right:0; bottom:0;
+            background:rgba(255,255,255,0.75);
+            z-index:10; pointer-events:none;
+            animation: hl-blink 2s ease-in-out infinite;
+          "></div>
+          <style>
+            @keyframes hl-blink {
+              0%, 100% { opacity:0; }
+              50% { opacity:1; }
+            }
+          </style>
           <div class="section-header">
             <h2 class="section-title">Quick Order</h2>
             <p class="section-subtitle">오늘 아침도 이 메뉴를 준비해 드릴까요?</p>
@@ -142,7 +155,14 @@
         </section>
 
         <!-- 최근 주문 -->
-        <section class="recent-order-section" id="recentOrderSection">
+        <section class="recent-order-section" id="recentOrderSection" style="position:relative;">
+          <!-- 영역 표시용 깜빡임 오버레이 -->
+          <div style="
+            position:absolute; top:0; left:0; right:0; bottom:0;
+            background:rgba(255,255,255,0.75);
+            z-index:10; pointer-events:none;
+            animation: hl-blink 2s ease-in-out infinite;
+          "></div>
           <div class="section-header">
             <h2 class="section-title">최근 주문</h2>
           </div>
