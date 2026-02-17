@@ -51,7 +51,7 @@
         <li class="active"><a href="menu.html" data-tab="order">ORDER</a></li>
         <li><a href="menu.html" data-tab="new">NEW</a></li>
         <li><a href="menu.html" data-tab="coffee">커피/음료</a></li>
-        <li><a href="#">디저트</a></li>
+        <li><a href="menu.html" data-tab="dessert">디저트</a></li>
         <li><a href="#">푸드</a></li>
         <li><a href="#">상품</a></li>
       </ul>
@@ -60,13 +60,23 @@
     <!-- 서브 카테고리 탭 (커피/음료) -->
     <nav class="sub-category-tabs" id="subCategoryTabs" style="display:none;">
       <ul>
-        <li class="active"><a href="#" data-sub="커피">커피</a></li>
+        <li class="active"><a href="#" data-sub="전체">전체</a></li>
+        <li><a href="#" data-sub="커피">커피</a></li>
         <li><a href="#" data-sub="디카페인 커피">디카페인 커피</a></li>
         <li><a href="#" data-sub="음료">음료</a></li>
         <li><a href="#" data-sub="티/티라떼">티/티라떼</a></li>
         <li><a href="#" data-sub="아이스크림/빙수">아이스크림/빙수</a></li>
       </ul>
     </nav>
+
+    <!-- 필터 바 (NEW, 커피/음료, 디저트 탭에서 표시) -->
+    <div class="filter-bar" id="filterBar" style="display:none;">
+      <div class="filter-selection-row" id="filterSelectionRow">
+        <div class="filter-chip" data-filter="lowSugar" onclick="toggleFilterChip(this)">저당</div>
+        <div class="filter-chip" data-filter="lowCalorie" onclick="toggleFilterChip(this)">저칼로리</div>
+        <div class="filter-chip" data-filter="decaf" onclick="toggleFilterChip(this)">카페인 프리</div>
+      </div>
+    </div>
 
     <!-- 메인 컨텐츠 (스크롤 영역) -->
     <main class="content">
@@ -150,6 +160,11 @@
         <section class="menu-list" id="coffeeMenuList"></section>
       </div>
 
+      <!-- 디저트 탭 컨텐츠 -->
+      <div class="tab-content" id="tabDessert" style="display:none;">
+        <section class="menu-list" id="dessertMenuList"></section>
+      </div>
+
     </main>
 
     <!-- 플로팅 추천 UI (주석처리)
@@ -201,23 +216,141 @@
 
   <script src="menu-data.js"></script>
   <script>
+    // ========================================
+    // 필터 상태
+    // ========================================
+    var activeFilters = {
+      lowSugar: false,
+      lowCalorie: false,
+      decaf: false
+    };
+    var currentTab = 'order';
+
     function formatPrice(price) {
+      if (price === undefined || price === null || isNaN(Number(price))) return '가격 미정';
       return Number(price).toLocaleString() + '원';
     }
 
     function renderMenuItems(container, items, showNewBadge) {
-      container.innerHTML = items.map(item => `
-        <a target="_top" href="docs/menu-detail-doc.html?id=${item.id}" class="menu-item">
-          <div class="menu-thumb">
-            <img src="./assets/images/${item.image}" alt="${item.name}">
-          </div>
-          <div class="menu-info">
-            ${showNewBadge ? '<span class="badge-new">New</span>' : ''}
-            <h3 class="menu-name">${item.name}</h3>
-            <p class="menu-price">${formatPrice(item.price)}</p>
-          </div>
-        </a>
-      `).join('');
+      if (items.length === 0) {
+        container.innerHTML = '<p style="padding:40px 20px;text-align:center;color:#888;font-size:14px;">조건에 맞는 메뉴가 없습니다.</p>';
+        return;
+      }
+      container.innerHTML = items.map(function(item) {
+        var imgSrc = item.imgUrl ? item.imgUrl : './assets/images/' + item.image;
+        return '<a target="_top" href="docs/menu-detail-doc.html?id=' + item.id + '" class="menu-item">' +
+          '<div class="menu-thumb">' +
+            '<img src="' + imgSrc + '" alt="' + item.name + '">' +
+          '</div>' +
+          '<div class="menu-info">' +
+            (showNewBadge ? '<span class="badge-new">New</span>' : '') +
+            '<h3 class="menu-name">' + item.name + '</h3>' +
+            '<p class="menu-price">' + formatPrice(item.price) + '</p>' +
+          '</div>' +
+        '</a>';
+      }).join('');
+    }
+
+    // ========================================
+    // 필터 로직
+    // ========================================
+    function getSugarValue(item) {
+      if (!item.sugar) return 999;
+      var val = item.sugar.split('/')[0];
+      return parseFloat(val) || 0;
+    }
+
+    function getCalorieValue(item) {
+      if (!item.calories) return 999;
+      return parseFloat(item.calories) || 0;
+    }
+
+    function getCaffeineValue(item) {
+      if (!item.caffeine) return 999;
+      return parseFloat(item.caffeine) || 0;
+    }
+
+    function applyFilters(items) {
+      var hasActive = activeFilters.lowSugar || activeFilters.lowCalorie || activeFilters.decaf;
+      if (!hasActive) return items;
+
+      return items.filter(function(item) {
+        if (activeFilters.lowSugar && getSugarValue(item) > 10) return false;
+        if (activeFilters.lowCalorie && getCalorieValue(item) > 150) return false;
+        if (activeFilters.decaf && getCaffeineValue(item) > 0) return false;
+        return true;
+      });
+    }
+
+    function toggleFilterChip(element) {
+      var filterType = element.dataset.filter;
+      element.classList.toggle('selected');
+      activeFilters[filterType] = element.classList.contains('selected');
+
+      // 현재 탭 다시 렌더
+      refreshCurrentTab();
+    }
+
+    function refreshCurrentTab() {
+      if (currentTab === 'new') {
+        renderNewMenu();
+      } else if (currentTab === 'coffee') {
+        var activeSub = document.querySelector('.sub-category-tabs li.active a');
+        var subCat = activeSub ? activeSub.dataset.sub : '커피';
+        renderCoffeeMenu(subCat);
+      } else if (currentTab === 'dessert') {
+        renderDessertMenu();
+      }
+    }
+
+    function showFilterBar(withSubTabs) {
+      var bar = document.getElementById('filterBar');
+      bar.style.display = '';
+      if (withSubTabs) {
+        bar.classList.add('with-sub-tabs');
+      } else {
+        bar.classList.remove('with-sub-tabs');
+      }
+    }
+
+    // 서브카테고리별 필터 칩 가시성 제어
+    function updateFilterChips(subCategory) {
+      var chips = document.querySelectorAll('.filter-chip');
+      chips.forEach(function(chip) {
+        chip.style.display = '';
+      });
+
+      if (subCategory === '디카페인 커피') {
+        // 디카페인 커피 탭: 카페인프리 제거 (이미 전부 디카페인)
+        chips.forEach(function(chip) {
+          if (chip.dataset.filter === 'decaf') {
+            chip.style.display = 'none';
+            chip.classList.remove('selected');
+            activeFilters.decaf = false;
+          }
+        });
+      } else if (subCategory === '아이스크림/빙수') {
+        // 아이스크림/빙수 탭: 저당, 저칼로리 제거
+        chips.forEach(function(chip) {
+          if (chip.dataset.filter === 'lowSugar' || chip.dataset.filter === 'lowCalorie') {
+            chip.style.display = 'none';
+            chip.classList.remove('selected');
+            activeFilters[chip.dataset.filter] = false;
+          }
+        });
+      }
+    }
+
+    function hideFilterBar() {
+      var bar = document.getElementById('filterBar');
+      bar.style.display = 'none';
+    }
+
+    function resetFilters() {
+      activeFilters.lowSugar = false;
+      activeFilters.lowCalorie = false;
+      activeFilters.decaf = false;
+      document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('selected'); });
     }
 
     // ========================================
@@ -293,23 +426,56 @@
       }).join('');
     }
 
+    // NEW 메뉴 렌더
+    function renderNewMenu() {
+      var menuList = document.getElementById('menuList');
+      var newItems = (typeof NEW_DATA !== 'undefined') ? NEW_DATA : MENU_DATA.filter(function(m) { return m.isNew === true; });
+      var filtered = applyFilters(newItems);
+      renderMenuItems(menuList, filtered, true);
+    }
+
     // 커피/음료 서브카테고리 렌더
     function renderCoffeeMenu(subCategory) {
       var coffeeList = document.getElementById('coffeeMenuList');
-      var filtered = MENU_DATA.filter(function(m) {
-        return m.category === '커피/음료' && m.subCategory === subCategory;
-      });
-
-      if (filtered.length === 0) {
-        coffeeList.innerHTML = '<p style="padding:40px 20px;text-align:center;color:#888;">등록된 메뉴가 없습니다.</p>';
-        return;
+      var items;
+      if (subCategory === '전체') {
+        items = [].concat(
+          typeof COFFEE_DATA !== 'undefined' ? COFFEE_DATA : [],
+          typeof DECAF_COFFEE_DATA !== 'undefined' ? DECAF_COFFEE_DATA : [],
+          typeof BEVERAGE_DATA !== 'undefined' ? BEVERAGE_DATA : [],
+          typeof TEA_DATA !== 'undefined' ? TEA_DATA : [],
+          typeof ICECREAM_DATA !== 'undefined' ? ICECREAM_DATA : []
+        );
+      } else if (subCategory === '커피' && typeof COFFEE_DATA !== 'undefined') {
+        items = COFFEE_DATA;
+      } else if (subCategory === '디카페인 커피' && typeof DECAF_COFFEE_DATA !== 'undefined') {
+        items = DECAF_COFFEE_DATA;
+      } else if (subCategory === '음료' && typeof BEVERAGE_DATA !== 'undefined') {
+        items = BEVERAGE_DATA;
+      } else if (subCategory === '티/티라떼' && typeof TEA_DATA !== 'undefined') {
+        items = TEA_DATA;
+      } else if (subCategory === '아이스크림/빙수' && typeof ICECREAM_DATA !== 'undefined') {
+        items = ICECREAM_DATA;
+      } else {
+        items = MENU_DATA.filter(function(m) {
+          return m.category === '커피/음료' && m.subCategory === subCategory;
+        });
       }
-
+      var filtered = applyFilters(items);
       renderMenuItems(coffeeList, filtered, false);
+    }
+
+    // 디저트 메뉴 렌더
+    function renderDessertMenu() {
+      var dessertList = document.getElementById('dessertMenuList');
+      var items = (typeof DESSERT_DATA !== 'undefined') ? DESSERT_DATA : [];
+      // 디저트는 영양 정보가 없으므로 필터 적용 시 전부 표시 (필터 비활성 취급)
+      renderMenuItems(dessertList, items, false);
     }
 
     // 탭 전환
     function switchTab(tabName) {
+      currentTab = tabName;
       var tabs = document.querySelectorAll('.category-tabs li');
       tabs.forEach(function(li) {
         var a = li.querySelector('a');
@@ -322,6 +488,7 @@
 
       document.querySelectorAll('.tab-content').forEach(function(el) { el.style.display = 'none'; });
       document.getElementById('subCategoryTabs').style.display = 'none';
+      hideFilterBar();
 
       if (tabName === 'order') {
         document.getElementById('tabOrder').style.display = '';
@@ -330,19 +497,22 @@
       } else if (tabName === 'new') {
         if (bannerAutoTimer) clearInterval(bannerAutoTimer);
         document.getElementById('tabNew').style.display = '';
-        var menuList = document.getElementById('menuList');
-        if (!menuList.hasChildNodes()) {
-          var newItems = MENU_DATA.filter(function(m) { return m.isNew === true; });
-          renderMenuItems(menuList, newItems, true);
-        }
+        showFilterBar(false);
+        renderNewMenu();
       } else if (tabName === 'coffee') {
         if (bannerAutoTimer) clearInterval(bannerAutoTimer);
         document.getElementById('subCategoryTabs').style.display = '';
         document.getElementById('tabCoffee').style.display = '';
-        var coffeeList = document.getElementById('coffeeMenuList');
-        if (!coffeeList.hasChildNodes()) {
-          renderCoffeeMenu('커피');
-        }
+        showFilterBar(true);
+        var activeSub = document.querySelector('.sub-category-tabs li.active a');
+        var subCat = activeSub ? activeSub.dataset.sub : '커피';
+        updateFilterChips(subCat);
+        renderCoffeeMenu(subCat);
+      } else if (tabName === 'dessert') {
+        if (bannerAutoTimer) clearInterval(bannerAutoTimer);
+        document.getElementById('tabDessert').style.display = '';
+        showFilterBar(false);
+        renderDessertMenu();
       }
     }
 
@@ -380,9 +550,11 @@
           e.preventDefault();
           document.querySelectorAll('.sub-category-tabs li').forEach(function(li) { li.classList.remove('active'); });
           link.parentElement.classList.add('active');
+          updateFilterChips(link.dataset.sub);
           renderCoffeeMenu(link.dataset.sub);
         });
       }
+
     });
   </script>
 </body>
