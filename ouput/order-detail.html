@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>투썸오더 - 주문상세</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="order-detail.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <a href="#" class="btn-icon btn-back" id="btnBack" aria-label="뒤로가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-home" aria-label="홈">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="header-title">주문상세</h1>
+      <div class="header-right"></div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="content">
+
+      <!-- 주문번호 배너 -->
+      <section class="order-banner">
+        <p class="order-number" id="orderNumber">주문번호 1</p>
+        <p class="order-datetime" id="orderDatetime">2022-03-12 19:15:19</p>
+      </section>
+
+      <!-- 주문 진행 상태 -->
+      <section class="order-progress-section">
+        <div class="progress-refresh">
+          <button class="btn-refresh" aria-label="새로고침">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M23 4v6h-6" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20.49 15a9 9 0 11-2.12-9.36L23 10" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="progress-steps">
+          <!-- Step 1: 주문완료 -->
+          <div class="step completed">
+            <div class="step-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="11" stroke="#bbb" stroke-width="1.5"/>
+                <path d="M7 12.5l3 3 7-7" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="step-label">주문완료</span>
+          </div>
+          <div class="step-line"></div>
+          <!-- Step 2: 준비중 (active) -->
+          <div class="step active">
+            <div class="step-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="11" fill="#222" stroke="#222" stroke-width="1"/>
+                <path d="M7 8.5C7 7.67 7.67 7 8.5 7h7c.83 0 1.5.67 1.5 1.5v1c0 .83-.67 1.5-1.5 1.5h-7C7.67 11 7 10.33 7 9.5v-1z" fill="#fff"/>
+                <path d="M8 11v4.5c0 .83.67 1.5 1.5 1.5h5c.83 0 1.5-.67 1.5-1.5V11" stroke="#fff" stroke-width="1.2" fill="none"/>
+                <path d="M10 14h4" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="step-label active-label">준비중</span>
+          </div>
+          <div class="step-line"></div>
+          <!-- Step 3: 준비완료 -->
+          <div class="step">
+            <div class="step-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="11" stroke="#ccc" stroke-width="1.5"/>
+                <path d="M7 12.5l3 3 7-7" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="step-label">준비완료</span>
+          </div>
+          <div class="step-line"></div>
+          <!-- Step 4: 수령완료 -->
+          <div class="step">
+            <div class="step-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="11" stroke="#ccc" stroke-width="1.5"/>
+                <path d="M7 12.5l3 3 7-7" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="step-label">수령완료</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 매장 정보 -->
+      <section class="store-section">
+        <span class="store-name" id="storeName">종로구청점</span>
+        <button class="btn-store-time" aria-label="영업시간">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#222" stroke-width="1.8"/>
+            <path d="M12 6v6l4 2" stroke="#222" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 주문 상품 리스트 (아코디언) -->
+      <section class="order-items-accordion">
+        <button class="accordion-toggle" id="accordionToggle">
+          <span class="accordion-title">주문 상품</span>
+          <svg class="accordion-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="accordion-body open" id="accordionBody">
+          <div class="order-items" id="orderItems">
+            <!-- JS에서 동적 생성 -->
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 프로모션 배너 슬라이더 -->
+      <section class="banner-slider">
+        <div class="banner-track" id="bannerTrack">
+          <div class="banner-slide active">
+            <a href="javascript:void(0);">
+              <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202602/MOCM0010_20260203095432_sCYKMXZA" alt="2월 브리저튼 신제품 출시">
+            </a>
+          </div>
+          <div class="banner-slide">
+            <a href="javascript:void(0);">
+              <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202601/MOCM0010_20260126140815_jgoMGRIz" alt="고르곤졸라 바스크 치즈&브라우니 신제품 출시">
+            </a>
+          </div>
+          <div class="banner-slide">
+            <a href="javascript:void(0);">
+              <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202601/MOCM0010_20260129164757_iWFJMaao" alt="두초생 미니&말차 스초생 신제품 출시">
+            </a>
+          </div>
+          <div class="banner-slide">
+            <a href="javascript:void(0);">
+              <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202601/MOCM0010_20260116092906_YkHAosAt" alt="설 기프트 세트 신제품 출시">
+            </a>
+          </div>
+          <div class="banner-slide">
+            <a href="javascript:void(0);">
+              <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202601/MOCM0010_20260113091132_wWQrwoum" alt="현대카드 M포인트 70% 사용">
+            </a>
+          </div>
+        </div>
+        <div class="banner-pagination">
+          <span class="current">1</span> / <span class="total">5</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 하단 버튼 -->
+    <footer class="bottom-action">
+      <button class="btn-receipt" id="btnReceipt">영수증 보기</button>
+    </footer>
+
+  </div>
+
+  <script src="menu-data.js"></script>
+  <script>
+    function formatPrice(price) {
+      return Number(price).toLocaleString() + '원';
+    }
+
+    function getNow() {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      const hh = String(d.getHours()).padStart(2, '0');
+      const mm = String(d.getMinutes()).padStart(2, '0');
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      return `${y}-${m}-${dd} ${hh}:${mm}:${ss}`;
+    }
+
+    // 아이템 조회 헬퍼 (MENU_DATA + DESSERT_DATA)
+    function findItemById(menuId) {
+      let item = MENU_DATA.find(m => m.id === menuId);
+      if (item) return item;
+      item = DESSERT_DATA.find(d => d.id === menuId);
+      if (item) return item;
+      return null;
+    }
+
+    function getDisplayName(item, options) {
+      if (!options || options.length === 0) return item.name;
+      const temp = options[0] || '';
+      const size = options[1] || '';
+      const sizeAbbr = size === '라지' ? 'L' : size === '레귤러' ? 'R' : '';
+      const tempAbbr = temp === '핫' ? 'H' : temp === '아이스' ? 'I' : '';
+      if (tempAbbr && sizeAbbr) return `(${tempAbbr})${item.name}(${sizeAbbr})`;
+      return item.name;
+    }
+
+    function loadOrderDetail() {
+      // localStorage에서 주문 데이터 로드
+      let orderData = [];
+      try {
+        orderData = JSON.parse(localStorage.getItem('twosome_order_detail') || '[]');
+      } catch(e) {}
+
+      // 하위호환: URL 파라미터로 단일 아이템 진입
+      if (orderData.length === 0) {
+        const params = new URLSearchParams(window.location.search);
+        const menuId = params.get('id');
+        if (menuId) {
+          const qty = parseInt(params.get('qty')) || 1;
+          const optionsStr = params.get('options') || '';
+          const options = optionsStr ? decodeURIComponent(optionsStr).split('|') : [];
+          orderData = [{ menuId, qty, options }];
+        }
+      }
+
+      if (orderData.length === 0) return;
+
+      // 주문번호 & 날짜
+      const orderNum = Math.floor(Math.random() * 100) + 1;
+      document.getElementById('orderNumber').textContent = `주문번호 ${orderNum}`;
+      document.getElementById('orderDatetime').textContent = getNow();
+      document.getElementById('btnBack').href = 'docs/menu-doc.html';
+      document.getElementById('btnBack').target = '_top';
+
+      // 주문 상품 렌더링
+      const orderItemsEl = document.getElementById('orderItems');
+      let html = '';
+
+      orderData.forEach(od => {
+        const item = findItemById(od.menuId);
+        if (!item) return;
+
+        const options = od.options || [];
+        const displayName = getDisplayName(item, options);
+        const optionText = options.length > 0 ? options.join(' | ') : '';
+        const unitPrice = item.price;
+        const itemTotal = unitPrice * od.qty;
+
+        html += `
+          <div class="order-product">
+            <div class="product-header">
+              <h3 class="product-title">${displayName}</h3>
+            </div>
+            ${optionText ? `
+            <div class="product-detail">
+              <span class="detail-options">${optionText}</span>
+              <span class="detail-price">${formatPrice(unitPrice)}</span>
+            </div>` : `
+            <div class="product-detail">
+              <span class="detail-options">상품금액</span>
+              <span class="detail-price">${formatPrice(unitPrice)}</span>
+            </div>`}
+            <div class="product-detail">
+              <span class="detail-options">커스텀 선택 안함</span>
+              <span class="detail-price">0원</span>
+            </div>
+            <div class="product-total">
+              <span class="total-calc">${formatPrice(unitPrice)} × ${od.qty}개 = </span>
+              <span class="total-price">${formatPrice(itemTotal)}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      orderItemsEl.innerHTML = html;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      loadOrderDetail();
+
+      // 아코디언 토글
+      const toggleBtn = document.getElementById('accordionToggle');
+      const accordionBody = document.getElementById('accordionBody');
+
+      toggleBtn.addEventListener('click', function() {
+        accordionBody.classList.toggle('open');
+        toggleBtn.classList.toggle('collapsed');
+      });
+
+      // 1.5초 후 자동 접힘
+      setTimeout(function() {
+        accordionBody.classList.remove('open');
+        toggleBtn.classList.add('collapsed');
+      }, 1500);
+
+      // 배너 슬라이더
+      const track = document.getElementById('bannerTrack');
+      if (track) {
+        const slides = track.querySelectorAll('.banner-slide');
+        const currentEl = document.querySelector('.banner-pagination .current');
+        const totalEl = document.querySelector('.banner-pagination .total');
+        let currentIndex = 0;
+        const total = slides.length;
+        let startX = 0;
+        let autoTimer;
+
+        totalEl.textContent = total;
+
+        function goTo(index) {
+          if (index < 0) index = total - 1;
+          if (index >= total) index = 0;
+          currentIndex = index;
+          track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+          slides.forEach(function(s) { s.classList.remove('active'); });
+          slides[currentIndex].classList.add('active');
+          currentEl.textContent = currentIndex + 1;
+        }
+
+        function startAuto() {
+          autoTimer = setInterval(function() { goTo(currentIndex + 1); }, 3500);
+        }
+        function stopAuto() { clearInterval(autoTimer); }
+
+        track.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+          stopAuto();
+        });
+        track.addEventListener('touchend', function(e) {
+          var diff = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) {
+            goTo(currentIndex + (diff > 0 ? 1 : -1));
+          }
+          startAuto();
+        });
+
+        startAuto();
+      }
+    });
+  </script>
+</body>
+</html>

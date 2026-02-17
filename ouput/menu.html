@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>투썸오더 - 메뉴</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <button class="btn-icon btn-back" aria-label="뒤로가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <a href="menu.html" class="btn-icon btn-home" aria-label="홈">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="header-title">투썸오더</h1>
+      <div class="header-right">
+        <a target="_top" href="docs/favorites-doc.html" class="btn-icon btn-favorite" aria-label="즐겨찾기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <button class="btn-icon btn-share" aria-label="공유">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v13" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <a target="_top" href="docs/cart-doc.html" class="btn-icon btn-cart" aria-label="장바구니">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6zM3 6h18M16 10a4 4 0 01-8 0" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-badge">2</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 카테고리 탭 -->
+    <nav class="category-tabs">
+      <ul>
+        <li class="active"><a href="menu.html" data-tab="order">ORDER</a></li>
+        <li><a href="menu.html" data-tab="new">NEW</a></li>
+        <li><a href="menu.html" data-tab="coffee">커피/음료</a></li>
+        <li><a href="#">디저트</a></li>
+        <li><a href="#">푸드</a></li>
+        <li><a href="#">상품</a></li>
+      </ul>
+    </nav>
+
+    <!-- 서브 카테고리 탭 (커피/음료) -->
+    <nav class="sub-category-tabs" id="subCategoryTabs" style="display:none;">
+      <ul>
+        <li class="active"><a href="#" data-sub="커피">커피</a></li>
+        <li><a href="#" data-sub="디카페인 커피">디카페인 커피</a></li>
+        <li><a href="#" data-sub="음료">음료</a></li>
+        <li><a href="#" data-sub="티/티라떼">티/티라떼</a></li>
+        <li><a href="#" data-sub="아이스크림/빙수">아이스크림/빙수</a></li>
+      </ul>
+    </nav>
+
+    <!-- 메인 컨텐츠 (스크롤 영역) -->
+    <main class="content">
+
+      <!-- ORDER 탭 컨텐츠 -->
+      <div class="tab-content" id="tabOrder">
+        <!-- 프로모션 배너 슬라이더 -->
+        <section class="banner-slider">
+          <div class="banner-track" id="bannerTrack">
+            <div class="banner-slide active">
+              <a href="javascript:void(0);">
+                <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202602/MOCM0010_20260203095432_sCYKMXZA" alt="2월 브리저튼 신제품 출시">
+              </a>
+            </div>
+            <div class="banner-slide">
+              <a href="javascript:void(0);">
+                <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202601/MOCM0010_20260126140815_jgoMGRIz" alt="고르곤졸라 바스크 치즈&브라우니 신제품 출시">
+              </a>
+            </div>
+            <div class="banner-slide">
+              <a href="javascript:void(0);">
+                <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202601/MOCM0010_20260129164757_iWFJMaao" alt="두초생 미니&말차 스초생 신제품 출시">
+              </a>
+            </div>
+            <div class="banner-slide">
+              <a href="javascript:void(0);">
+                <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202601/MOCM0010_20260116092906_YkHAosAt" alt="설 기프트 세트 신제품 출시">
+              </a>
+            </div>
+            <div class="banner-slide">
+              <a href="javascript:void(0);">
+                <img src="https://mcdn.twosome.co.kr/upload/MOCM0010/202601/MOCM0010_20260113091132_wWQrwoum" alt="현대카드 M포인트 70% 사용">
+              </a>
+            </div>
+          </div>
+          <div class="banner-pagination">
+            <span class="current">1</span> / <span class="total">5</span>
+          </div>
+        </section>
+        <!-- Quick Order -->
+        <section class="quick-order-section" id="quickOrderSection">
+          <div class="section-header">
+            <h2 class="section-title">Quick Order</h2>
+            <p class="section-subtitle">오늘 아침도 이 메뉴를 준비해 드릴까요?</p>
+          </div>
+          <div class="quick-order-card">
+            <div class="quick-order-thumb">
+              <img src="./assets/images/아메리카노.png" alt="아메리카노">
+            </div>
+            <div class="quick-order-info">
+              <span class="quick-order-name">아메리카노</span>
+              <span class="quick-order-option">ICE · 레귤러</span>
+              <span class="quick-order-price">4,700원</span>
+              <span class="quick-order-store">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" fill="#bbb"/>
+                </svg>
+                종로3가역점 · 301m
+              </span>
+            </div>
+            <a target="_top" href="docs/order-detail-doc.html" class="quick-order-btn">주문하기</a>
+          </div>
+        </section>
+
+        <!-- 최근 주문 -->
+        <section class="recent-order-section" id="recentOrderSection">
+          <div class="section-header">
+            <h2 class="section-title">최근 주문</h2>
+          </div>
+          <div class="recent-order-list" id="recentOrderList"></div>
+        </section>
+      </div>
+
+      <!-- NEW 탭 컨텐츠 -->
+      <div class="tab-content" id="tabNew" style="display:none;">
+        <section class="menu-list" id="menuList"></section>
+      </div>
+
+      <!-- 커피/음료 탭 컨텐츠 -->
+      <div class="tab-content" id="tabCoffee" style="display:none;">
+        <section class="menu-list" id="coffeeMenuList"></section>
+      </div>
+
+    </main>
+
+    <!-- 플로팅 추천 UI (주석처리)
+    <div class="floating-recommend" id="floatingRecommend">
+      <button class="floating-recommend-close" id="floatingRecommendClose" aria-label="닫기">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+          <path d="M11 3L3 11M3 3l8 8" stroke="#999" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p class="floating-recommend-text">오늘 아침도 이 메뉴를 준비해 드릴까요?</p>
+      <div class="floating-recommend-product">
+        <div class="floating-recommend-thumb">
+          <img src="./assets/images/아메리카노.png" alt="아메리카노">
+        </div>
+        <div class="floating-recommend-body">
+          <span class="floating-recommend-menu">아메리카노</span>
+          <span class="floating-recommend-price">4,700원</span>
+          <span class="floating-recommend-store">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" fill="#bbb"/>
+            </svg>
+            종로3가역점 · 301m
+          </span>
+        </div>
+        <a target="_top" href="docs/order-detail-doc.html" class="floating-recommend-btn">주문하기</a>
+      </div>
+    </div>
+    -->
+
+    <!-- 플로팅 검색 버튼 -->
+    <button class="fab-search" aria-label="검색">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2"/>
+        <path d="M21 21l-4.35-4.35" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- 하단 매장 정보 바 -->
+    <footer class="bottom-bar">
+      <div class="store-info">
+        <span class="store-label">주문 매장</span>
+        <span class="store-name">종로3가역점</span>
+        <span class="store-distance">301m</span>
+      </div>
+      <a target="_top" href="docs/store-select-doc.html" class="btn-change">변경</a>
+    </footer>
+
+  </div>
+
+  <script src="menu-data.js"></script>
+  <script>
+    function formatPrice(price) {
+      return Number(price).toLocaleString() + '원';
+    }
+
+    function renderMenuItems(container, items, showNewBadge) {
+      container.innerHTML = items.map(item => `
+        <a target="_top" href="docs/menu-detail-doc.html?id=${item.id}" class="menu-item">
+          <div class="menu-thumb">
+            <img src="./assets/images/${item.image}" alt="${item.name}">
+          </div>
+          <div class="menu-info">
+            ${showNewBadge ? '<span class="badge-new">New</span>' : ''}
+            <h3 class="menu-name">${item.name}</h3>
+            <p class="menu-price">${formatPrice(item.price)}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // ========================================
+    // 배너 슬라이더
+    // ========================================
+    let bannerAutoTimer;
+    function initBannerSlider() {
+      const track = document.getElementById('bannerTrack');
+      if (!track) return;
+      const slides = track.querySelectorAll('.banner-slide');
+      const currentEl = document.querySelector('.banner-pagination .current');
+      const totalEl = document.querySelector('.banner-pagination .total');
+      let currentIndex = 0;
+      const total = slides.length;
+      let startX = 0;
+
+      totalEl.textContent = total;
+
+      function goTo(index) {
+        if (index < 0) index = total - 1;
+        if (index >= total) index = 0;
+        currentIndex = index;
+        track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+        slides.forEach(function(s) { s.classList.remove('active'); });
+        slides[currentIndex].classList.add('active');
+        currentEl.textContent = currentIndex + 1;
+      }
+
+      function startAuto() {
+        if (bannerAutoTimer) clearInterval(bannerAutoTimer);
+        bannerAutoTimer = setInterval(function() { goTo(currentIndex + 1); }, 3500);
+      }
+      function stopAuto() { clearInterval(bannerAutoTimer); }
+
+      track.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        stopAuto();
+      });
+      track.addEventListener('touchend', function(e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+          goTo(currentIndex + (diff > 0 ? 1 : -1));
+        }
+        startAuto();
+      });
+
+      startAuto();
+    }
+
+    // 최근 주문 데이터 (모의)
+    var RECENT_ORDERS = [
+      { id: '1', name: '아메리카노', price: 4700, image: '아메리카노.png', options: 'ICE · 레귤러', date: '2025.02.07' },
+      { id: '8', name: '딸기 듬뿍 라떼', price: 6800, image: '딸기 듬뿍 라떼.png', options: 'ICE · 레귤러', date: '2025.02.06' },
+      { id: '2', name: '카페 라떼', price: 5200, image: '카페 라떼.png', options: 'HOT · 라지', date: '2025.02.05' },
+      { id: '9', name: '생딸기 듬뿍 주스', price: 7200, image: '생딸기 듬뿍 주스.png', options: 'ICE · 레귤러', date: '2025.02.03' },
+      { id: '4', name: '바닐라 라떼', price: 5700, image: '바닐라 라떼.png', options: 'ICE · 레귤러', date: '2025.02.01' }
+    ];
+
+    function renderRecentOrders() {
+      var list = document.getElementById('recentOrderList');
+      list.innerHTML = RECENT_ORDERS.slice(0, 3).map(function(item) {
+        return '<a target="_top" href="docs/menu-detail-doc.html?id=' + item.id + '" class="recent-order-item">' +
+          '<div class="recent-order-thumb">' +
+            '<img src="./assets/images/' + item.image + '" alt="' + item.name + '">' +
+          '</div>' +
+          '<div class="recent-order-info">' +
+            '<span class="recent-order-name">' + item.name + '</span>' +
+            '<span class="recent-order-options">' + item.options + '</span>' +
+            '<span class="recent-order-date">' + item.date + '</span>' +
+          '</div>' +
+          '<span class="recent-order-price">' + formatPrice(item.price) + '</span>' +
+        '</a>';
+      }).join('');
+    }
+
+    // 커피/음료 서브카테고리 렌더
+    function renderCoffeeMenu(subCategory) {
+      var coffeeList = document.getElementById('coffeeMenuList');
+      var filtered = MENU_DATA.filter(function(m) {
+        return m.category === '커피/음료' && m.subCategory === subCategory;
+      });
+
+      if (filtered.length === 0) {
+        coffeeList.innerHTML = '<p style="padding:40px 20px;text-align:center;color:#888;">등록된 메뉴가 없습니다.</p>';
+        return;
+      }
+
+      renderMenuItems(coffeeList, filtered, false);
+    }
+
+    // 탭 전환
+    function switchTab(tabName) {
+      var tabs = document.querySelectorAll('.category-tabs li');
+      tabs.forEach(function(li) {
+        var a = li.querySelector('a');
+        if (a && a.dataset.tab === tabName) {
+          li.classList.add('active');
+        } else if (a && a.dataset.tab) {
+          li.classList.remove('active');
+        }
+      });
+
+      document.querySelectorAll('.tab-content').forEach(function(el) { el.style.display = 'none'; });
+      document.getElementById('subCategoryTabs').style.display = 'none';
+
+      if (tabName === 'order') {
+        document.getElementById('tabOrder').style.display = '';
+        renderRecentOrders();
+        initBannerSlider();
+      } else if (tabName === 'new') {
+        if (bannerAutoTimer) clearInterval(bannerAutoTimer);
+        document.getElementById('tabNew').style.display = '';
+        var menuList = document.getElementById('menuList');
+        if (!menuList.hasChildNodes()) {
+          var newItems = MENU_DATA.filter(function(m) { return m.isNew === true; });
+          renderMenuItems(menuList, newItems, true);
+        }
+      } else if (tabName === 'coffee') {
+        if (bannerAutoTimer) clearInterval(bannerAutoTimer);
+        document.getElementById('subCategoryTabs').style.display = '';
+        document.getElementById('tabCoffee').style.display = '';
+        var coffeeList = document.getElementById('coffeeMenuList');
+        if (!coffeeList.hasChildNodes()) {
+          renderCoffeeMenu('커피');
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // ORDER 탭 초기 렌더
+      renderRecentOrders();
+      initBannerSlider();
+
+      // 플로팅 추천 닫기
+      var floatingClose = document.getElementById('floatingRecommendClose');
+      if (floatingClose) {
+        floatingClose.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var floating = document.getElementById('floatingRecommend');
+          floating.classList.add('hide');
+          setTimeout(function() { floating.style.display = 'none'; }, 300);
+        });
+      }
+
+      // 메인 탭 클릭 이벤트
+      document.querySelectorAll('.category-tabs a[data-tab]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          switchTab(this.dataset.tab);
+        });
+      });
+
+      // 서브 카테고리 탭 클릭 이벤트
+      var subTabsEl = document.querySelector('#subCategoryTabs ul');
+      if (subTabsEl) {
+        subTabsEl.addEventListener('click', function(e) {
+          var link = e.target.closest('a[data-sub]');
+          if (!link) return;
+          e.preventDefault();
+          document.querySelectorAll('.sub-category-tabs li').forEach(function(li) { li.classList.remove('active'); });
+          link.parentElement.classList.add('active');
+          renderCoffeeMenu(link.dataset.sub);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

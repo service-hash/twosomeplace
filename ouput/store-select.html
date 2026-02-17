@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>투썸오더 - 주문 매장 선택</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="store-select.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-back" aria-label="뒤로가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-home" aria-label="홈">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="header-title">주문 매장 선택</h1>
+      <div class="header-right">
+        <a target="_top" href="docs/cart-doc.html" class="btn-icon btn-cart" aria-label="장바구니">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6zM3 6h18M16 10a4 4 0 01-8 0" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 검색 바 -->
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="7" stroke="#999" stroke-width="2"/>
+          <path d="M21 21l-4.35-4.35" stroke="#999" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="text" class="search-input" placeholder="매장명 또는 주소를 입력해 주세요">
+      </div>
+    </div>
+
+    <!-- 필터 옵션 -->
+    <div class="filter-bar">
+      <button class="filter-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M4 6h16M7 12h10M10 18h4" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        서비스 옵션
+      </button>
+      <button class="filter-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="#555" stroke-width="2"/>
+          <circle cx="12" cy="12" r="3" fill="#555"/>
+        </svg>
+        지도
+      </button>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="content">
+
+      <!-- 즐겨찾는 매장 -->
+      <section class="store-section">
+        <h2 class="store-section-title">즐겨찾는 매장 <span class="count">3</span></h2>
+
+        <!-- 즐겨찾는 매장 카드 슬라이더 -->
+        <div class="favorite-store-card">
+          <div class="store-card-header">
+            <h3 class="store-card-name">종로3가역점</h3>
+            <button class="btn-star active" aria-label="즐겨찾기 해제">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#d42a2a">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/>
+              </svg>
+            </button>
+          </div>
+          <p class="store-card-address">서울 종로구 수표로 106</p>
+          <p class="store-card-distance">326m</p>
+          <div class="store-card-icons">
+            <span class="store-icon" title="와이파이">📶</span>
+            <span class="store-icon" title="와이파이">📡</span>
+            <span class="store-icon" title="주차">🅿️</span>
+            <span class="store-icon" title="배달">🚗</span>
+          </div>
+          <div class="store-card-image">
+            <img src="./assets/images/store_jongro3.png" alt="종로3가역점">
+          </div>
+        </div>
+
+        <!-- 페이지네이션 닷 -->
+        <div class="dots-pagination">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 매장 리스트 -->
+      <section class="store-list">
+
+        <!-- 매장 아이템 1 -->
+        <div class="store-item">
+          <div class="store-item-info">
+            <div class="store-item-header">
+              <h3 class="store-item-name">투썸2.0안국</h3>
+              <button class="btn-star" aria-label="즐겨찾기">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="#ccc" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+            <p class="store-item-address">서울특별시 종로구 율곡로 47 (안국동, 걸스카우트회관) 1-2층</p>
+            <p class="store-item-distance">436m</p>
+            <div class="store-item-icons">
+              <span class="store-icon">📶</span>
+              <span class="store-icon">📡</span>
+              <span class="store-icon">🅿️</span>
+              <span class="store-icon">🚗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 매장 아이템 2 -->
+        <div class="store-item">
+          <div class="store-item-info">
+            <div class="store-item-header">
+              <h3 class="store-item-name">종로알파빌딩점</h3>
+              <button class="btn-star" aria-label="즐겨찾기">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="#ccc" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+            <p class="store-item-address">서울 종로구 종로 34 알파빌딩</p>
+            <p class="store-item-distance">621m</p>
+            <div class="store-item-icons">
+              <span class="store-icon">📶</span>
+              <span class="store-icon">📡</span>
+              <span class="store-icon">🅿️</span>
+            </div>
+          </div>
+          <div class="store-item-image">
+            <img src="./assets/images/store_jongro_alpha.png" alt="종로알파빌딩점">
+          </div>
+        </div>
+
+        <!-- 매장 아이템 3 -->
+        <div class="store-item">
+          <div class="store-item-info">
+            <div class="store-item-header">
+              <h3 class="store-item-name">청계천광교점</h3>
+              <button class="btn-star" aria-label="즐겨찾기">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="#ccc" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+            <p class="store-item-address">서울 종로구 청계천로 67</p>
+            <p class="store-item-distance">820m</p>
+            <div class="store-item-icons">
+              <span class="store-icon">📶</span>
+              <span class="store-icon">🅿️</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+</body>
+</html>

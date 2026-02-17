@@ -1,0 +1,451 @@
+/* ========================================
+   주문정보입력 페이지 스타일
+   ======================================== */
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 90px;
+}
+
+/* ========================================
+   Section
+   ======================================== */
+.order-section {
+  padding: 22px 20px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #222;
+}
+
+.section-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.btn-toggle {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================
+   Order Item (주문 상품)
+   ======================================== */
+.order-item {
+  margin-top: 16px;
+}
+
+.order-item-card {
+  padding-bottom: 16px;
+}
+
+.order-item-card.mt-16 {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.item-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.item-options {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.item-detail-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.item-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f5f5f5;
+}
+
+.item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-prices {
+  flex: 1;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.price-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.price-value {
+  font-size: 14px;
+  color: #555;
+}
+
+.price-row.total {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px dashed #ddd;
+}
+
+.price-row.total .price-label,
+.price-row.total .price-value {
+  font-weight: 700;
+  color: #222;
+}
+
+/* 쿠폰 행 */
+.coupon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 0;
+}
+
+.btn-coupon {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border: 1px solid #d42a2a;
+  border-radius: 20px;
+  color: #d42a2a;
+  font-size: 13px;
+  font-weight: 600;
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn-coupon:active {
+  background: #fff5f5;
+}
+
+.coupon-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* ========================================
+   Use Link Button
+   ======================================== */
+.btn-use-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #d42a2a;
+  background: none;
+  border: 1px solid #d42a2a;
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.btn-use-link:active {
+  background: #fff5f5;
+}
+
+/* ========================================
+   Packaging (포장 여부)
+   ======================================== */
+.packaging-options {
+  display: flex;
+  gap: 24px;
+  margin-top: 14px;
+}
+
+/* Check Option (체크박스 스타일) */
+.check-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.check-option input[type="radio"] {
+  display: none;
+}
+
+.check-custom {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.check-option input:checked ~ .check-custom {
+  border-color: #d42a2a;
+  background: #d42a2a;
+  color: #fff;
+}
+
+.check-label {
+  font-size: 14px;
+  color: #333;
+}
+
+/* ========================================
+   Membership
+   ======================================== */
+.membership-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding: 10px 0;
+}
+
+.membership-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.badge-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: #eee;
+  color: #999;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 50%;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.btn-toggle-small {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================
+   Sub Section (기타 결제수단 하위)
+   ======================================== */
+.sub-section {
+  margin-top: 16px;
+  padding-top: 12px;
+}
+
+.sub-label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.sub-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.sub-value {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ========================================
+   Payment (결제수단 선택)
+   ======================================== */
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.payment-btn {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.payment-btn:active {
+  background: #fafafa;
+}
+
+.payment-btn.active {
+  color: #222;
+  font-weight: 700;
+  border: 2px solid #222;
+}
+
+/* 카드 선택 */
+.card-select {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.select-card {
+  width: 100%;
+  height: 48px;
+  padding: 0 40px 0 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #888;
+  background: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* 동일 결제수단 */
+.same-payment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.check-icon {
+  flex-shrink: 0;
+}
+
+/* 매장별 안내 */
+.payment-notice {
+  margin-top: 16px;
+  padding: 12px 0;
+}
+
+.payment-notice p {
+  font-size: 13px;
+  color: #d42a2a;
+  line-height: 1.5;
+}
+
+/* 제휴 할인 */
+.partnership-info {
+  margin-top: 8px;
+}
+
+.partnership-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.partnership-list {
+  list-style: none;
+}
+
+.partnership-list li {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+/* ========================================
+   Final Price (최종 결제금액)
+   ======================================== */
+.final-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.final-label {
+  font-size: 17px;
+  font-weight: 700;
+  color: #222;
+}
+
+.final-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #222;
+}
+
+/* ========================================
+   Notice (유의사항)
+   ======================================== */
+.notice-text {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* ========================================
+   Bottom Action
+   ======================================== */
+.bottom-action {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  padding: 12px 20px 20px;
+  background: #fff;
+  z-index: 100;
+}

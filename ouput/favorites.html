@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>투썸오더 - 즐겨찾는 메뉴</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="favorites.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-back" aria-label="뒤로가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-home" aria-label="홈">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="header-title">즐겨찾는 메뉴</h1>
+      <div class="header-right"></div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="content">
+
+      <!-- 총 개수 -->
+      <div class="total-count">
+        총 <strong>1</strong>개
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- 안내 문구 -->
+      <div class="edit-notice">
+        <span class="notice-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#bbb" stroke-width="2"/>
+            <path d="M12 8v4M12 16h.01" stroke="#bbb" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="notice-text">즐겨찾는 메뉴 편집은 마이페이지에서 가능합니다.</span>
+        <a href="#" class="edit-link">편집하기 &gt;</a>
+      </div>
+
+      <!-- 즐겨찾기 메뉴 리스트 -->
+      <div class="fav-list">
+
+        <!-- 즐겨찾기 아이템 -->
+        <div class="fav-item">
+          <div class="fav-checkbox">
+            <button class="check-btn" aria-label="선택">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="#ddd" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="fav-thumb">
+            <img src="./assets/images/menu_strawberry_latte.png" alt="딸기듬뿍 라떼">
+          </div>
+
+          <div class="fav-info">
+            <h3 class="fav-name">딸기듬뿍 라떼</h3>
+            <p class="fav-price">7,400원</p>
+            <p class="fav-options">아이스/라지/일회용컵</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 하단 액션 버튼 -->
+      <div class="fav-actions">
+        <button class="btn-action btn-cart-add">장바구니 담기</button>
+        <a target="_top" href="docs/order-doc.html" class="btn-action btn-order-now">지금 바로 주문</a>
+      </div>
+
+    </main>
+
+  </div>
+</body>
+</html>

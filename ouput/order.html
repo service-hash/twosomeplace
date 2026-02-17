@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>투썸오더 - 주문정보입력</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="order.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <a href="#" class="btn-icon btn-back" id="btnBack" aria-label="뒤로가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-home" aria-label="홈">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="header-title">주문정보입력</h1>
+      <div class="header-right">
+        <a target="_top" href="docs/cart-doc.html" class="btn-icon btn-cart" aria-label="장바구니">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6zM3 6h18M16 10a4 4 0 01-8 0" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="content">
+
+      <!-- 주문정보 섹션 -->
+      <section class="order-section">
+        <div class="section-header">
+          <h2 class="section-title">주문정보</h2>
+          <button class="btn-toggle" aria-label="접기/펼치기">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="order-item" id="orderItem">
+          <!-- JS에서 동적 생성 -->
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 페어링/영수증 쿠폰 섹션 -->
+      <section class="order-section">
+        <div class="section-header">
+          <h2 class="section-title">페어링/영수증 쿠폰 (프로모션)</h2>
+          <button class="btn-use-link">사용하기 &gt;</button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 포장 여부 -->
+      <section class="order-section">
+        <h2 class="section-title">포장 여부</h2>
+        <div class="packaging-options">
+          <label class="check-option">
+            <input type="radio" name="packaging" value="eat-in" checked>
+            <span class="check-custom">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="check-label">전체 포장</span>
+          </label>
+          <label class="check-option">
+            <input type="radio" name="packaging" value="takeout">
+            <span class="check-custom">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="check-label">포장 안 함</span>
+          </label>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- T 우주패스 -->
+      <section class="order-section">
+        <div class="section-header">
+          <h2 class="section-title">T 우주패스 <span class="badge-info">i</span></h2>
+        </div>
+        <div class="membership-row">
+          <span class="membership-label">T 멤버십 카드번호 <span class="badge-info">i</span></span>
+          <button class="btn-toggle-small">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 기타 결제수단 -->
+      <section class="order-section">
+        <div class="section-header">
+          <h2 class="section-title">기타 결제수단</h2>
+          <span class="section-value">0원</span>
+          <button class="btn-toggle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 15l6-6 6 6" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 모바일 쿠폰 -->
+        <div class="sub-section">
+          <p class="sub-label">모바일 쿠폰 (사용가능 0 / 0)</p>
+          <div class="sub-row">
+            <span class="sub-value">0원</span>
+            <button class="btn-use-link">사용하기 &gt;</button>
+          </div>
+        </div>
+
+        <!-- 기프트카드 -->
+        <div class="sub-section">
+          <p class="sub-label">기프트카드 (보유잔액 0원)</p>
+          <div class="sub-row">
+            <span class="sub-value">0원</span>
+            <button class="btn-use-link">사용하기 &gt;</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 결제수단 선택 -->
+      <section class="order-section">
+        <h2 class="section-title">결제수단 선택</h2>
+        <div class="payment-grid">
+          <button class="payment-btn">투썸페이</button>
+          <button class="payment-btn active">신용카드</button>
+          <button class="payment-btn">KB Pay</button>
+          <button class="payment-btn">카카오페이</button>
+          <button class="payment-btn">네이버페이</button>
+          <button class="payment-btn">페이코</button>
+        </div>
+
+        <!-- 카드 선택 -->
+        <div class="card-select">
+          <select class="select-card">
+            <option>카드를 선택하세요.</option>
+          </select>
+          <svg class="select-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- 동일 결제수단 사용 -->
+        <div class="same-payment">
+          <div class="check-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#d42a2a"/>
+              <path d="M8 12l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span>다음에도 동일한 결제수단으로 사용할게요.</span>
+        </div>
+
+        <!-- 매장별 안내 -->
+        <div class="payment-notice">
+          <p>※ 매장에 따라 간편결제(카카오페이/네이버페이/페이코)를 지원하지 않을 수 있습니다.</p>
+        </div>
+
+        <!-- 제휴 할인 안내 -->
+        <div class="partnership-info">
+          <p class="partnership-title">※ 투썸오디/케이크예약 제휴 할인</p>
+          <ul class="partnership-list">
+            <li>• The CJ Card(일반/임직원) 할인, 현대카드 M포인트 사용 가능합니다. (단, 이벤트 및 쿠폰 적용 시 할인 불가합니다.)</li>
+            <li>• 투썸페이 및 간편결제(KB Pay/카카오페이/네이버페이/페이코) 결제 시에는 The CJ Card(일반/임직원) 제휴 할인이 적용되지 않습니다.</li>
+            <li>• 추후 제휴할인 적용 카드가 확대될 예정입니다. (단, 이벤트 및 쿠폰 적용 시 제휴 할인이 불가할 수 있습니다.)</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 최종 결제금액 -->
+      <section class="order-section">
+        <div class="final-price-row">
+          <span class="final-label">최종 결제금액</span>
+          <span class="final-price" id="finalPrice">0원</span>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 유의사항 -->
+      <section class="order-section">
+        <div class="section-header">
+          <h2 class="section-title">유의사항</h2>
+          <button class="btn-toggle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <p class="notice-text">아래 유의사항을 확인하였으며, 주문/결제에 동의합니다.</p>
+      </section>
+
+    </main>
+
+    <!-- 하단 결제 버튼 -->
+    <footer class="bottom-action">
+      <button class="btn-cta" id="payBtn">0원 결제하기</button>
+    </footer>
+
+  </div>
+
+  <script src="menu-data.js"></script>
+  <script>
+    function formatPrice(price) {
+      return Number(price).toLocaleString() + '원';
+    }
+
+    // 아이템 조회 헬퍼 (MENU_DATA + DESSERT_DATA)
+    function findItemById(menuId) {
+      let item = MENU_DATA.find(m => m.id === menuId);
+      if (item) return { ...item, imgSrc: `./assets/images/${item.image}` };
+      item = DESSERT_DATA.find(d => d.id === menuId);
+      if (item) return { ...item, imgSrc: item.imgUrl };
+      return null;
+    }
+
+    function loadOrderInfo() {
+      const params = new URLSearchParams(window.location.search);
+      const fromCart = params.get('from') === 'cart';
+
+      let orderItems = []; // { item, qty, options, subtotal }
+
+      if (fromCart) {
+        // 장바구니에서 진입: localStorage에서 주문 데이터 로드
+        try {
+          const orderData = JSON.parse(localStorage.getItem('twosome_order') || '[]');
+          orderData.forEach(ci => {
+            const item = findItemById(ci.menuId);
+            if (!item) return;
+            orderItems.push({
+              item: item,
+              qty: ci.qty,
+              options: ci.options || [],
+              subtotal: item.price * ci.qty
+            });
+          });
+        } catch(e) {}
+        document.getElementById('btnBack').href = 'docs/cart-doc.html';
+        document.getElementById('btnBack').target = '_top';
+      } else {
+        // 단일 메뉴에서 진입: URL 파라미터
+        const menuId = params.get('id') || '1';
+        const qty = parseInt(params.get('qty')) || 1;
+        const optionsStr = params.get('options') || '';
+        const options = optionsStr ? decodeURIComponent(optionsStr).split('|') : [];
+        const item = findItemById(menuId);
+        if (item) {
+          orderItems.push({
+            item: item,
+            qty: qty,
+            options: options,
+            subtotal: item.price * qty
+          });
+        }
+        document.getElementById('btnBack').href = `docs/menu-detail-doc.html?id=${menuId}`;
+        document.getElementById('btnBack').target = '_top';
+      }
+
+      if (orderItems.length === 0) return;
+
+      // 전체 금액 계산
+      let grandTotal = 0;
+      orderItems.forEach(oi => { grandTotal += oi.subtotal; });
+
+      // 주문 아이템 렌더링
+      let html = '';
+      orderItems.forEach((oi, idx) => {
+        const optionText = oi.options.length > 0 ? `(${oi.options.join(' | ')})` : '';
+        html += `
+          <div class="order-item-card ${idx > 0 ? 'mt-16' : ''}">
+            <h3 class="item-name">${oi.item.name}</h3>
+            <p class="item-options">${optionText}</p>
+            <div class="item-detail-row">
+              <div class="item-thumb">
+                <img src="${oi.item.imgSrc}" alt="${oi.item.name}" onerror="this.src='https://mcdn.twosome.co.kr/resources/images/svg/img_goods_no.svg?width=276&height=276&q=100';">
+              </div>
+              <div class="item-prices">
+                <div class="price-row">
+                  <span class="price-label">상품금액</span>
+                  <span class="price-value">${formatPrice(oi.item.price)}</span>
+                </div>
+                <div class="price-row">
+                  <span class="price-label">퍼스널 옵션 선택 안함</span>
+                  <span class="price-value">0원</span>
+                </div>
+                <div class="price-row total">
+                  <span class="price-label">수량/주문금액</span>
+                  <span class="price-value">${oi.qty}개 /${formatPrice(oi.subtotal)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      // 쿠폰 행 (마지막에 한 번만)
+      html += `
+        <div class="coupon-row">
+          <button class="btn-coupon">쿠폰/프로모션 사용 &gt;</button>
+          <span class="coupon-total">${formatPrice(grandTotal)}</span>
+        </div>
+      `;
+
+      document.getElementById('orderItem').innerHTML = html;
+
+      // 최종 결제금액
+      document.getElementById('finalPrice').textContent = formatPrice(grandTotal);
+      document.getElementById('payBtn').textContent = `${formatPrice(grandTotal)} 결제하기`;
+
+      // 결제 버튼 클릭 시 주문상세 페이지로 이동 (전체 주문 데이터 전달)
+      document.getElementById('payBtn').addEventListener('click', function() {
+        const detailData = orderItems.map(oi => ({
+          menuId: oi.item.id,
+          qty: oi.qty,
+          options: oi.options
+        }));
+        localStorage.setItem('twosome_order_detail', JSON.stringify(detailData));
+        window.top.location.href = 'docs/order-detail-doc.html';
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadOrderInfo);
+  </script>
+</body>
+</html>

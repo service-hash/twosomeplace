@@ -1,0 +1,299 @@
+/* ========================================
+   커피/음료 카테고리 페이지 스타일
+   ======================================== */
+
+/* ========================================
+   Category Tabs (메인 탭)
+   ======================================== */
+.category-tabs {
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  position: sticky;
+  top: 52px;
+  z-index: 99;
+  flex-shrink: 0;
+}
+
+.category-tabs ul {
+  display: flex;
+  align-items: stretch;
+  padding: 0 4px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.category-tabs ul::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tabs li {
+  flex-shrink: 0;
+}
+
+.category-tabs li a {
+  display: block;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #888;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.category-tabs li.active a {
+  color: #222;
+  font-weight: 700;
+}
+
+.category-tabs li.active a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 3px;
+  background: #222;
+  border-radius: 2px 2px 0 0;
+}
+
+/* ========================================
+   Sub Category Tabs (서브 탭)
+   ======================================== */
+.sub-category-tabs {
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 99px;
+  z-index: 98;
+  flex-shrink: 0;
+}
+
+.sub-category-tabs ul {
+  display: flex;
+  align-items: stretch;
+  padding: 0 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.sub-category-tabs ul::-webkit-scrollbar {
+  display: none;
+}
+
+.sub-category-tabs li {
+  flex-shrink: 0;
+}
+
+.sub-category-tabs li a {
+  display: block;
+  padding: 12px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #999;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.sub-category-tabs li.active a {
+  color: #222;
+  font-weight: 700;
+}
+
+.sub-category-tabs li.active a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: #222;
+}
+
+/* ========================================
+   Main Content
+   ======================================== */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 68px;
+}
+
+/* ========================================
+   Menu List
+   ======================================== */
+.menu-list {
+  padding: 4px 0;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: #fff;
+  transition: background 0.15s;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.menu-item:active {
+  background: #fafafa;
+}
+
+.menu-thumb {
+  width: 88px;
+  height: 88px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f0ece8;
+}
+
+.menu-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-info {
+  margin-left: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+
+.menu-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+  margin-top: 2px;
+}
+
+/* ========================================
+   FAB (플로팅 검색 버튼)
+   ======================================== */
+.fab-search {
+  position: fixed;
+  bottom: 88px;
+  right: calc(50% - 215px + 20px);
+  width: 52px;
+  height: 52px;
+  background: #d42a2a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(212, 42, 42, 0.35);
+  z-index: 50;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.fab-search:active {
+  transform: scale(0.92);
+  box-shadow: 0 2px 8px rgba(212, 42, 42, 0.3);
+}
+
+.fab-search svg {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 430px) {
+  .fab-search {
+    right: 20px;
+  }
+}
+
+/* ========================================
+   Bottom Bar (하단 매장 정보)
+   ======================================== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  height: 60px;
+  background: #222;
+  border-radius: 18px 18px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 100;
+}
+
+.store-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+
+.store-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  font-weight: 400;
+}
+
+.store-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.store-distance {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 400;
+}
+
+.btn-change {
+  padding: 8px 18px;
+  background: #d42a2a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.btn-change:active {
+  background: #b82525;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 360px) {
+  .menu-thumb {
+    width: 76px;
+    height: 76px;
+  }
+
+  .menu-name {
+    font-size: 15px;
+  }
+
+  .menu-price {
+    font-size: 14px;
+  }
+
+  .sub-category-tabs li a {
+    font-size: 12px;
+    padding: 10px 10px;
+  }
+}

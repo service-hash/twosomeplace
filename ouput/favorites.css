@@ -1,0 +1,185 @@
+/* ========================================
+   즐겨찾는 메뉴 페이지 스타일
+   ======================================== */
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ========================================
+   Total Count
+   ======================================== */
+.total-count {
+  padding: 16px 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.total-count strong {
+  font-weight: 700;
+  color: #222;
+}
+
+/* ========================================
+   Edit Notice
+   ======================================== */
+.edit-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 20px;
+}
+
+.notice-icon {
+  flex-shrink: 0;
+}
+
+.notice-text {
+  font-size: 13px;
+  color: #999;
+  flex: 1;
+}
+
+.edit-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   Favorite List
+   ======================================== */
+.fav-list {
+  padding: 0 20px;
+}
+
+.fav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.fav-checkbox {
+  flex-shrink: 0;
+}
+
+.check-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.check-btn.checked svg circle {
+  fill: #d42a2a;
+  stroke: #d42a2a;
+}
+
+.fav-thumb {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f8f8f8;
+}
+
+.fav-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fav-info {
+  flex: 1;
+}
+
+.fav-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.fav-price {
+  font-size: 17px;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.fav-options {
+  font-size: 13px;
+  color: #999;
+}
+
+/* ========================================
+   Favorite Actions (하단 버튼)
+   ======================================== */
+.fav-actions {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.btn-action {
+  flex: 1;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-cart-add {
+  color: #222;
+  background: #fff;
+  border: 1px solid #222;
+}
+
+.btn-cart-add:active {
+  background: #f5f5f5;
+}
+
+.btn-order-now {
+  color: #222;
+  background: #fff;
+  border: 1px solid #222;
+}
+
+.btn-order-now:active {
+  background: #f5f5f5;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 360px) {
+  .fav-thumb {
+    width: 80px;
+    height: 80px;
+  }
+
+  .fav-name {
+    font-size: 15px;
+  }
+
+  .fav-price {
+    font-size: 16px;
+  }
+}

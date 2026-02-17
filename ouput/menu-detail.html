@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>투썸오더 - 메뉴 상세</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="menu-detail.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <a target="_top" href="docs/category-coffee-doc.html" class="btn-icon btn-back" aria-label="뒤로가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-home" aria-label="홈">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="header-title">커피/음료</h1>
+      <div class="header-right">
+        <a target="_top" href="docs/cart-doc.html" class="btn-icon btn-cart" aria-label="장바구니">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6zM3 6h18M16 10a4 4 0 01-8 0" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="content">
+
+      <!-- 상품 이미지 -->
+      <section class="product-hero">
+        <div class="product-image">
+          <img id="productImage" src="" alt="">
+        </div>
+      </section>
+
+      <!-- 상품 정보 -->
+      <section class="product-info">
+        <span class="badge-new" id="badgeNew" style="display:none;">New</span>
+        <h2 class="product-name" id="productName"></h2>
+        <p class="product-desc" id="productDesc"></p>
+        <p class="product-price" id="productPrice"></p>
+        <ul class="product-notice" id="productNotice"></ul>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 제품 영양 정보 -->
+      <section class="nutrition-section">
+        <h3 class="nutrition-title">제품 영양 정보</h3>
+
+        <!-- 온도 탭 -->
+        <div class="nutrition-temp-tabs" id="nutritionTempTabs">
+          <button class="temp-tab active">핫</button>
+          <button class="temp-tab">아이스</button>
+        </div>
+
+        <!-- 사이즈 탭 -->
+        <div class="nutrition-size-tabs" id="nutritionSizeTabs">
+          <button class="size-tab active">레귤러</button>
+          <button class="size-tab">라지</button>
+        </div>
+
+        <!-- 영양 정보 테이블 -->
+        <div class="nutrition-table" id="nutritionTable"></div>
+
+        <div class="nutrition-disclaimer-divider"></div>
+
+        <ul class="nutrition-disclaimer">
+          <li>제품 이미지는 실제 제품과 다소 차이가 있을 수 있습니다.<br>(매장 계절에 따라 대체 과일 데코레이션으로 운영될 수 있습니다.)</li>
+          <li>제품의 취급여부는 매장별로 상이할 수 있습니다.</li>
+          <li>어린이, 임산부 등 카페인 민감자는 섭취에 주의해주시기 바랍니다.</li>
+        </ul>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 알레르기 유발요인 -->
+      <section class="allergen-section" id="allergenSection">
+        <h3 class="allergen-title">알레르기 유발요인</h3>
+        <div class="allergen-content" id="allergenContent"></div>
+      </section>
+
+    </main>
+
+    <!-- 하단 주문하기 버튼 -->
+    <footer class="bottom-action">
+      <button class="btn-cta" onclick="openOptionSheet()">주문하기</button>
+    </footer>
+
+    <!-- 딤 오버레이 -->
+    <div class="dim-overlay" id="dimOverlay" onclick="closeOptionSheet()"></div>
+
+    <!-- 옵션 선택 바텀시트 -->
+    <div class="option-bottomsheet" id="optionSheet">
+      <!-- 드래그 핸들 -->
+      <div class="sheet-handle">
+        <span class="handle-bar"></span>
+      </div>
+
+      <!-- 옵션 그룹들 (JS에서 동적 생성) -->
+      <div id="optionGroups"></div>
+
+      <!-- 퍼스널 옵션 -->
+      <div class="personal-option">
+        <a href="#" class="personal-option-link">
+          <span>퍼스널 옵션</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M9 5l7 7-7 7" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="section-divider-thin" style="margin: 0 0 20px;"></div>
+
+      <!-- 하단 주문 영역 -->
+      <div class="sheet-order">
+        <div class="order-quantity-row">
+          <span class="order-product-name" id="orderProductName"></span>
+          <div class="quantity-control">
+            <button class="qty-btn minus" aria-label="수량 감소">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn plus" aria-label="수량 증가">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v14M5 12h14" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="order-actions">
+          <button class="action-btn cart-add" aria-label="장바구니 담기">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6zM3 6h18M16 10a4 4 0 01-8 0" stroke="#d42a2a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="action-btn favorite-add" aria-label="즐겨찾기">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="#d42a2a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <a href="#" class="btn-cta order-submit disabled" id="orderSubmitBtn">주문하기</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="menu-data.js"></script>
+  <script>
+    function formatPrice(price) {
+      return Number(price).toLocaleString() + '원';
+    }
+
+    function getMenuId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id') || '1';
+    }
+
+    function createOptionGroup(title, options, colCount) {
+      if (!options || options.length === 0) return '';
+      const colsClass = colCount <= 2 ? 'cols-2' : 'cols-3';
+      const buttons = options.map((opt, i) => {
+        let activeClass = i === 0 ? ' active' : '';
+        let colorClass = '';
+        if (i === 0 && title === '온도') colorClass = ' blue';
+        if (i === 0 && title === '원두') colorClass = ' dark';
+        return `<button class="option-btn${activeClass}${colorClass}">${opt}</button>`;
+      }).join('');
+      let infoIcon = (title === '원두' || title === '컵 선택') ? ' <span class="info-icon">ⓘ</span>' : '';
+      let notice = '';
+      if (title === '컵 선택') {
+        notice = '<p class="option-notice">• 매장에서 드시는 경우 일회용컵 제공이 불가능합니다.</p>';
+      }
+      return `<div class="option-group">
+        <h3 class="option-title">${title}${infoIcon}</h3>
+        <div class="option-buttons ${colsClass}">${buttons}</div>${notice}
+      </div>`;
+    }
+
+    function loadMenuDetail() {
+      const menuId = getMenuId();
+      const item = MENU_DATA.find(m => m.id === menuId);
+
+      if (!item) {
+        document.getElementById('productName').textContent = '메뉴를 찾을 수 없습니다';
+        return;
+      }
+
+      document.title = `투썸오더 - ${item.name}`;
+
+      const imgEl = document.getElementById('productImage');
+      imgEl.src = `./assets/images/${item.image}`;
+      imgEl.alt = item.name;
+
+      // New 뱃지
+      if (item.isNew) {
+        document.getElementById('badgeNew').style.display = 'inline-block';
+      }
+
+      document.getElementById('productName').textContent = item.name;
+      document.getElementById('productDesc').textContent = item.description;
+      document.getElementById('productPrice').textContent = formatPrice(item.price);
+
+      // 주의사항
+      const noticeEl = document.getElementById('productNotice');
+      if (item.caffeineR > 0 || item.caffeineL > 0) {
+        let html = `<li>* 카페인 함량 : (R)${item.caffeineR}mg, (L)${item.caffeineL}mg (블랙그라운드 원두 기준)`;
+        if (item.caffeineBeanNote) html += `<br>&nbsp;&nbsp;- ${item.caffeineBeanNote}.</li>`;
+        else html += '</li>';
+        html += '<li>* 고카페인 함유</li>';
+        html += '<li>* 어린이, 임산부, 카페인 민감자는 섭취에 주의해 주시기 바랍니다.</li>';
+        noticeEl.innerHTML = html;
+      }
+
+      // 알레르기 유발요인
+      const allergenMap = {
+        '우유': '우유(Milk)',
+        '대두': '대두(Soybean)',
+        '밀': '밀(Wheat)',
+        '땅콩': '땅콩(Peanut)',
+        '견과류': '견과류(Tree Nuts)',
+        '계란': '계란(Egg)'
+      };
+      const allergenContent = document.getElementById('allergenContent');
+      if (item.allergens && item.allergens !== '해당없음') {
+        allergenContent.textContent = item.allergens.split('|').map(a => {
+          const trimmed = a.trim();
+          return allergenMap[trimmed] || trimmed;
+        }).join(', ');
+      } else {
+        allergenContent.textContent = '해당없음';
+      }
+
+      // 영양 정보 탭
+      document.getElementById('nutritionTempTabs').innerHTML = item.tempOptions.map((t, i) =>
+        `<button class="temp-tab${i === 0 ? ' active' : ''}">${t}</button>`
+      ).join('');
+
+      document.getElementById('nutritionSizeTabs').innerHTML = item.sizeOptions.map((s, i) =>
+        `<button class="size-tab${i === 0 ? ' active' : ''}">${s}</button>`
+      ).join('');
+
+      // 영양 정보 테이블
+      const rows = [
+        { label: '1회 제공량', value: item.servingSize },
+        { label: '총 제공량', value: item.totalServing },
+        { label: '열량(Kcal)', value: item.calories },
+        { label: '당류(g/%)', value: item.sugar },
+        { label: '단백질(g/%)', value: item.protein },
+        { label: '포화지방(g/%)', value: item.satFat },
+        { label: '나트륨(mg/%)', value: item.sodium },
+        { label: '카페인(mg)', value: item.caffeine }
+      ];
+      document.getElementById('nutritionTable').innerHTML = rows.map(r =>
+        `<div class="nutrition-row"><span class="nutrition-label">${r.label} ${r.value}</span></div>`
+      ).join('');
+
+      // 바텀시트 옵션
+      let optionHTML = '';
+      if (item.tempOptions.length > 0) optionHTML += createOptionGroup('온도', item.tempOptions, item.tempOptions.length);
+      if (item.sizeOptions.length > 0) optionHTML += createOptionGroup('사이즈', item.sizeOptions, 3);
+      if (item.beanOptions.length > 0) optionHTML += createOptionGroup('원두', item.beanOptions, 3);
+      if (item.cupOptions.length > 0) optionHTML += createOptionGroup('컵 선택', item.cupOptions, 3);
+      document.getElementById('optionGroups').innerHTML = optionHTML;
+
+      document.getElementById('orderProductName').textContent = item.name;
+
+      // 초기 상태: 주문하기 비활성
+      const submitBtn = document.getElementById('orderSubmitBtn');
+      submitBtn.textContent = '주문하기';
+      submitBtn.classList.add('disabled');
+
+      // 옵션 버튼 클릭 이벤트 바인딩
+      setTimeout(() => initOptionButtons(item), 0);
+    }
+
+    function initOptionButtons(item) {
+      const groups = document.querySelectorAll('.option-group');
+      groups.forEach(group => {
+        const btns = group.querySelectorAll('.option-btn');
+        btns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            // 같은 그룹 내 active 해제
+            btns.forEach(b => {
+              b.classList.remove('active', 'blue', 'dark');
+            });
+            btn.classList.add('active');
+            // 온도 그룹이면 파란색
+            const title = group.querySelector('.option-title').textContent.trim();
+            if (title.startsWith('온도')) btn.classList.add('blue');
+            if (title.startsWith('원두')) btn.classList.add('dark');
+
+            updateSubmitButton(item);
+          });
+        });
+      });
+    }
+
+    function updateSubmitButton(item) {
+      const submitBtn = document.getElementById('orderSubmitBtn');
+      submitBtn.classList.remove('disabled');
+      submitBtn.textContent = `${formatPrice(item.price)} 주문하기`;
+
+      // 선택된 옵션 수집 후 order.html로 링크
+      const selectedOptions = [];
+      document.querySelectorAll('.option-group').forEach(group => {
+        const activeBtn = group.querySelector('.option-btn.active');
+        if (activeBtn) selectedOptions.push(activeBtn.textContent);
+      });
+      submitBtn.href = `docs/order-doc.html?id=${item.id}&qty=${orderQty}&options=${encodeURIComponent(selectedOptions.join('|'))}`;
+      submitBtn.target = '_top';
+
+      // 아이콘 버튼 활성화
+      document.querySelectorAll('.action-btn').forEach(btn => {
+        btn.classList.add('active-icon');
+      });
+    }
+
+    // 수량 제어
+    let orderQty = 1;
+    function initQuantityControl() {
+      document.querySelector('.qty-btn.minus').addEventListener('click', () => {
+        if (orderQty > 1) {
+          orderQty--;
+          document.querySelector('.qty-value').textContent = orderQty;
+        }
+      });
+      document.querySelector('.qty-btn.plus').addEventListener('click', () => {
+        orderQty++;
+        document.querySelector('.qty-value').textContent = orderQty;
+      });
+    }
+
+    function openOptionSheet() {
+      document.getElementById('dimOverlay').classList.add('active');
+      document.getElementById('optionSheet').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOptionSheet() {
+      document.getElementById('dimOverlay').classList.remove('active');
+      document.getElementById('optionSheet').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMenuDetail();
+      initQuantityControl();
+    });
+  </script>
+</body>
+</html>

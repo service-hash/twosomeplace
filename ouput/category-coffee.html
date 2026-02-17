@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>투썸오더 - 커피/음료</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="category-coffee.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-back" aria-label="뒤로가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-home" aria-label="홈">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="header-title">투썸오더</h1>
+      <div class="header-right">
+        <a target="_top" href="docs/favorites-doc.html" class="btn-icon btn-favorite" aria-label="즐겨찾기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <button class="btn-icon btn-share" aria-label="공유">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v13" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <a target="_top" href="docs/cart-doc.html" class="btn-icon btn-cart" aria-label="장바구니">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6zM3 6h18M16 10a4 4 0 01-8 0" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 메인 카테고리 탭 -->
+    <nav class="category-tabs">
+      <ul>
+        <li><a target="_top" href="docs/menu-doc.html">NEW</a></li>
+        <li class="active"><a target="_top" href="docs/category-coffee-doc.html">커피/음료</a></li>
+        <li><a href="#">디저트</a></li>
+        <li><a href="#">푸드</a></li>
+        <li><a href="#">상품</a></li>
+      </ul>
+    </nav>
+
+    <!-- 서브 카테고리 탭 -->
+    <nav class="sub-category-tabs">
+      <ul>
+        <li class="active"><a href="#" data-sub="커피">커피</a></li>
+        <li><a href="#" data-sub="디카페인 커피">디카페인 커피</a></li>
+        <li><a href="#" data-sub="음료">음료</a></li>
+        <li><a href="#" data-sub="티/티라떼">티/티라떼</a></li>
+        <li><a href="#" data-sub="아이스크림/빙수">아이스크림/빙수</a></li>
+      </ul>
+    </nav>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="content">
+      <!-- 메뉴 리스트 (JS에서 동적 생성) -->
+      <section class="menu-list" id="menuList"></section>
+    </main>
+
+    <!-- 플로팅 검색 버튼 -->
+    <button class="fab-search" aria-label="검색">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="7" stroke="#fff" stroke-width="2"/>
+        <path d="M21 21l-4.35-4.35" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- 하단 매장 정보 바 -->
+    <footer class="bottom-bar">
+      <div class="store-info">
+        <span class="store-label">주문 매장</span>
+        <span class="store-name">종로3가역점</span>
+        <span class="store-distance">326m</span>
+      </div>
+      <a target="_top" href="docs/store-select-doc.html" class="btn-change">변경</a>
+    </footer>
+
+  </div>
+
+  <script src="menu-data.js"></script>
+  <script>
+    function formatPrice(price) {
+      return Number(price).toLocaleString() + '원';
+    }
+
+    function renderMenuList(subCategory) {
+      const menuList = document.getElementById('menuList');
+      const filtered = MENU_DATA.filter(m =>
+        m.category === '커피/음료' && m.subCategory === subCategory
+      );
+
+      if (filtered.length === 0) {
+        menuList.innerHTML = '<p style="padding:40px 20px;text-align:center;color:#888;">등록된 메뉴가 없습니다.</p>';
+        return;
+      }
+
+      menuList.innerHTML = filtered.map(item => `
+        <a target="_top" href="docs/menu-detail-doc.html?id=${item.id}" class="menu-item">
+          <div class="menu-thumb">
+            <img src="./assets/images/${item.image}" alt="${item.name}">
+          </div>
+          <div class="menu-info">
+            <h3 class="menu-name">${item.name}</h3>
+            <p class="menu-price">${formatPrice(item.price)}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // 서브 카테고리 탭 클릭
+    document.querySelector('.sub-category-tabs ul').addEventListener('click', function(e) {
+      const link = e.target.closest('a[data-sub]');
+      if (!link) return;
+      e.preventDefault();
+      document.querySelectorAll('.sub-category-tabs li').forEach(li => li.classList.remove('active'));
+      link.parentElement.classList.add('active');
+      renderMenuList(link.dataset.sub);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      renderMenuList('커피');
+    });
+  </script>
+</body>
+</html>

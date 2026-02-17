@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>투썸오더 - 장바구니</title>
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+      <div class="header-left">
+        <a href="javascript:history.back()" class="btn-icon btn-back" aria-label="뒤로가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 19l-7-7 7-7" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a target="_top" href="docs/menu-doc.html" class="btn-icon btn-home" aria-label="홈">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3l9 7.5V21a1 1 0 01-1 1H4a1 1 0 01-1-1V10.5z" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <h1 class="header-title">장바구니</h1>
+      <div class="header-right"></div>
+    </header>
+
+    <!-- 탭 메뉴 -->
+    <div class="cart-tabs">
+      <button class="cart-tab active">투썸오더</button>
+      <button class="cart-tab">케이크예약</button>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="content">
+
+      <!-- 매장 정보 -->
+      <section class="store-info">
+        <div class="store-info-top">
+          <h2 class="store-name-title">종로구청점</h2>
+          <button class="btn-fold" id="btnFoldStore" aria-label="접기">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 15l6-6 6 6" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <p class="store-address" id="storeAddress">서울특별시 종로구종로5길 58 광해관리공단 (수송동, 석탄회관빌딩)</p>
+      </section>
+
+      <div class="section-divider-thin"></div>
+
+      <!-- 전체선택 / 선택삭제 -->
+      <div class="select-all-row">
+        <label class="select-all-label" id="selectAllLabel">
+          <span class="check-circle checked" id="checkAll">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>전체선택</span>
+        </label>
+        <button class="btn-select-delete" id="btnSelectDelete">선택삭제</button>
+      </div>
+
+      <!-- 장바구니 아이템 리스트 -->
+      <div class="cart-items" id="cartItems">
+        <!-- JS에서 동적 생성 -->
+      </div>
+
+      <!-- 메뉴 추가하기 -->
+      <div class="add-menu-row">
+        <a target="_top" href="docs/menu-doc.html" class="btn-add-menu">메뉴 추가하기</a>
+      </div>
+
+    </main>
+
+    <!-- 픽업매장 안내 -->
+    <div class="pickup-bar" id="pickupBar">
+      <div class="pickup-info">
+        <span class="pickup-label">픽업매장</span>
+        <span class="pickup-text" id="pickupText">선택해 주세요.</span>
+      </div>
+    </div>
+
+    <!-- 하단 주문 바 -->
+    <footer class="bottom-order-bar">
+      <div class="qr-btn-wrap">
+        <!-- 말풍선 배너 -->
+        <div class="barcode-bubble" id="barcodeBanner">
+          <div class="bubble-content">
+            <p class="bubble-text"><strong>점원에게 바코드를 보여주세요.</strong><br>쉽고 빠르게 결제가 진행됩니다.</p>
+            <button class="btn-bubble-close" id="btnBannerClose" aria-label="닫기">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="bubble-tail"></div>
+        </div>
+        <!-- QR 버튼 -->
+        <button class="btn-qr" id="btnQr" aria-label="QR코드">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="8" height="8" rx="1" stroke="#d42a2a" stroke-width="1.8"/>
+            <rect x="5.5" y="5.5" width="3" height="3" rx="0.5" fill="#d42a2a"/>
+            <rect x="13" y="3" width="8" height="8" rx="1" stroke="#d42a2a" stroke-width="1.8"/>
+            <rect x="15.5" y="5.5" width="3" height="3" rx="0.5" fill="#d42a2a"/>
+            <rect x="3" y="13" width="8" height="8" rx="1" stroke="#d42a2a" stroke-width="1.8"/>
+            <rect x="5.5" y="15.5" width="3" height="3" rx="0.5" fill="#d42a2a"/>
+            <rect x="13" y="13" width="2.5" height="2.5" fill="#d42a2a"/>
+            <rect x="17" y="13" width="4" height="2.5" rx="0.5" fill="#d42a2a"/>
+            <rect x="13" y="17" width="2.5" height="4" rx="0.5" fill="#d42a2a"/>
+            <rect x="17" y="18.5" width="4" height="2.5" rx="0.5" fill="#d42a2a"/>
+          </svg>
+        </button>
+      </div>
+      <button class="btn-order-submit disabled" id="btnOrderSubmit">
+        <span class="order-price" id="orderTotalPrice">주문하기</span>
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- 바텀시트 오버레이 -->
+  <div class="bs-overlay" id="bsOverlay">
+    <div class="bs-sheet" id="bsSheet">
+      <div class="bs-header">
+        <h2 class="bs-title">함께 주문하면 더 좋아요!</h2>
+        <button class="bs-close" id="bsClose" aria-label="닫기">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6l12 12" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="bs-body" id="bsBody">
+        <!-- JS에서 동적 생성 -->
+      </div>
+      <div class="bs-footer">
+        <button class="bs-btn-order" id="bsOrderBtn">함께 주문하기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="menu-data.js"></script>
+  <script>
+    // ====== 장바구니 데이터 (localStorage) ======
+    function getCart() {
+      try {
+        return JSON.parse(localStorage.getItem('twosome_cart') || '[]');
+      } catch(e) {
+        return [];
+      }
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('twosome_cart', JSON.stringify(cart));
+    }
+
+    function formatPrice(price) {
+      return Number(price).toLocaleString() + '원';
+    }
+
+    // ====== 아이템 조회 헬퍼 (MENU_DATA + DESSERT_DATA) ======
+    function findItemById(menuId) {
+      let item = MENU_DATA.find(m => m.id === menuId);
+      if (item) return { ...item, imgSrc: `./assets/images/${item.image}` };
+      item = DESSERT_DATA.find(d => d.id === menuId);
+      if (item) return { ...item, imgSrc: item.imgUrl };
+      return null;
+    }
+
+    // ====== 렌더링 ======
+    function renderCart() {
+      const cart = getCart();
+      const cartItemsEl = document.getElementById('cartItems');
+
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = `
+          <div class="cart-empty">
+            <p>장바구니가 비어있습니다.</p>
+            <a target="_top" href="docs/menu-doc.html" class="btn-go-menu">메뉴 보러가기</a>
+          </div>
+        `;
+        updateTotal();
+        return;
+      }
+
+      let html = '';
+      cart.forEach((cartItem, index) => {
+        const item = findItemById(cartItem.menuId);
+        if (!item) return;
+
+        const options = cartItem.options || [];
+        const optionText = options.length > 0 ? options.join(' | ') : '';
+        const unitPrice = item.price;
+        const itemTotal = unitPrice * cartItem.qty;
+        const checkedClass = cartItem.checked !== false ? 'checked' : '';
+
+        html += `
+          <div class="cart-item" data-index="${index}">
+            <div class="cart-item-top">
+              <button class="check-circle ${checkedClass}" data-action="toggle-check" data-index="${index}">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="cart-item-info">
+                <h3 class="cart-item-name">${item.name}</h3>
+                <p class="cart-item-options">${optionText}</p>
+              </div>
+              <button class="btn-remove" data-action="remove" data-index="${index}" aria-label="삭제">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6l12 12" stroke="#bbb" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="cart-item-body">
+              <div class="cart-item-thumb">
+                <img src="${item.imgSrc}" alt="${item.name}" onerror="this.src='https://mcdn.twosome.co.kr/resources/images/svg/img_goods_no.svg?width=276&height=276&q=100';">
+              </div>
+              <div class="cart-item-prices">
+                <div class="ci-price-row">
+                  <span class="ci-label">상품금액</span>
+                  <span class="ci-value">${formatPrice(unitPrice)}</span>
+                </div>
+                <div class="ci-price-row">
+                  <span class="ci-label">퍼스널 옵션 선택 안함</span>
+                  <span class="ci-value">0원</span>
+                </div>
+                <div class="ci-price-row ci-total-row">
+                  <span class="ci-label">주문금액</span>
+                  <span class="ci-value bold">${formatPrice(itemTotal)}</span>
+                </div>
+              </div>
+            </div>
+            <div class="cart-item-bottom">
+              <div class="qty-control">
+                <button class="qty-btn" data-action="qty-minus" data-index="${index}">−</button>
+                <span class="qty-value">${cartItem.qty}</span>
+                <button class="qty-btn" data-action="qty-plus" data-index="${index}">+</button>
+              </div>
+              <span class="cart-item-subtotal">${formatPrice(itemTotal)}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      cartItemsEl.innerHTML = html;
+      updateTotal();
+      updateSelectAll();
+    }
+
+    let storeSelected = false;
+
+    function updateTotal() {
+      const cart = getCart();
+      let total = 0;
+      let count = 0;
+      cart.forEach(ci => {
+        if (ci.checked !== false) {
+          const item = findItemById(ci.menuId);
+          if (item) {
+            total += item.price * ci.qty;
+            count += ci.qty;
+          }
+        }
+      });
+
+      const btn = document.getElementById('btnOrderSubmit');
+      const priceEl = document.getElementById('orderTotalPrice');
+      const bubble = document.getElementById('barcodeBanner');
+
+      // 체크된 항목이 있을 때만 말풍선 표시
+      if (count > 0 && !bubble.dataset.closed) {
+        bubble.classList.add('show');
+      } else {
+        bubble.classList.remove('show');
+      }
+
+      if (count === 0) {
+        // 체크된 아이템 없음: 비활성
+        btn.classList.add('disabled');
+        btn.innerHTML = '<span class="order-price" id="orderTotalPrice">주문하기</span>';
+      } else {
+        // 체크된 아이템 있음: 활성
+        btn.classList.remove('disabled');
+        btn.innerHTML = `
+          <span class="order-price" id="orderTotalPrice">${formatPrice(total)}</span>
+          <span class="order-text">주문하기</span>
+          <span class="order-count" id="orderCount">${count}</span>
+        `;
+      }
+    }
+
+    function updateSelectAll() {
+      const cart = getCart();
+      const allChecked = cart.length > 0 && cart.every(ci => ci.checked !== false);
+      const checkAllEl = document.getElementById('checkAll');
+      if (allChecked) {
+        checkAllEl.classList.add('checked');
+      } else {
+        checkAllEl.classList.remove('checked');
+      }
+    }
+
+    // ====== 이벤트 ======
+    document.addEventListener('DOMContentLoaded', function() {
+      // 데모용 샘플 데이터 (항상 초기화)
+      const sampleCart = [
+        { menuId: '9', qty: 1, options: ['아이스', '라지', '머그컵'], checked: false },
+        { menuId: '8', qty: 2, options: ['아이스', '레귤러', '머그컵'], checked: false }
+      ];
+      saveCart(sampleCart);
+      renderCart();
+    });
+
+    // 이벤트 위임
+    document.getElementById('cartItems').addEventListener('click', function(e) {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+
+      const action = btn.dataset.action;
+      const index = parseInt(btn.dataset.index);
+      const cart = getCart();
+
+      if (action === 'toggle-check') {
+        cart[index].checked = cart[index].checked === false ? true : false;
+        saveCart(cart);
+        renderCart();
+      }
+
+      if (action === 'remove') {
+        cart.splice(index, 1);
+        saveCart(cart);
+        renderCart();
+      }
+
+      if (action === 'qty-minus') {
+        if (cart[index].qty > 1) {
+          cart[index].qty--;
+          saveCart(cart);
+          renderCart();
+        }
+      }
+
+      if (action === 'qty-plus') {
+        cart[index].qty++;
+        saveCart(cart);
+        renderCart();
+      }
+    });
+
+    // 전체선택
+    document.getElementById('selectAllLabel').addEventListener('click', function() {
+      const cart = getCart();
+      const allChecked = cart.every(ci => ci.checked !== false);
+      cart.forEach(ci => ci.checked = !allChecked);
+      saveCart(cart);
+      renderCart();
+    });
+
+    // 선택삭제
+    document.getElementById('btnSelectDelete').addEventListener('click', function() {
+      let cart = getCart();
+      cart = cart.filter(ci => ci.checked === false);
+      saveCart(cart);
+      renderCart();
+    });
+
+    // 배너 닫기
+    document.getElementById('btnBannerClose').addEventListener('click', function(e) {
+      e.stopPropagation();
+      const bubble = document.getElementById('barcodeBanner');
+      bubble.classList.remove('show');
+      bubble.dataset.closed = 'true';
+    });
+
+    // 매장주소 접기/펼치기
+    document.getElementById('btnFoldStore').addEventListener('click', function() {
+      const addr = document.getElementById('storeAddress');
+      const svg = this.querySelector('svg');
+      if (addr.style.display === 'none') {
+        addr.style.display = 'block';
+        svg.style.transform = 'rotate(0deg)';
+      } else {
+        addr.style.display = 'none';
+        svg.style.transform = 'rotate(180deg)';
+      }
+    });
+
+    // 픽업매장 선택 (클릭 시 매장 선택 시뮬레이션)
+    document.getElementById('pickupBar').addEventListener('click', function() {
+      storeSelected = true;
+      document.getElementById('pickupText').textContent = '종로구청점';
+      document.getElementById('pickupBar').classList.add('selected');
+      updateTotal();
+    });
+
+    // 주문하기 버튼 → 바텀시트 열기
+    document.getElementById('btnOrderSubmit').addEventListener('click', function() {
+      if (this.classList.contains('disabled')) return;
+      openRecommendSheet();
+    });
+
+    // ====== 추천 바텀시트 (DESSERT_DATA 사용) ======
+    function openRecommendSheet() {
+      const body = document.getElementById('bsBody');
+      const cart = getCart();
+      let html = '<div class="bs-grid">';
+      DESSERT_DATA.forEach((item, i) => {
+        const alreadyIn = cart.some(ci => ci.menuId === item.id);
+        html += `
+          <div class="bs-item" data-bs-index="${i}">
+            <div class="bs-thumb">
+              <img src="${item.imgUrl}" alt="${item.name}" onerror="this.src='https://mcdn.twosome.co.kr/resources/images/svg/img_goods_no.svg?width=276&height=276&q=100';">
+              <button class="bs-add-btn ${alreadyIn ? 'added' : ''}" data-dessert-id="${item.id}" aria-label="추가" ${alreadyIn ? 'style="pointer-events:none"' : ''}>
+                ${alreadyIn
+                  ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#d42a2a"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+                  : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#222"/><path d="M12 7v10M7 12h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>'
+                }
+              </button>
+            </div>
+            <p class="bs-item-name">${item.name}</p>
+            <p class="bs-item-price">${formatPrice(item.price)}</p>
+          </div>
+        `;
+      });
+      html += '</div>';
+      body.innerHTML = html;
+
+      // 초기 버튼 금액 표시
+      updateBsOrderBtn();
+
+      const overlay = document.getElementById('bsOverlay');
+      overlay.classList.add('show');
+      setTimeout(() => {
+        document.getElementById('bsSheet').classList.add('show');
+      }, 10);
+
+      // + 버튼 클릭 → 장바구니에 디저트 추가
+      body.addEventListener('click', function(e) {
+        const addBtn = e.target.closest('.bs-add-btn');
+        if (!addBtn || addBtn.classList.contains('added')) return;
+        const dessertId = addBtn.dataset.dessertId;
+        const dessert = DESSERT_DATA.find(d => d.id === dessertId);
+        if (!dessert) return;
+        const cart = getCart();
+        cart.push({ menuId: dessert.id, qty: 1, options: [], checked: true });
+        saveCart(cart);
+        addBtn.classList.add('added');
+        addBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#d42a2a"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        addBtn.style.pointerEvents = 'none';
+        updateBsOrderBtn();
+      });
+    }
+
+    // 바텀시트 주문 버튼 금액 갱신
+    function updateBsOrderBtn() {
+      const cart = getCart();
+      let total = 0;
+      cart.forEach(ci => {
+        if (ci.checked !== false) {
+          const item = findItemById(ci.menuId);
+          if (item) total += item.price * ci.qty;
+        }
+      });
+      const btn = document.getElementById('bsOrderBtn');
+      btn.textContent = `${formatPrice(total)} 함께 주문하기`;
+    }
+
+    function closeRecommendSheet() {
+      document.getElementById('bsSheet').classList.remove('show');
+      setTimeout(() => {
+        document.getElementById('bsOverlay').classList.remove('show');
+      }, 300);
+    }
+
+    // 바텀시트 닫기
+    document.getElementById('bsClose').addEventListener('click', closeRecommendSheet);
+    document.getElementById('bsOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeRecommendSheet();
+    });
+
+    // 바텀시트 주문하기 → 주문 페이지 이동 (localStorage 기반)
+    document.getElementById('bsOrderBtn').addEventListener('click', function() {
+      closeRecommendSheet();
+      const cart = getCart();
+      const checked = cart.filter(ci => ci.checked !== false);
+      if (checked.length === 0) return;
+      // 체크된 항목을 주문 데이터로 저장
+      localStorage.setItem('twosome_order', JSON.stringify(checked));
+      window.top.location.href = 'docs/order-doc.html?from=cart';
+    });
+
+    // 탭 전환
+    document.querySelectorAll('.cart-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.cart-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
