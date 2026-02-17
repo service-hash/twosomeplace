@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>투썸오더 - 장바구니 화면 설명서</title>
+  <style>
+    /* ========================================
+       Reset & Base
+       ======================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      font-size: 16px;
+      color: #222;
+      background: #f0f2f5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================
+       Page Layout
+       ======================================== */
+    .doc-wrapper {
+      display: flex;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      gap: 56px;
+      align-items: flex-start;
+    }
+
+    /* ========================================
+       Left: Phone Mockup
+       ======================================== */
+    .mockup-area {
+      flex-shrink: 0;
+      position: sticky;
+      top: 32px;
+    }
+
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      background: #1a1a1a;
+      border-radius: 52px;
+      padding: 14px;
+      box-shadow:
+        0 0 0 2px #333,
+        0 24px 80px rgba(0,0,0,0.25),
+        0 8px 24px rgba(0,0,0,0.15),
+        inset 0 0 0 2px #2a2a2a;
+      position: relative;
+    }
+
+    /* Notch */
+    .phone-notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 32px;
+      background: #1a1a1a;
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+
+    .phone-notch::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 40px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-statusbar {
+      width: 100%;
+      height: 48px;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .phone-screen iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+      display: block;
+    }
+
+    /* ========================================
+       Right: Description
+       ======================================== */
+    .doc-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .doc-header {
+      margin-bottom: 40px;
+    }
+
+    .doc-header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #111;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    .doc-header .subtitle {
+      font-size: 16px;
+      color: #888;
+      margin-top: 8px;
+      font-weight: 400;
+    }
+
+    .doc-badge {
+      display: inline-block;
+      background: #d42a2a;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .step-badge {
+      display: inline-block;
+      background: #222;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      margin-left: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Section Card */
+    .doc-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .doc-section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .doc-section h2 .icon {
+      width: 28px;
+      height: 28px;
+      background: #fef2f2;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .doc-section h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #444;
+      margin: 16px 0 8px;
+    }
+
+    .doc-section p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .doc-section ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .doc-section ul li {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .doc-section ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      background: #d42a2a;
+      border-radius: 50%;
+    }
+
+    /* Info Table */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .info-table th,
+    .info-table td {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .info-table th {
+      background: #fafafa;
+      font-weight: 600;
+      color: #444;
+      width: 140px;
+      white-space: nowrap;
+    }
+
+    .info-table td {
+      color: #555;
+    }
+
+    .info-table td code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      color: #d42a2a;
+    }
+
+    /* Tag */
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #666;
+      font-weight: 500;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .tag.red {
+      background: #fef2f2;
+      color: #d42a2a;
+    }
+
+    /* Divider */
+    .doc-divider {
+      height: 1px;
+      background: #eee;
+      margin: 16px 0;
+    }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .flow-item {
+      background: #f8f8f8;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #444;
+      white-space: nowrap;
+    }
+
+    .flow-item.active {
+      background: #d42a2a;
+      border-color: #d42a2a;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .flow-arrow {
+      color: #ccc;
+      font-size: 16px;
+    }
+
+    /* ========================================
+       Flow Map (Step Indicator)
+       ======================================== */
+    .flow-map {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 4px 0;
+    }
+
+    .flow-map .step {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .flow-map .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      border: 2px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #aaa;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .flow-map .step-dot.active {
+      background: #d42a2a;
+      border-color: #d42a2a;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(212,42,42,0.3);
+    }
+
+    .flow-map .step-dot.done {
+      background: #222;
+      border-color: #222;
+      color: #fff;
+    }
+
+    .flow-map .step-line {
+      width: 24px;
+      height: 2px;
+      background: #ddd;
+      flex-shrink: 0;
+    }
+
+    .flow-map .step-line.done {
+      background: #222;
+    }
+
+    .flow-map-labels {
+      display: flex;
+      gap: 0;
+      margin-top: 8px;
+    }
+
+    .flow-map-labels .step-label {
+      width: 56px;
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .flow-map-labels .step-label.active {
+      color: #d42a2a;
+      font-weight: 700;
+    }
+
+    /* ========================================
+       Design Intent Box
+       ======================================== */
+    .intent-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 12px 0;
+    }
+
+    .intent-box .intent-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .intent-box p {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .intent-box ul {
+      margin-top: 8px;
+    }
+
+    .intent-box ul li {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.7;
+    }
+
+    .intent-box ul li::before {
+      background: #f59e0b !important;
+    }
+
+    /* ========================================
+       Page Navigation
+       ======================================== */
+    .page-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .page-nav a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 20px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .page-nav a:hover {
+      border-color: #d42a2a;
+      box-shadow: 0 2px 8px rgba(212,42,42,0.1);
+    }
+
+    .page-nav .nav-label {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .page-nav .nav-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .page-nav .nav-next {
+      text-align: right;
+    }
+
+    .page-nav .nav-prev {}
+
+    .page-nav a.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* ========================================
+       Responsive
+       ======================================== */
+    @media (max-width: 960px) {
+      .doc-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 16px;
+        gap: 32px;
+      }
+
+      .mockup-area {
+        position: static;
+      }
+
+      .phone-frame {
+        width: 320px;
+        height: 693px;
+        border-radius: 44px;
+        padding: 12px;
+      }
+
+      .phone-notch {
+        top: 12px;
+        width: 140px;
+        height: 28px;
+      }
+
+      .phone-screen {
+        border-radius: 34px;
+      }
+
+      .phone-statusbar {
+        height: 40px;
+      }
+
+      .doc-content {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .phone-frame {
+        width: 280px;
+        height: 606px;
+        border-radius: 38px;
+        padding: 10px;
+      }
+
+      .phone-notch {
+        top: 10px;
+        width: 120px;
+        height: 24px;
+      }
+
+      .phone-screen {
+        border-radius: 30px;
+      }
+
+      .phone-statusbar {
+        height: 34px;
+      }
+
+      .doc-section {
+        padding: 20px 18px;
+      }
+
+      .doc-header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-wrapper">
+
+    <!-- ========================================
+         Left: Phone Mockup
+         ======================================== -->
+    <div class="mockup-area">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-statusbar"></div>
+          <iframe src="../cart.html" title="투썸오더 장바구니 화면"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         Right: Description
+         ======================================== -->
+    <div class="doc-content">
+
+      <div class="doc-header">
+        <span class="doc-badge">STEP 6 OF 8</span>
+        <span class="step-badge">주문 준비</span>
+        <h1>장바구니</h1>
+        <p class="subtitle">담아둔 메뉴를 확인·수정하고 주문으로 진행하는 화면</p>
+      </div>
+
+      <!-- 1 플로우 위치 -->
+      <div class="doc-section">
+        <h2><span class="icon">📍</span> 전체 플로우 위치</h2>
+        <div class="flow-map">
+          <div class="step"><span class="step-dot done">1</span></div>
+          <span class="step-line done"></span>
+          <div class="step"><span class="step-dot done">2</span></div>
+          <span class="step-line done"></span>
+          <div class="step"><span class="step-dot done">3</span></div>
+          <span class="step-line done"></span>
+          <div class="step"><span class="step-dot done">4</span></div>
+          <span class="step-line done"></span>
+          <div class="step"><span class="step-dot done">5</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot active">6</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">7</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">8</span></div>
+        </div>
+        <div class="flow-map-labels">
+          <span class="step-label">메뉴홈</span>
+          <span class="step-label">카테고리</span>
+          <span class="step-label">메뉴상세</span>
+          <span class="step-label">즐겨찾기</span>
+          <span class="step-label">매장선택</span>
+          <span class="step-label active">장바구니</span>
+          <span class="step-label">주문정보</span>
+          <span class="step-label">주문완료</span>
+        </div>
+        <table class="info-table" style="margin-top:16px;">
+          <tr><th>화면명</th><td>장바구니 (Cart)</td></tr>
+          <tr><th>파일명</th><td><code>cart.html</code></td></tr>
+          <tr><th>역할</th><td>장바구니 관리 및 주문 전 최종 검토</td></tr>
+        </table>
+      </div>
+
+      <!-- 2 설계 의도 -->
+      <div class="doc-section">
+        <h2><span class="icon">💡</span> 설계 의도</h2>
+        <div class="intent-box">
+          <div class="intent-title">🎯 이 화면의 핵심 목적</div>
+          <p>여러 메뉴를 모아두고 수량/옵션을 최종 조정한 뒤 <strong>한 번에 주문할 수 있는 중간 허브 화면</strong>입니다. 충동구매를 유도하는 디저트 추천 바텀시트로 객단가 상승 기회를 제공합니다.</p>
+        </div>
+
+        <h3>UX 설계 근거</h3>
+        <ul>
+          <li><strong>탭 구조(투썸오더/케이크예약)</strong> — 주문 유형을 명확히 구분하여 일반 주문과 케이크 예약 장바구니를 분리 관리합니다</li>
+          <li><strong>매장 정보 접기/펼치기</strong> — 매장명과 주소를 토글 방식으로 표시해 공간 효율을 극대화합니다</li>
+          <li><strong>전체선택/선택삭제</strong> — 대량의 장바구니 아이템을 한 번에 관리할 수 있는 편의성을 제공합니다</li>
+          <li><strong>개별 아이템 컨트롤</strong> — 수량조절(+/-), 개별삭제, 체크박스를 아이템마다 배치해 세밀한 관리가 가능합니다</li>
+          <li><strong>바코드 말풍선</strong> — QR 버튼 옆 말풍선으로 매장 결제 안내를 직관적으로 전달합니다</li>
+          <li><strong>디저트 추천 바텀시트</strong> — 주문하기 클릭 시 크로스셀링 기회를 제공하여 객단가를 높입니다</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>사용자 시나리오</h3>
+        <table class="info-table">
+          <tr><th>단일 메뉴 주문</th><td>장바구니 → 수량 확인 → 주문하기 → 디저트 추가/스킵 → 결제</td></tr>
+          <tr><th>여러 메뉴 관리</th><td>장바구니 → 불필요 메뉴 삭제 → 수량 조정 → 주문하기</td></tr>
+          <tr><th>메뉴 추가</th><td>장바구니 → "메뉴 추가하기" → 메뉴 탐색 → 장바구니 복귀</td></tr>
+        </table>
+      </div>
+
+      <!-- 3 화면 구성요소 -->
+      <div class="doc-section">
+        <h2><span class="icon">🧩</span> 화면 구성요소</h2>
+
+        <h3>상단 헤더 (Header)</h3>
+        <p>좌측 뒤로가기, 중앙 "장바구니" 타이틀, 우측 홈 버튼으로 구성된 고정 헤더입니다. 명확한 화면 식별과 빠른 네비게이션을 제공합니다.</p>
+        <ul>
+          <li>뒤로가기 버튼으로 이전 화면 복귀</li>
+          <li>홈 버튼으로 메뉴 메인 화면 이동</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>탭 메뉴 (Order Type Tabs)</h3>
+        <p>투썸오더(일반 주문)와 케이크예약 두 개의 탭으로 장바구니 유형을 구분합니다. 활성 탭 하단에 인디케이터 바가 표시됩니다.</p>
+        <div class="flow">
+          <span class="flow-item active">투썸오더</span>
+          <span class="flow-item">케이크예약</span>
+        </div>
+
+        <div class="doc-divider"></div>
+
+        <h3>매장 정보 (Store Info)</h3>
+        <p>현재 선택된 매장명과 주소를 표시합니다. 접기/펼치기 토글로 공간을 효율적으로 활용하며, 주문 전 매장을 한 번 더 확인할 수 있습니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>전체선택 / 선택삭제 바</h3>
+        <p>좌측에 전체선택 체크박스, 우측에 선택삭제 버튼을 배치합니다. 다수의 아이템을 한 번에 관리할 때 사용하는 일괄 제어 영역입니다.</p>
+        <ul>
+          <li>전체선택 토글 시 모든 아이템의 체크박스가 동기화</li>
+          <li>선택삭제 버튼으로 체크된 아이템만 일괄 제거</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>장바구니 아이템 리스트 (Cart Items)</h3>
+        <p>각 아이템은 체크박스, 메뉴명, 옵션 정보, 삭제 버튼, 썸네일 이미지, 가격 내역, 수량 조절 버튼(+/-)으로 구성됩니다. 개별 아이템 단위로 세밀한 관리가 가능합니다.</p>
+        <ul>
+          <li>체크박스로 주문 대상 아이템 선택/해제</li>
+          <li>수량 +/- 버튼으로 실시간 수량 조정 및 금액 재계산</li>
+          <li>X 버튼으로 개별 아이템 삭제</li>
+          <li>메뉴 썸네일 이미지와 옵션 텍스트로 메뉴 식별</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>메뉴 추가하기 링크</h3>
+        <p>아이템 리스트 하단에 위치한 텍스트 링크입니다. 탭 시 메뉴 홈(<code>menu.html</code>)으로 이동하여 추가 메뉴를 탐색할 수 있습니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>픽업매장 안내 바</h3>
+        <p>선택된 픽업 매장 정보를 다시 한번 보여주는 안내 영역입니다. 결제 직전 매장 확인 기능을 합니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>하단 주문 바 (Bottom Order Bar)</h3>
+        <p>화면 하단에 고정되는 주문 액션 영역입니다. 좌측에 QR 버튼과 바코드 말풍선, 우측에 주문하기 버튼(총 금액 + 수량 표시)이 배치됩니다.</p>
+        <ul>
+          <li>QR 버튼 — 매장 바코드 결제 안내</li>
+          <li>바코드 말풍선 — 매장 결제 방법을 직관적으로 안내</li>
+          <li>주문하기 버튼 — 선택된 아이템의 총 금액과 수량을 표시, 탭 시 디저트 추천 바텀시트 오픈</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>디저트 추천 바텀시트 (Dessert Upsell Sheet)</h3>
+        <p>주문하기 버튼 클릭 시 올라오는 바텀시트입니다. "함께 주문하면 더 좋아요!" 타이틀과 함께 디저트 그리드, 함께 주문하기 버튼으로 구성됩니다.</p>
+        <ul>
+          <li>overlay + sheet 구조로 slide-up 애니메이션 적용</li>
+          <li>디저트 아이템 그리드로 크로스셀링 기회 제공</li>
+          <li>함께 주문하기 버튼 → 주문 정보 입력 화면으로 이동</li>
+          <li>overlay 탭 또는 닫기로 바텀시트 해제</li>
+        </ul>
+      </div>
+
+      <!-- 4 인터랙션 & 전환 -->
+      <div class="doc-section">
+        <h2><span class="icon">🔗</span> 인터랙션 &amp; 화면 전환</h2>
+
+        <h3>진입 경로</h3>
+        <ul>
+          <li>메뉴 홈(<code>menu.html</code>)의 장바구니 아이콘 클릭</li>
+          <li>카테고리 화면의 장바구니 아이콘 클릭</li>
+          <li>메뉴 상세(<code>menu-detail.html</code>)의 장바구니 아이콘 클릭</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>주요 인터랙션</h3>
+        <table class="info-table">
+          <tr><th>수량 +/- 버튼</th><td>localStorage 업데이트 → 금액 실시간 재계산</td></tr>
+          <tr><th>체크박스 토글</th><td>선택 아이템만 주문 대상으로 지정</td></tr>
+          <tr><th>주문하기 클릭</th><td>디저트 추천 바텀시트 오픈</td></tr>
+          <tr><th>함께 주문하기</th><td>→ 주문 정보 입력 (<code>order.html?from=cart</code>)</td></tr>
+          <tr><th>메뉴 추가하기</th><td>→ 메뉴 홈 (<code>menu.html</code>)</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>이 화면에서 이동 가능한 곳</h3>
+        <table class="info-table">
+          <tr><th>뒤로가기</th><td>→ 이전 화면 (브라우저 히스토리)</td></tr>
+          <tr><th>홈 버튼</th><td>→ 메뉴 홈 (<code>menu.html</code>)</td></tr>
+          <tr><th>메뉴 추가하기</th><td>→ 메뉴 홈 (<code>menu.html</code>)</td></tr>
+          <tr><th>주문하기 → 함께 주문하기</th><td>→ 주문 정보 (<code>order.html?from=cart</code>)</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>주문 플로우</h3>
+        <div class="flow">
+          <span class="flow-item">장바구니 확인</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item">수량/선택 조정</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item active">주문하기</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item">디저트 추천</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-item">주문 정보 입력</span>
+        </div>
+      </div>
+
+      <!-- 5 데이터 & 기술 -->
+      <div class="doc-section">
+        <h2><span class="icon">⚙️</span> 데이터 &amp; 기술 스펙</h2>
+        <p>장바구니 데이터는 <code>localStorage</code>의 <code>twosome_cart</code> 키를 기반으로 관리됩니다. 메뉴 정보는 <code>MENU_DATA</code>와 <code>DESSERT_DATA</code>에서 조회합니다.</p>
+        <table class="info-table">
+          <tr><th>데이터 저장소</th><td><code>localStorage</code> → <code>twosome_cart</code> 키</td></tr>
+          <tr><th>메뉴 데이터</th><td><code>menu-data.js</code> → MENU_DATA + DESSERT_DATA 배열</td></tr>
+          <tr><th>데모 샘플</th><td>메뉴ID 9, 8 (2개 아이템 기본 세팅)</td></tr>
+          <tr><th>이벤트 처리</th><td>이벤트 위임 패턴 (<code>data-action</code> 속성 기반)</td></tr>
+          <tr><th>바텀시트</th><td>overlay + sheet 구조, slide-up 애니메이션</td></tr>
+          <tr><th>최대 화면 너비</th><td>430px (모바일 최적화)</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>사용 기술</h3>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">Vanilla JS</span>
+        <span class="tag">localStorage</span>
+        <span class="tag red">이벤트 위임</span>
+        <span class="tag red">바텀시트 UI</span>
+      </div>
+
+      <!-- 6 페이지 네비게이션 -->
+      <div class="doc-section" style="background:transparent;box-shadow:none;padding:0;">
+        <div class="page-nav">
+          <a class="nav-prev" href="store-select-doc.html">
+            <span class="nav-label">← 이전</span>
+            <span class="nav-title">매장 선택</span>
+          </a>
+          <a class="nav-next" href="order-doc.html">
+            <span class="nav-label">다음 →</span>
+            <span class="nav-title">주문 정보</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

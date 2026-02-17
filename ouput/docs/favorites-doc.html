@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>투썸오더 - 즐겨찾는 메뉴 설명서</title>
+  <style>
+    /* ========================================
+       Reset & Base
+       ======================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      font-size: 16px;
+      color: #222;
+      background: #f0f2f5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================
+       Page Layout
+       ======================================== */
+    .doc-wrapper {
+      display: flex;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      gap: 56px;
+      align-items: flex-start;
+    }
+
+    /* ========================================
+       Left: Phone Mockup
+       ======================================== */
+    .mockup-area {
+      flex-shrink: 0;
+      position: sticky;
+      top: 32px;
+    }
+
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      background: #1a1a1a;
+      border-radius: 52px;
+      padding: 14px;
+      box-shadow:
+        0 0 0 2px #333,
+        0 24px 80px rgba(0,0,0,0.25),
+        0 8px 24px rgba(0,0,0,0.15),
+        inset 0 0 0 2px #2a2a2a;
+      position: relative;
+    }
+
+    /* Notch */
+    .phone-notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 32px;
+      background: #1a1a1a;
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+
+    .phone-notch::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 40px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-statusbar {
+      width: 100%;
+      height: 48px;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .phone-screen iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+      display: block;
+    }
+
+    /* ========================================
+       Right: Description
+       ======================================== */
+    .doc-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .doc-header {
+      margin-bottom: 40px;
+    }
+
+    .doc-header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #111;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    .doc-header .subtitle {
+      font-size: 16px;
+      color: #888;
+      margin-top: 8px;
+      font-weight: 400;
+    }
+
+    .doc-badge {
+      display: inline-block;
+      background: #d42a2a;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .step-badge {
+      display: inline-block;
+      background: #222;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      margin-left: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Section Card */
+    .doc-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .doc-section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .doc-section h2 .icon {
+      width: 28px;
+      height: 28px;
+      background: #fef2f2;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .doc-section h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #444;
+      margin: 16px 0 8px;
+    }
+
+    .doc-section p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .doc-section ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .doc-section ul li {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .doc-section ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      background: #d42a2a;
+      border-radius: 50%;
+    }
+
+    /* Info Table */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .info-table th,
+    .info-table td {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .info-table th {
+      background: #fafafa;
+      font-weight: 600;
+      color: #444;
+      width: 140px;
+      white-space: nowrap;
+    }
+
+    .info-table td {
+      color: #555;
+    }
+
+    .info-table td code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      color: #d42a2a;
+    }
+
+    /* Tag */
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #666;
+      font-weight: 500;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .tag.red {
+      background: #fef2f2;
+      color: #d42a2a;
+    }
+
+    /* Divider */
+    .doc-divider {
+      height: 1px;
+      background: #eee;
+      margin: 16px 0;
+    }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .flow-item {
+      background: #f8f8f8;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #444;
+      white-space: nowrap;
+    }
+
+    .flow-item.active {
+      background: #d42a2a;
+      border-color: #d42a2a;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .flow-arrow {
+      color: #ccc;
+      font-size: 16px;
+    }
+
+    /* ========================================
+       Flow Map (Step Indicator)
+       ======================================== */
+    .flow-map {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 4px 0;
+    }
+
+    .flow-map .step {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .flow-map .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      border: 2px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #aaa;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .flow-map .step-dot.active {
+      background: #d42a2a;
+      border-color: #d42a2a;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(212,42,42,0.3);
+    }
+
+    .flow-map .step-dot.done {
+      background: #222;
+      border-color: #222;
+      color: #fff;
+    }
+
+    .flow-map .step-line {
+      width: 24px;
+      height: 2px;
+      background: #ddd;
+      flex-shrink: 0;
+    }
+
+    .flow-map .step-line.done {
+      background: #222;
+    }
+
+    .flow-map-labels {
+      display: flex;
+      gap: 0;
+      margin-top: 8px;
+    }
+
+    .flow-map-labels .step-label {
+      width: 56px;
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .flow-map-labels .step-label.active {
+      color: #d42a2a;
+      font-weight: 700;
+    }
+
+    /* ========================================
+       Design Intent Box
+       ======================================== */
+    .intent-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 12px 0;
+    }
+
+    .intent-box .intent-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .intent-box p {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .intent-box ul {
+      margin-top: 8px;
+    }
+
+    .intent-box ul li {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.7;
+    }
+
+    .intent-box ul li::before {
+      background: #f59e0b !important;
+    }
+
+    /* ========================================
+       Page Navigation
+       ======================================== */
+    .page-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .page-nav a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 20px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .page-nav a:hover {
+      border-color: #d42a2a;
+      box-shadow: 0 2px 8px rgba(212,42,42,0.1);
+    }
+
+    .page-nav .nav-label {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .page-nav .nav-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .page-nav .nav-next {
+      text-align: right;
+    }
+
+    .page-nav .nav-prev {}
+
+    .page-nav a.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* ========================================
+       Responsive
+       ======================================== */
+    @media (max-width: 960px) {
+      .doc-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 16px;
+        gap: 32px;
+      }
+
+      .mockup-area {
+        position: static;
+      }
+
+      .phone-frame {
+        width: 320px;
+        height: 693px;
+        border-radius: 44px;
+        padding: 12px;
+      }
+
+      .phone-notch {
+        top: 12px;
+        width: 140px;
+        height: 28px;
+      }
+
+      .phone-screen {
+        border-radius: 34px;
+      }
+
+      .phone-statusbar {
+        height: 40px;
+      }
+
+      .doc-content {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .phone-frame {
+        width: 280px;
+        height: 606px;
+        border-radius: 38px;
+        padding: 10px;
+      }
+
+      .phone-notch {
+        top: 10px;
+        width: 120px;
+        height: 24px;
+      }
+
+      .phone-screen {
+        border-radius: 30px;
+      }
+
+      .phone-statusbar {
+        height: 34px;
+      }
+
+      .doc-section {
+        padding: 20px 18px;
+      }
+
+      .doc-header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-wrapper">
+
+    <!-- ========================================
+         Left: Phone Mockup
+         ======================================== -->
+    <div class="mockup-area">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-statusbar"></div>
+          <iframe src="../favorites.html" title="투썸오더 즐겨찾는 메뉴 화면"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         Right: Description
+         ======================================== -->
+    <div class="doc-content">
+
+      <div class="doc-header">
+        <span class="doc-badge">STEP 4 OF 8</span>
+        <span class="step-badge">즐겨찾기</span>
+        <h1>즐겨찾는 메뉴</h1>
+        <p class="subtitle">자주 주문하는 메뉴를 저장하고 빠르게 재주문하는 화면</p>
+      </div>
+
+      <!-- 1. 플로우 위치 -->
+      <div class="doc-section">
+        <h2><span class="icon">📍</span> 전체 플로우 위치</h2>
+        <div class="flow-map">
+          <div class="step"><span class="step-dot done">1</span></div>
+          <span class="step-line done"></span>
+          <div class="step"><span class="step-dot done">2</span></div>
+          <span class="step-line done"></span>
+          <div class="step"><span class="step-dot done">3</span></div>
+          <span class="step-line done"></span>
+          <div class="step"><span class="step-dot active">4</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">5</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">6</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">7</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">8</span></div>
+        </div>
+        <div class="flow-map-labels">
+          <span class="step-label">메뉴홈</span>
+          <span class="step-label">카테고리</span>
+          <span class="step-label">메뉴상세</span>
+          <span class="step-label active">즐겨찾기</span>
+          <span class="step-label">매장선택</span>
+          <span class="step-label">장바구니</span>
+          <span class="step-label">주문정보</span>
+          <span class="step-label">주문완료</span>
+        </div>
+        <table class="info-table" style="margin-top:16px;">
+          <tr><th>화면명</th><td>즐겨찾는 메뉴 (Favorites)</td></tr>
+          <tr><th>파일명</th><td><code>favorites.html</code></td></tr>
+          <tr><th>역할</th><td>즐겨찾기 메뉴 관리 및 빠른 재주문</td></tr>
+        </table>
+      </div>
+
+      <!-- 2. 설계 의도 -->
+      <div class="doc-section">
+        <h2><span class="icon">💡</span> 설계 의도</h2>
+        <div class="intent-box">
+          <div class="intent-title">🎯 이 화면의 핵심 목적</div>
+          <p>반복 주문 고객이 매번 메뉴를 탐색하지 않고 <strong>저장해둔 메뉴를 1-2탭으로 즉시 재주문</strong>할 수 있는 숏컷 화면입니다. 자주 시키는 메뉴를 미리 등록해두면 옵션 선택 과정 없이 바로 주문 흐름에 진입할 수 있습니다.</p>
+        </div>
+
+        <h3>UX 설계 근거</h3>
+        <ul>
+          <li><strong>체크박스 선택 방식</strong> — 여러 메뉴를 한 번에 선택하여 동시 주문이 가능하도록 설계했습니다. 개별 메뉴마다 주문하는 번거로움을 제거합니다</li>
+          <li><strong>저장된 옵션 표시</strong> — 아이스/라지/일회용컵 등 이전에 저장한 커스텀 옵션이 리스트에 함께 표시되어 별도 확인 없이 바로 주문할 수 있습니다</li>
+          <li><strong>2가지 액션 버튼</strong> — "장바구니 담기"와 "지금 바로 주문"으로 유연한 주문 동선을 제공합니다. 다른 메뉴를 추가하고 싶으면 장바구니에, 즉시 결제하려면 바로 주문을 선택합니다</li>
+          <li><strong>편집 기능 분리</strong> — 즐겨찾기 편집(삭제/순서변경)은 마이페이지에서 처리하도록 분리하여 이 화면에서는 주문 흐름에만 집중할 수 있습니다</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>사용자 시나리오</h3>
+        <table class="info-table">
+          <tr><th>빠른 재주문</th><td>즐겨찾기 진입 → 메뉴 체크 → 지금 바로 주문 → 주문 정보 입력</td></tr>
+          <tr><th>장바구니에 추가</th><td>즐겨찾기 진입 → 메뉴 체크 → 장바구니 담기 → 다른 메뉴 추가 탐색</td></tr>
+        </table>
+      </div>
+
+      <!-- 3. 화면 구성요소 -->
+      <div class="doc-section">
+        <h2><span class="icon">🧩</span> 화면 구성요소</h2>
+
+        <h3>상단 헤더 (Header)</h3>
+        <p>뒤로가기(메뉴홈) 버튼, 홈 버튼, 중앙 "즐겨찾는 메뉴" 타이틀로 구성됩니다. 뒤로가기와 홈 모두 메뉴 홈 화면으로 이동합니다.</p>
+        <ul>
+          <li>좌측 뒤로가기 아이콘 → 메뉴 홈으로 복귀</li>
+          <li>홈 아이콘 → 메뉴 홈으로 이동</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>총 개수 표시</h3>
+        <p>현재 등록된 즐겨찾기 메뉴의 총 개수를 "총 N개" 형태로 표시합니다. 사용자가 저장된 메뉴 수를 한눈에 파악할 수 있습니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>편집 안내 문구</h3>
+        <p>"즐겨찾는 메뉴 편집은 마이페이지에서 가능합니다" 텍스트와 함께 "편집하기" 링크를 제공합니다. 주문 흐름과 편집 흐름을 분리하여 사용자가 혼동 없이 원하는 작업에 집중할 수 있도록 합니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>즐겨찾기 리스트</h3>
+        <p>저장된 메뉴를 카드 형태의 리스트로 표시합니다. 각 항목은 다음 요소로 구성됩니다.</p>
+        <ul>
+          <li><strong>체크박스</strong> — SVG 커스텀 버튼으로 선택/해제 상태를 토글합니다</li>
+          <li><strong>메뉴 썸네일</strong> — 메뉴 이미지를 소형으로 표시합니다</li>
+          <li><strong>메뉴명</strong> — 저장된 메뉴의 이름을 표시합니다</li>
+          <li><strong>가격</strong> — 저장 시점의 옵션이 반영된 가격을 표시합니다</li>
+          <li><strong>저장된 옵션</strong> — "아이스/라지/일회용컵" 등 커스텀 옵션을 텍스트로 표시합니다</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>하단 액션 버튼</h3>
+        <p>화면 하단에 고정되는 2개의 액션 버튼입니다. 선택된 메뉴에 대해 즉시 실행됩니다.</p>
+        <div class="flow">
+          <span class="flow-item">장바구니 담기</span>
+          <span class="flow-item active">지금 바로 주문</span>
+        </div>
+        <ul>
+          <li><strong>장바구니 담기</strong> — 선택한 메뉴를 장바구니에 추가하고, 계속 탐색할 수 있습니다</li>
+          <li><strong>지금 바로 주문</strong> — 선택한 메뉴로 즉시 주문 정보 입력 화면으로 이동합니다</li>
+        </ul>
+      </div>
+
+      <!-- 4. 인터랙션 & 전환 -->
+      <div class="doc-section">
+        <h2><span class="icon">🔗</span> 인터랙션 &amp; 화면 전환</h2>
+
+        <h3>진입 경로</h3>
+        <ul>
+          <li>메뉴 홈 헤더의 즐겨찾기(⭐) 아이콘 클릭</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>이 화면에서의 주요 인터랙션</h3>
+        <table class="info-table">
+          <tr><th>체크박스 탭</th><td>메뉴 선택/해제 토글 (SVG 커스텀 체크박스)</td></tr>
+          <tr><th>장바구니 담기</th><td>→ 선택한 메뉴를 장바구니에 추가</td></tr>
+          <tr><th>지금 바로 주문</th><td>→ 주문 정보 입력 (<code>order.html</code>)</td></tr>
+          <tr><th>편집하기 링크</th><td>→ 마이페이지 즐겨찾기 편집</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>이 화면에서 이동 가능한 곳</h3>
+        <table class="info-table">
+          <tr><th>뒤로가기</th><td>→ 메뉴 홈 (<code>menu.html</code>)</td></tr>
+          <tr><th>홈 버튼</th><td>→ 메뉴 홈 (<code>menu.html</code>)</td></tr>
+          <tr><th>지금 바로 주문</th><td>→ 주문 정보 입력 (<code>order.html</code>)</td></tr>
+          <tr><th>장바구니 담기</th><td>→ 장바구니에 추가 후 현재 화면 유지</td></tr>
+          <tr><th>편집하기</th><td>→ 마이페이지 즐겨찾기 편집</td></tr>
+        </table>
+      </div>
+
+      <!-- 5. 데이터 & 기술 -->
+      <div class="doc-section">
+        <h2><span class="icon">⚙️</span> 데이터 &amp; 기술 스펙</h2>
+        <p>데모용 정적 HTML로 구현되어 있으며, 즐겨찾기 데이터는 하드코딩되어 있습니다.</p>
+        <table class="info-table">
+          <tr><th>데이터 소스</th><td>정적 HTML (데모용 하드코딩 데이터)</td></tr>
+          <tr><th>체크박스</th><td>SVG 커스텀 버튼 (네이티브 체크박스 대체)</td></tr>
+          <tr><th>옵션 텍스트</th><td>아이스/라지/일회용컵</td></tr>
+          <tr><th>최대 화면 너비</th><td>430px (모바일 최적화)</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>사용 기술</h3>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">Vanilla JS</span>
+        <span class="tag red">정적 데모</span>
+        <span class="tag red">모바일 퍼스트</span>
+      </div>
+
+      <!-- 6. 페이지 네비게이션 -->
+      <div class="doc-section" style="background:transparent;box-shadow:none;padding:0;">
+        <div class="page-nav">
+          <a class="nav-prev" href="menu-detail-doc.html">
+            <span class="nav-label">← 이전</span>
+            <span class="nav-title">메뉴 상세</span>
+          </a>
+          <a class="nav-next" href="store-select-doc.html">
+            <span class="nav-label">다음 →</span>
+            <span class="nav-title">매장 선택</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>투썸오더 - 메뉴 화면 설명서</title>
+  <style>
+    /* ========================================
+       Reset & Base
+       ======================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      font-size: 16px;
+      color: #222;
+      background: #f0f2f5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================
+       Page Layout
+       ======================================== */
+    .doc-wrapper {
+      display: flex;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      gap: 56px;
+      align-items: flex-start;
+    }
+
+    /* ========================================
+       Left: Phone Mockup
+       ======================================== */
+    .mockup-area {
+      flex-shrink: 0;
+      position: sticky;
+      top: 32px;
+    }
+
+    .phone-frame {
+      width: 375px;
+      height: 812px;
+      background: #1a1a1a;
+      border-radius: 52px;
+      padding: 14px;
+      box-shadow:
+        0 0 0 2px #333,
+        0 24px 80px rgba(0,0,0,0.25),
+        0 8px 24px rgba(0,0,0,0.15),
+        inset 0 0 0 2px #2a2a2a;
+      position: relative;
+    }
+
+    /* Notch */
+    .phone-notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 32px;
+      background: #1a1a1a;
+      border-radius: 0 0 20px 20px;
+      z-index: 10;
+    }
+
+    .phone-notch::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 40px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-statusbar {
+      width: 100%;
+      height: 48px;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .phone-screen iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+      display: block;
+    }
+
+    /* ========================================
+       Right: Description
+       ======================================== */
+    .doc-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .doc-header {
+      margin-bottom: 40px;
+    }
+
+    .doc-header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #111;
+      letter-spacing: -0.5px;
+      line-height: 1.3;
+    }
+
+    .doc-header .subtitle {
+      font-size: 16px;
+      color: #888;
+      margin-top: 8px;
+      font-weight: 400;
+    }
+
+    .doc-badge {
+      display: inline-block;
+      background: #d42a2a;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .step-badge {
+      display: inline-block;
+      background: #222;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      margin-left: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Section Card */
+    .doc-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .doc-section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .doc-section h2 .icon {
+      width: 28px;
+      height: 28px;
+      background: #fef2f2;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .doc-section h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #444;
+      margin: 16px 0 8px;
+    }
+
+    .doc-section p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .doc-section ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .doc-section ul li {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      padding-left: 18px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .doc-section ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      background: #d42a2a;
+      border-radius: 50%;
+    }
+
+    /* Info Table */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .info-table th,
+    .info-table td {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .info-table th {
+      background: #fafafa;
+      font-weight: 600;
+      color: #444;
+      width: 140px;
+      white-space: nowrap;
+    }
+
+    .info-table td {
+      color: #555;
+    }
+
+    .info-table td code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      color: #d42a2a;
+    }
+
+    /* Tag */
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #666;
+      font-weight: 500;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .tag.red {
+      background: #fef2f2;
+      color: #d42a2a;
+    }
+
+    /* Divider */
+    .doc-divider {
+      height: 1px;
+      background: #eee;
+      margin: 16px 0;
+    }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .flow-item {
+      background: #f8f8f8;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #444;
+      white-space: nowrap;
+    }
+
+    .flow-item.active {
+      background: #d42a2a;
+      border-color: #d42a2a;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .flow-arrow {
+      color: #ccc;
+      font-size: 16px;
+    }
+
+    /* ========================================
+       Flow Map (Step Indicator)
+       ======================================== */
+    .flow-map {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 4px 0;
+    }
+
+    .flow-map .step {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .flow-map .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      border: 2px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #aaa;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .flow-map .step-dot.active {
+      background: #d42a2a;
+      border-color: #d42a2a;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(212,42,42,0.3);
+    }
+
+    .flow-map .step-dot.done {
+      background: #222;
+      border-color: #222;
+      color: #fff;
+    }
+
+    .flow-map .step-line {
+      width: 24px;
+      height: 2px;
+      background: #ddd;
+      flex-shrink: 0;
+    }
+
+    .flow-map .step-line.done {
+      background: #222;
+    }
+
+    .flow-map-labels {
+      display: flex;
+      gap: 0;
+      margin-top: 8px;
+    }
+
+    .flow-map-labels .step-label {
+      width: 56px;
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .flow-map-labels .step-label.active {
+      color: #d42a2a;
+      font-weight: 700;
+    }
+
+    /* ========================================
+       Design Intent Box
+       ======================================== */
+    .intent-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 12px 0;
+    }
+
+    .intent-box .intent-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .intent-box p {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .intent-box ul {
+      margin-top: 8px;
+    }
+
+    .intent-box ul li {
+      font-size: 13px;
+      color: #78350f;
+      line-height: 1.7;
+    }
+
+    .intent-box ul li::before {
+      background: #f59e0b !important;
+    }
+
+    /* ========================================
+       Page Navigation
+       ======================================== */
+    .page-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .page-nav a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 20px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .page-nav a:hover {
+      border-color: #d42a2a;
+      box-shadow: 0 2px 8px rgba(212,42,42,0.1);
+    }
+
+    .page-nav .nav-label {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .page-nav .nav-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .page-nav .nav-next {
+      text-align: right;
+    }
+
+    .page-nav .nav-prev {}
+
+    .page-nav a.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* ========================================
+       Responsive
+       ======================================== */
+    @media (max-width: 960px) {
+      .doc-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 16px;
+        gap: 32px;
+      }
+
+      .mockup-area {
+        position: static;
+      }
+
+      .phone-frame {
+        width: 320px;
+        height: 693px;
+        border-radius: 44px;
+        padding: 12px;
+      }
+
+      .phone-notch {
+        top: 12px;
+        width: 140px;
+        height: 28px;
+      }
+
+      .phone-screen {
+        border-radius: 34px;
+      }
+
+      .phone-statusbar {
+        height: 40px;
+      }
+
+      .doc-content {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .phone-frame {
+        width: 280px;
+        height: 606px;
+        border-radius: 38px;
+        padding: 10px;
+      }
+
+      .phone-notch {
+        top: 10px;
+        width: 120px;
+        height: 24px;
+      }
+
+      .phone-screen {
+        border-radius: 30px;
+      }
+
+      .phone-statusbar {
+        height: 34px;
+      }
+
+      .doc-section {
+        padding: 20px 18px;
+      }
+
+      .doc-header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-wrapper">
+
+    <!-- ========================================
+         Left: Phone Mockup
+         ======================================== -->
+    <div class="mockup-area">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-statusbar"></div>
+          <iframe src="../menu.html" title="투썸오더 메뉴 화면"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         Right: Description
+         ======================================== -->
+    <div class="doc-content">
+
+      <div class="doc-header">
+        <span class="doc-badge">STEP 1 OF 8</span>
+        <span class="step-badge">앱 진입점</span>
+        <h1>메뉴 홈</h1>
+        <p class="subtitle">사용자가 앱에 진입했을 때 가장 먼저 만나는 메뉴 허브 화면</p>
+      </div>
+
+      <!-- ① 플로우 위치 -->
+      <div class="doc-section">
+        <h2><span class="icon">📍</span> 전체 플로우 위치</h2>
+        <div class="flow-map">
+          <div class="step"><span class="step-dot active">1</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">2</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">3</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">4</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">5</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">6</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">7</span></div>
+          <span class="step-line"></span>
+          <div class="step"><span class="step-dot">8</span></div>
+        </div>
+        <div class="flow-map-labels">
+          <span class="step-label active">메뉴홈</span>
+          <span class="step-label">카테고리</span>
+          <span class="step-label">메뉴상세</span>
+          <span class="step-label">즐겨찾기</span>
+          <span class="step-label">매장선택</span>
+          <span class="step-label">장바구니</span>
+          <span class="step-label">주문정보</span>
+          <span class="step-label">주문완료</span>
+        </div>
+        <table class="info-table" style="margin-top:16px;">
+          <tr><th>화면명</th><td>메뉴 메인 (Menu Home)</td></tr>
+          <tr><th>파일명</th><td><code>menu.html</code></td></tr>
+          <tr><th>역할</th><td>앱의 메인 랜딩 페이지, 전체 주문 동선의 시작점</td></tr>
+        </table>
+      </div>
+
+      <!-- ② 설계 의도 -->
+      <div class="doc-section">
+        <h2><span class="icon">💡</span> 설계 의도</h2>
+        <div class="intent-box">
+          <div class="intent-title">🎯 이 화면의 핵심 목적</div>
+          <p>사용자가 앱을 열자마자 <strong>"최소한의 탐색으로 원하는 메뉴에 도달"</strong>할 수 있도록 설계했습니다. 재주문 사용자와 신규 탐색 사용자 모두의 니즈를 동시에 충족하는 허브 역할을 합니다.</p>
+        </div>
+
+        <h3>UX 설계 근거</h3>
+        <ul>
+          <li><strong>Quick Order 카드</strong> — 재주문율이 70% 이상인 카페 앱 특성을 반영해, 이전 주문 기반의 1-tap 재주문을 최상단에 배치했습니다</li>
+          <li><strong>프로모션 배너</strong> — 신메뉴/시즌 한정 메뉴의 인지도를 높이기 위한 비주얼 영역으로, 자동 슬라이드로 다양한 프로모션을 노출합니다</li>
+          <li><strong>카테고리 탭</strong> — ORDER/NEW/커피/음료 등 탭 구조로 스크롤 없이 원하는 카테고리에 즉시 접근 가능합니다</li>
+          <li><strong>하단 매장 정보 바</strong> — 주문 전 매장 확인이 필수이므로 항상 노출하여 "어디서 수령할지"를 상기시킵니다</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>사용자 시나리오</h3>
+        <table class="info-table">
+          <tr><th>반복 고객</th><td>Quick Order → 주문하기 → 결제 (3단계 완료)</td></tr>
+          <tr><th>탐색 고객</th><td>카테고리 탭 → 메뉴 리스트 → 상세 → 장바구니 → 결제</td></tr>
+          <tr><th>프로모션 유입</th><td>배너 클릭 → 해당 메뉴 상세 → 주문</td></tr>
+        </table>
+      </div>
+
+      <!-- ③ 화면 구성요소 -->
+      <div class="doc-section">
+        <h2><span class="icon">🧩</span> 화면 구성요소</h2>
+
+        <h3>상단 헤더 (Header)</h3>
+        <p>고정(sticky) 헤더로 스크롤 시에도 항상 상단에 노출됩니다. 좌측 뒤로가기/홈 버튼, 중앙 "투썸오더" 타이틀, 우측 즐겨찾기·공유·장바구니 아이콘을 배치합니다.</p>
+        <ul>
+          <li>장바구니 아이콘에 담긴 수량을 나타내는 빨간색 뱃지 표시</li>
+          <li>헤더 높이: 52px, 하단 1px 보더로 콘텐츠 영역과 구분</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>카테고리 탭 (Category Tabs)</h3>
+        <p>헤더 아래 고정되는 수평 탭 네비게이션입니다. 좌우 스크롤이 가능하며 선택된 탭 하단에 인디케이터 바가 표시됩니다.</p>
+        <div class="flow">
+          <span class="flow-item active">ORDER</span>
+          <span class="flow-item">NEW</span>
+          <span class="flow-item">커피/음료</span>
+          <span class="flow-item">디저트</span>
+          <span class="flow-item">푸드</span>
+          <span class="flow-item">상품</span>
+        </div>
+
+        <div class="doc-divider"></div>
+
+        <h3>프로모션 배너 (Banner Slider)</h3>
+        <p>ORDER 탭에서 표시되는 자동 슬라이드 배너입니다. 5장의 프로모션 배너가 3.5초 간격으로 자동 전환되며, 터치 스와이프 제스처를 지원합니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>Quick Order</h3>
+        <p>이전 주문 이력 기반의 빠른 재주문 카드입니다. 메뉴 썸네일, 이름, 옵션, 가격, 가까운 매장 정보를 표시하고 "주문하기" 버튼으로 즉시 주문이 가능합니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>최근 주문 (Recent Orders)</h3>
+        <p>최근 주문한 메뉴 3건을 리스트 형태로 보여줍니다. 각 항목 탭 시 메뉴 상세 화면으로 이동합니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>플로팅 검색 버튼 (FAB)</h3>
+        <p>화면 우하단 고정 빨간색 원형 버튼(52x52px). 메뉴 검색 기능으로의 빠른 접근을 제공합니다.</p>
+
+        <div class="doc-divider"></div>
+
+        <h3>하단 매장 정보 바 (Bottom Bar)</h3>
+        <p>현재 선택된 주문 매장 정보와 "변경" 버튼을 표시합니다. 높이 60px, 어두운 배경으로 화면 하단에 고정됩니다.</p>
+      </div>
+
+      <!-- ④ 인터랙션 & 전환 -->
+      <div class="doc-section">
+        <h2><span class="icon">🔗</span> 인터랙션 &amp; 화면 전환</h2>
+
+        <h3>진입 경로</h3>
+        <ul>
+          <li>앱 실행 시 기본 랜딩 화면</li>
+          <li>다른 화면의 홈(🏠) 버튼 클릭 시</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>이 화면에서 이동 가능한 곳</h3>
+        <table class="info-table">
+          <tr><th>메뉴 아이템 탭</th><td>→ 메뉴 상세 (<code>menu-detail.html</code>)</td></tr>
+          <tr><th>Quick Order 주문하기</th><td>→ 주문 완료 (<code>order-detail.html</code>)</td></tr>
+          <tr><th>장바구니 아이콘</th><td>→ 장바구니 (<code>cart.html</code>)</td></tr>
+          <tr><th>즐겨찾기 아이콘</th><td>→ 즐겨찾기 (<code>favorites.html</code>)</td></tr>
+          <tr><th>매장 변경 버튼</th><td>→ 매장 선택 (<code>store-select.html</code>)</td></tr>
+          <tr><th>커피/음료 탭</th><td>→ 카테고리 (<code>category-coffee.html</code>)</td></tr>
+        </table>
+      </div>
+
+      <!-- ⑤ 데이터 & 기술 -->
+      <div class="doc-section">
+        <h2><span class="icon">⚙️</span> 데이터 &amp; 기술 스펙</h2>
+        <p>메뉴 데이터는 <code>menu-data.js</code>의 <code>MENU_DATA</code> 배열을 사용합니다.</p>
+        <table class="info-table">
+          <tr><th>데이터 소스</th><td><code>menu-data.js</code> → MENU_DATA 배열</td></tr>
+          <tr><th>배너 자동 재생</th><td>3.5초 간격, 스와이프 시 일시 정지 후 재시작</td></tr>
+          <tr><th>탭 전환</th><td>display 속성 전환 (애니메이션 없이 즉시 교체)</td></tr>
+          <tr><th>최대 화면 너비</th><td>430px (모바일 최적화)</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>사용 기술</h3>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">Vanilla JS</span>
+        <span class="tag red">반응형</span>
+        <span class="tag red">모바일 퍼스트</span>
+      </div>
+
+      <!-- ⑥ 페이지 네비게이션 -->
+      <div class="doc-section" style="background:transparent;box-shadow:none;padding:0;">
+        <div class="page-nav">
+          <a class="nav-prev disabled" href="#">
+            <span class="nav-label">← 이전</span>
+            <span class="nav-title">—</span>
+          </a>
+          <a class="nav-next" href="category-coffee-doc.html">
+            <span class="nav-label">다음 →</span>
+            <span class="nav-title">카테고리 (커피/음료)</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
