@@ -96,37 +96,6 @@
         </div>
       </section>
 
-      <div class="section-divider"></div>
-
-      <!-- 매장 정보 -->
-      <section class="store-section">
-        <span class="store-name" id="storeName">종로구청점</span>
-        <button class="btn-store-time" aria-label="전화">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#222" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </section>
-
-      <div class="section-divider"></div>
-
-      <!-- 주문 상품 리스트 (아코디언) -->
-      <section class="order-items-accordion">
-        <button class="accordion-toggle" id="accordionToggle">
-          <span class="accordion-title">주문 상품</span>
-          <svg class="accordion-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <div class="accordion-body open" id="accordionBody">
-          <div class="order-items" id="orderItems">
-            <!-- JS에서 동적 생성 -->
-          </div>
-        </div>
-      </section>
-
-      <div class="section-divider"></div>
-
       <!-- 프로모션 배너 슬라이더 -->
       <section class="banner-slider">
         <div class="banner-track" id="bannerTrack">
@@ -158,6 +127,35 @@
         </div>
         <div class="banner-pagination">
           <span class="current">1</span> / <span class="total">5</span>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 매장 정보 -->
+      <section class="store-section">
+        <span class="store-name" id="storeName">종로구청점</span>
+        <button class="btn-store-time" aria-label="전화">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="#222" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- 주문 상품 리스트 (아코디언) -->
+      <section class="order-items-accordion">
+        <button class="accordion-toggle" id="accordionToggle">
+          <span class="accordion-title">주문 상품</span>
+          <svg class="accordion-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="accordion-body open" id="accordionBody">
+          <div class="order-items" id="orderItems">
+            <!-- JS에서 동적 생성 -->
+          </div>
         </div>
       </section>
 
@@ -288,12 +286,6 @@
         accordionBody.classList.toggle('open');
         toggleBtn.classList.toggle('collapsed');
       });
-
-      // 1.5초 후 자동 접힘
-      setTimeout(function() {
-        accordionBody.classList.remove('open');
-        toggleBtn.classList.add('collapsed');
-      }, 1500);
 
       // 배너 슬라이더
       const track = document.getElementById('bannerTrack');

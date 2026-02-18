@@ -439,6 +439,16 @@
       background: #f59e0b !important;
     }
 
+    /* Problem box (red variant) */
+    .intent-box[style*="fef2f2"] ul li::before {
+      background: #ef4444 !important;
+    }
+
+    /* Effect box (green variant) */
+    .intent-box[style*="ecfdf5"] ul li::before {
+      background: #10b981 !important;
+    }
+
     /* ========================================
        Page Navigation
        ======================================== */
@@ -710,195 +720,73 @@
         <p class="subtitle">루틴한 주문과 다같이 주문, 두 가지 시나리오의 공통 시작점</p>
       </div>
 
-      <!-- ① 사용자 시나리오 플로우 -->
+      <!-- ① Quick Order -->
       <div class="doc-section">
-        <h2><span class="icon">📍</span> 사용자 시나리오 플로우</h2>
-        <p style="margin-bottom:20px;">이 앱은 두 가지 핵심 사용자 시나리오를 기반으로 설계되었습니다. 메뉴 홈은 두 시나리오의 공통 진입점입니다.</p>
-
-        <!-- 시나리오 1 -->
-        <div class="scenario-group">
-          <div class="scenario-header">
-            <span class="scenario-number">1</span>
-            <span class="scenario-title">루틴한 주문 <span class="scenario-subtitle">— 빠르게 반복 주문</span></span>
-          </div>
-          <div class="scenario-context">
-            <span class="context-icon">🚶</span>
-            <span><strong>출근 시간</strong> — 매일 아침 출근길에 같은 메뉴를 빠르게 주문하는 직장인. 최소한의 탭으로 주문을 완료하고 싶다.</span>
-          </div>
-          <div class="scenario-flow">
-            <span class="sf-item active">ORDER</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">퀵오더</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">최근 주문</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">결제화면</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">결제완료</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item highlight">광고</span>
-          </div>
-        </div>
-
-        <div class="scenario-divider"></div>
-
-        <!-- 시나리오 2 -->
-        <div class="scenario-group">
-          <div class="scenario-header">
-            <span class="scenario-number blue">2</span>
-            <span class="scenario-title">다같이 주문 <span class="scenario-subtitle">— 여러 메뉴 탐색 후 주문</span></span>
-          </div>
-          <div class="scenario-context">
-            <span class="context-icon">👥</span>
-            <span><strong>점심 시간</strong> — 동료들과 함께 주문할 때, 여러 메뉴를 탐색하고 장바구니에 담아 한 번에 주문하는 시나리오.</span>
-          </div>
-          <div class="scenario-flow">
-            <span class="sf-item blue">ORDER</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">NEW</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">커피/음료</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">주문하기</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">바텀시트</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">결제화면</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item">결제완료</span>
-            <span class="sf-arrow">→</span>
-            <span class="sf-item highlight">광고</span>
-          </div>
-        </div>
-
-        <table class="info-table" style="margin-top:20px;">
-          <tr><th>화면명</th><td>메뉴 메인 (Menu Home)</td></tr>
-          <tr><th>파일명</th><td><code>menu.html</code></td></tr>
-          <tr><th>역할</th><td>앱의 메인 랜딩 페이지, 두 시나리오의 공통 진입점</td></tr>
-        </table>
-      </div>
-
-      <!-- ② 설계 의도 -->
-      <div class="doc-section">
-        <h2><span class="icon">💡</span> 설계 의도</h2>
-        <div class="intent-box">
-          <div class="intent-title">🎯 이 화면의 핵심 목적</div>
-          <p>사용자가 앱을 열자마자 <strong>"최소한의 탐색으로 원하는 메뉴에 도달"</strong>할 수 있도록 설계했습니다. 재주문 사용자와 신규 탐색 사용자 모두의 니즈를 동시에 충족하는 허브 역할을 합니다.</p>
-        </div>
-
-        <h3>UX 설계 근거</h3>
-        <ul>
-          <li><strong>Quick Order 카드</strong> — 재주문율이 70% 이상인 카페 앱 특성을 반영해, 이전 주문 기반의 1-tap 재주문을 최상단에 배치했습니다</li>
-          <li><strong>프로모션 배너</strong> — 신메뉴/시즌 한정 메뉴의 인지도를 높이기 위한 비주얼 영역으로, 자동 슬라이드로 다양한 프로모션을 노출합니다</li>
-          <li><strong>카테고리 탭</strong> — ORDER/NEW/커피/음료 등 탭 구조로 스크롤 없이 원하는 카테고리에 즉시 접근 가능합니다</li>
-          <li><strong>하단 매장 정보 바</strong> — 주문 전 매장 확인이 필수이므로 항상 노출하여 "어디서 수령할지"를 상기시킵니다</li>
-        </ul>
-
-        <div class="doc-divider"></div>
-
-        <h3>사용자 시나리오별 설계 포인트</h3>
-        <table class="info-table">
-          <tr><th>시나리오 1<br><span style="font-weight:400;color:#888;font-size:12px;">루틴한 주문</span></th><td>출근길에 매일 같은 메뉴를 주문하는 사용자를 위해 <strong>Quick Order → 최근 주문 → 결제</strong>의 최단 경로를 제공합니다. 최소 탭으로 주문 완료가 가능하도록 설계했습니다.</td></tr>
-          <tr><th>시나리오 2<br><span style="font-weight:400;color:#888;font-size:12px;">다같이 주문</span></th><td>점심시간에 동료들과 함께 주문하는 사용자를 위해 <strong>카테고리 탐색 → 메뉴 상세 → 디저트 추천 바텀시트 → 결제</strong>로 여러 메뉴를 편리하게 담을 수 있도록 설계했습니다.</td></tr>
-          <tr><th>공통</th><td>두 시나리오 모두 결제 완료 후 <strong>광고 화면</strong>을 노출하여 프로모션 인지도를 높입니다.</td></tr>
-        </table>
-      </div>
-
-      <!-- ③ 화면 구성요소 -->
-      <div class="doc-section">
-        <h2><span class="icon">🧩</span> 화면 구성요소</h2>
-
-        <h3>상단 헤더 (Header)</h3>
-        <p>고정(sticky) 헤더로 스크롤 시에도 항상 상단에 노출됩니다. 좌측 뒤로가기/홈 버튼, 중앙 "투썸오더" 타이틀, 우측 즐겨찾기·공유·장바구니 아이콘을 배치합니다.</p>
-        <ul>
-          <li>장바구니 아이콘에 담긴 수량을 나타내는 빨간색 뱃지 표시</li>
-          <li>헤더 높이: 52px, 하단 1px 보더로 콘텐츠 영역과 구분</li>
-        </ul>
-
-        <div class="doc-divider"></div>
-
-        <h3>카테고리 탭 (Category Tabs)</h3>
-        <p>헤더 아래 고정되는 수평 탭 네비게이션입니다. 좌우 스크롤이 가능하며 선택된 탭 하단에 인디케이터 바가 표시됩니다.</p>
-        <div class="flow">
-          <span class="flow-item active">ORDER</span>
-          <span class="flow-item">NEW</span>
-          <span class="flow-item">커피/음료</span>
-          <span class="flow-item">디저트</span>
-          <span class="flow-item">푸드</span>
-          <span class="flow-item">상품</span>
-        </div>
-
-        <div class="doc-divider"></div>
-
-        <h3>프로모션 배너 (Banner Slider)</h3>
-        <p>ORDER 탭에서 표시되는 자동 슬라이드 배너입니다. 5장의 프로모션 배너가 3.5초 간격으로 자동 전환되며, 터치 스와이프 제스처를 지원합니다.</p>
-
-        <div class="doc-divider"></div>
-
-        <h3>Quick Order</h3>
+        <h2><span class="icon">⚡</span> Quick Order</h2>
         <p>이전 주문 이력 기반의 빠른 재주문 카드입니다. 메뉴 썸네일, 이름, 옵션, 가격, 가까운 매장 정보를 표시하고 "주문하기" 버튼으로 즉시 주문이 가능합니다.</p>
 
-        <div class="doc-divider"></div>
+        <div class="intent-box" style="background:#fef2f2; border-color:#fca5a5;">
+          <div class="intent-title" style="color:#991b1b;">⚠️ 이전의 문제점</div>
+          <ul>
+            <li>기존 투썸오더 앱에서는 재주문 시 메뉴 탐색 → 메뉴 선택 → 옵션 설정 → 장바구니 → 결제까지 최소 5단계 이상의 탭이 필요했음</li>
+            <li>매일 같은 메뉴를 주문하는 루틴 사용자에게도 매번 동일한 탐색 과정을 강제하여 주문 피로도를 높임</li>
+            <li>재주문에 최적화된 전용 동선이 없어, 빠른 주문을 원하는 사용자의 이탈률이 증가</li>
+          </ul>
+        </div>
 
-        <h3>최근 주문 (Recent Orders)</h3>
+        <div class="intent-box">
+          <div class="intent-title">🎯 설계 의도</div>
+          <ul>
+            <li>가장 최근 주문한 메뉴 1건을 카드 형태로 최상단에 배치하여, 앱 진입 즉시 1-tap 재주문이 가능하도록 설계</li>
+            <li>메뉴 썸네일·이름·옵션·가격·매장 정보를 한눈에 확인할 수 있도록 정보 밀도를 높여 별도 화면 진입 없이 의사결정 가능</li>
+            <li>"주문하기" 버튼을 카드 내에 직접 배치하여, 탐색 → 결제까지의 단계를 5단계에서 2단계(Quick Order 탭 → 결제)로 단축</li>
+          </ul>
+        </div>
+
+        <div class="intent-box" style="background:#ecfdf5; border-color:#6ee7b7;">
+          <div class="intent-title" style="color:#065f46;">📈 기대 효과</div>
+          <ul>
+            <li>루틴 주문 사용자의 주문 완료 시간을 기존 대비 60% 이상 단축 (5단계 → 2단계)</li>
+            <li>재주문 전환율 향상 — 앱 진입 시 즉각적인 행동 유도(CTA)로 주문 완료율 증가 기대</li>
+            <li>출퇴근 시간대 등 시간이 제한된 상황에서의 사용자 만족도 및 앱 재방문율 개선</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ② 최근 주문 -->
+      <div class="doc-section">
+        <h2><span class="icon">🕐</span> 최근 주문 (Recent Orders)</h2>
         <p>최근 주문한 메뉴 3건을 리스트 형태로 보여줍니다. 각 항목 탭 시 메뉴 상세 화면으로 이동합니다.</p>
 
-        <div class="doc-divider"></div>
+        <div class="intent-box" style="background:#fef2f2; border-color:#fca5a5;">
+          <div class="intent-title" style="color:#991b1b;">⚠️ 이전의 문제점</div>
+          <ul>
+            <li>기존 앱에서는 과거 주문 이력을 확인하려면 마이페이지 → 주문내역으로 별도 진입해야 해서 접근성이 낮았음</li>
+            <li>주문내역 화면은 날짜·주문번호 중심의 관리 목적 UI로, 빠른 재주문 용도로 활용하기 어려웠음</li>
+            <li>"2~3일 전에 먹었던 그 메뉴"를 다시 주문하려면 전체 메뉴에서 처음부터 탐색해야 하는 비효율 발생</li>
+          </ul>
+        </div>
 
-        <h3>플로팅 검색 버튼 (FAB)</h3>
-        <p>화면 우하단 고정 빨간색 원형 버튼(52x52px). 메뉴 검색 기능으로의 빠른 접근을 제공합니다.</p>
+        <div class="intent-box">
+          <div class="intent-title">🎯 설계 의도</div>
+          <ul>
+            <li>Quick Order 카드 하단에 최근 주문 3건을 리스트로 노출하여, 메뉴 홈에서 바로 과거 주문에 접근 가능하도록 설계</li>
+            <li>메뉴 이미지·이름·옵션을 간결하게 표시하여, 시각적으로 빠르게 원하는 메뉴를 식별할 수 있도록 구성</li>
+            <li>각 항목 탭 시 메뉴 상세 화면으로 이동하여, 옵션 변경이 필요한 경우에도 유연하게 대응 가능</li>
+          </ul>
+        </div>
 
-        <div class="doc-divider"></div>
-
-        <h3>하단 매장 정보 바 (Bottom Bar)</h3>
-        <p>현재 선택된 주문 매장 정보와 "변경" 버튼을 표시합니다. 높이 60px, 어두운 배경으로 화면 하단에 고정됩니다.</p>
+        <div class="intent-box" style="background:#ecfdf5; border-color:#6ee7b7;">
+          <div class="intent-title" style="color:#065f46;">📈 기대 효과</div>
+          <ul>
+            <li>과거 주문 기반 재주문의 접근 경로를 3단계(마이페이지→주문내역→재주문)에서 1단계(메뉴 홈에서 직접 탭)로 단축</li>
+            <li>Quick Order(1건)와 최근 주문(3건)의 조합으로 총 4건의 재주문 옵션을 제공하여 다양한 재주문 니즈 충족</li>
+            <li>메뉴 탐색 시간 감소로 주문 전환율 향상 및 사용자의 메뉴 선택 스트레스 완화</li>
+          </ul>
+        </div>
       </div>
 
-      <!-- ④ 인터랙션 & 전환 -->
-      <div class="doc-section">
-        <h2><span class="icon">🔗</span> 인터랙션 &amp; 화면 전환</h2>
-
-        <h3>진입 경로</h3>
-        <ul>
-          <li>앱 실행 시 기본 랜딩 화면</li>
-          <li>다른 화면의 홈(🏠) 버튼 클릭 시</li>
-        </ul>
-
-        <div class="doc-divider"></div>
-
-        <h3>이 화면에서 이동 가능한 곳</h3>
-        <table class="info-table">
-          <tr><th>메뉴 아이템 탭</th><td>→ 메뉴 상세 (<code>menu-detail.html</code>)</td></tr>
-          <tr><th>Quick Order 주문하기</th><td>→ 주문 정보 (<code>order.html</code>)</td></tr>
-          <tr><th>장바구니 아이콘</th><td>→ 장바구니 (<code>cart.html</code>)</td></tr>
-          <tr><th>즐겨찾기 아이콘</th><td>→ 즐겨찾기 (<code>favorites.html</code>)</td></tr>
-          <tr><th>매장 변경 버튼</th><td>→ 매장 선택 (<code>store-select.html</code>)</td></tr>
-          <tr><th>커피/음료 탭</th><td>→ 카테고리 (<code>category-coffee.html</code>)</td></tr>
-        </table>
-      </div>
-
-      <!-- ⑤ 데이터 & 기술 -->
-      <div class="doc-section">
-        <h2><span class="icon">⚙️</span> 데이터 &amp; 기술 스펙</h2>
-        <p>메뉴 데이터는 <code>menu-data.js</code>의 <code>MENU_DATA</code> 배열을 사용합니다.</p>
-        <table class="info-table">
-          <tr><th>데이터 소스</th><td><code>menu-data.js</code> → MENU_DATA 배열</td></tr>
-          <tr><th>배너 자동 재생</th><td>3.5초 간격, 스와이프 시 일시 정지 후 재시작</td></tr>
-          <tr><th>탭 전환</th><td>display 속성 전환 (애니메이션 없이 즉시 교체)</td></tr>
-          <tr><th>최대 화면 너비</th><td>430px (모바일 최적화)</td></tr>
-        </table>
-
-        <div class="doc-divider"></div>
-
-        <h3>사용 기술</h3>
-        <span class="tag">HTML5</span>
-        <span class="tag">CSS3</span>
-        <span class="tag">Vanilla JS</span>
-        <span class="tag red">반응형</span>
-        <span class="tag red">모바일 퍼스트</span>
-      </div>
-
-      <!-- ⑥ 페이지 네비게이션 -->
+      <!-- 페이지 네비게이션 -->
       <div class="doc-section" style="background:transparent;box-shadow:none;padding:0;">
         <div class="page-nav">
           <a class="nav-prev disabled" href="#">
@@ -915,5 +803,82 @@
     </div>
   </div>
 
+  <script>
+    (function() {
+      var iframe = document.querySelector('.phone-screen iframe');
+      var targets = [
+        { el: null, key: 'quickOrder' },
+        { el: null, key: 'recentOrder' }
+      ];
+      var currentHighlight = null;
+      var scrollTimer = null;
+
+      // doc-section 매핑
+      var sections = document.querySelectorAll('.doc-content > .doc-section');
+      if (sections[0]) targets[0].el = sections[0];
+      if (sections[1]) targets[1].el = sections[1];
+
+      // 활성 스타일
+      var style = document.createElement('style');
+      style.textContent = '.doc-section.active-sync{box-shadow:0 0 0 2.5px #d42a2a,0 4px 16px rgba(212,42,42,0.12);transition:box-shadow 0.3s;}';
+      document.head.appendChild(style);
+
+      function sendHighlight(section) {
+        if (section === currentHighlight) return;
+        currentHighlight = section;
+
+        targets.forEach(function(t) {
+          if (t.el) t.el.classList.remove('active-sync');
+        });
+        if (section) {
+          targets.forEach(function(t) {
+            if (t.key === section && t.el) t.el.classList.add('active-sync');
+          });
+        }
+
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage({ type: 'highlight', section: section }, '*');
+        }
+      }
+
+      // 뷰포트 중앙에 가장 가까운 섹션 찾기
+      function findClosestSection() {
+        var viewMid = window.innerHeight / 2;
+        var closest = null;
+        var closestDist = Infinity;
+
+        targets.forEach(function(t) {
+          if (!t.el) return;
+          var rect = t.el.getBoundingClientRect();
+          // 섹션이 뷰포트에 일부라도 보이는지 확인
+          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+          var sectionMid = rect.top + rect.height / 2;
+          var dist = Math.abs(sectionMid - viewMid);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closest = t.key;
+          }
+        });
+
+        return closest;
+      }
+
+      function onScroll() {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function() {
+          var found = findClosestSection();
+          sendHighlight(found);
+        }, 80);
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // 초기 로드
+      setTimeout(function() {
+        var found = findClosestSection();
+        sendHighlight(found || 'quickOrder');
+      }, 500);
+    })();
+  </script>
 </body>
 </html>

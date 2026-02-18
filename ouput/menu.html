@@ -118,19 +118,6 @@
         </section>
         <!-- Quick Order -->
         <section class="quick-order-section" id="quickOrderSection" style="position:relative;">
-          <!-- 영역 표시용 깜빡임 오버레이 -->
-          <div style="
-            position:absolute; top:0; left:0; right:0; bottom:0;
-            background:rgba(255,255,255,0.75);
-            z-index:10; pointer-events:none;
-            animation: hl-blink 2s ease-in-out infinite;
-          "></div>
-          <style>
-            @keyframes hl-blink {
-              0%, 100% { opacity:0; }
-              50% { opacity:1; }
-            }
-          </style>
           <div class="section-header">
             <h2 class="section-title">Quick Order</h2>
             <p class="section-subtitle">오늘 아침도 이 메뉴를 준비해 드릴까요?</p>
@@ -156,13 +143,6 @@
 
         <!-- 최근 주문 -->
         <section class="recent-order-section" id="recentOrderSection" style="position:relative;">
-          <!-- 영역 표시용 깜빡임 오버레이 -->
-          <div style="
-            position:absolute; top:0; left:0; right:0; bottom:0;
-            background:rgba(255,255,255,0.75);
-            z-index:10; pointer-events:none;
-            animation: hl-blink 2s ease-in-out infinite;
-          "></div>
           <div class="section-header">
             <h2 class="section-title">최근 주문</h2>
           </div>
@@ -576,6 +556,55 @@
       }
 
     });
+
+    // ── postMessage 하이라이트 리스너 (menu-doc.html 연동) ──
+    var currentSyncTarget = null;
+
+    window.addEventListener('message', function(e) {
+      if (!e.data || e.data.type !== 'highlight') return;
+
+      var sectionKey = e.data.section;
+
+      // 같은 섹션이면 무시
+      if (sectionKey === currentSyncTarget) return;
+      currentSyncTarget = sectionKey;
+
+      // 기존 하이라이트 오버레이 모두 제거
+      document.querySelectorAll('.sync-highlight-overlay').forEach(function(el) {
+        el.remove();
+      });
+
+      var targetId = null;
+      if (sectionKey === 'quickOrder') targetId = 'quickOrderSection';
+      else if (sectionKey === 'recentOrder') targetId = 'recentOrderSection';
+
+      if (!targetId) return;
+
+      var target = document.getElementById(targetId);
+      if (!target) return;
+
+      // 하이라이트 오버레이 생성
+      var overlay = document.createElement('div');
+      overlay.className = 'sync-highlight-overlay';
+      overlay.style.cssText = 'position:absolute;top:0;left:0;right:0;bottom:0;' +
+        'border:2.5px solid #d42a2a;border-radius:12px;' +
+        'background:rgba(212,42,42,0.06);pointer-events:none;z-index:50;' +
+        'animation:syncPulse 1.5s ease-in-out infinite;';
+      target.style.position = 'relative';
+      target.appendChild(overlay);
+
+      // iframe 내부 스크롤 컨테이너에서만 스크롤 (부모 페이지 영향 없음)
+      var scrollContainer = document.querySelector('.menu-body') || document.documentElement;
+      var targetRect = target.getBoundingClientRect();
+      var containerRect = scrollContainer.getBoundingClientRect();
+      var scrollTop = scrollContainer.scrollTop + (targetRect.top - containerRect.top) - (containerRect.height / 2) + (targetRect.height / 2);
+      scrollContainer.scrollTo({ top: scrollTop, behavior: 'smooth' });
+    });
+
+    // syncPulse 애니메이션 스타일 추가
+    var pulseStyle = document.createElement('style');
+    pulseStyle.textContent = '@keyframes syncPulse{0%,100%{border-color:#d42a2a;background:rgba(212,42,42,0.06);}50%{border-color:#ef4444;background:rgba(212,42,42,0.12);}}';
+    document.head.appendChild(pulseStyle);
   </script>
 </body>
 </html>
