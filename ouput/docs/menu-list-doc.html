@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>투썸오더 - 메뉴 목록 화면 설명서</title>
+  <link rel="stylesheet" href="doc-common.css">
+</head>
+<body>
+
+  <div class="doc-wrapper">
+
+    <!-- ========================================
+        Left: Phone Mockup
+        ======================================== -->
+    <div class="mockup-area">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-statusbar"></div>
+          <iframe src="about:blank" id="mockupIframe" title="투썸오더 메뉴 화면"></iframe>
+          <script>
+            (function() {
+              var t = new URLSearchParams(window.location.search).get('tab') || 'new';
+              document.getElementById('mockupIframe').src = '../menu.html?tab=' + t;
+            })();
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+        Right: Description
+        ======================================== -->
+    <div class="doc-content">
+
+      <!-- 브레드크럼 -->
+      <div class="doc-breadcrumb">
+        <a href="index.html">제안서 메인</a> <span class="sep">›</span> 화면 제안 <span class="sep">›</span> <span class="current">메뉴 목록</span>
+      </div>
+
+      <!-- 제안서 헤더 -->
+      <div class="doc-header">
+        <span class="doc-badge">탐색</span><span class="step-badge">STEP 1 of 8</span>
+        <h1>메뉴 목록 (Order List)</h1>
+        <p class="subtitle">NEW/커피/디저트 탭으로 메뉴를 체계적으로 탐색하는 주문 목록 화면</p>
+      </div>
+
+      <!-- 상단 허브: 제안서 구성 -->
+      <div class="page-hub">
+        <div class="page-hub-title">📋 제안서 구성</div>
+        <div class="page-hub-grid">
+          <div class="hub-group-label">진입</div>
+          <a href="store-select-doc.html"><div class="hub-icon">🏪</div><div class="hub-name">매장선택</div><div class="hub-desc">픽업 매장</div></a>
+          <div class="hub-group-label">탐색</div>
+          <a href="menu-doc.html"><div class="hub-icon">🏠</div><div class="hub-name">메뉴홈</div><div class="hub-desc">주문 진입점</div></a>
+          <div class="hub-current"><div class="hub-icon">☕</div><div class="hub-name">메뉴목록</div><div class="hub-desc">메뉴 탐색</div></div>
+          <a href="category-coffee-doc.html"><div class="hub-icon">📂</div><div class="hub-name">카테고리</div><div class="hub-desc">카테고리 탐색</div></a>
+          <a href="menu-detail-doc.html"><div class="hub-icon">📋</div><div class="hub-name">메뉴상세</div><div class="hub-desc">옵션 선택</div></a>
+          <a href="favorites-doc.html"><div class="hub-icon">⭐</div><div class="hub-name">즐겨찾기</div><div class="hub-desc">빠른 재주문</div></a>
+          <div class="hub-group-label">결제</div>
+          <a href="cart-doc.html"><div class="hub-icon">🛒</div><div class="hub-name">장바구니</div><div class="hub-desc">주문 관리</div></a>
+          <a href="order-doc.html"><div class="hub-icon">💳</div><div class="hub-name">주문정보</div><div class="hub-desc">결제 진행</div></a>
+          <div class="hub-group-label">완료</div>
+          <a href="order-detail-doc.html"><div class="hub-icon">✅</div><div class="hub-name">주문완료</div><div class="hub-desc">주문 확인</div></a>
+        </div>
+      </div>
+
+      <!-- ⓪ 플로우 맵 -->
+      <div class="doc-section">
+        <h2><span class="icon">📍</span> 전체 플로우 위치</h2>
+        <div class="flow-map">
+          <div class="step"><span class="step-dot active">1</span></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="category-coffee-doc.html"><span class="step-dot">2</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="menu-detail-doc.html"><span class="step-dot">3</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="favorites-doc.html"><span class="step-dot">4</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="store-select-doc.html"><span class="step-dot">5</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="cart-doc.html"><span class="step-dot">6</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="order-doc.html"><span class="step-dot">7</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="order-detail-doc.html"><span class="step-dot">8</span></a></div>
+        </div>
+        <div class="flow-map-labels">
+          <span class="step-label active">메뉴홈</span>
+          <a href="category-coffee-doc.html" class="step-label">카테고리</a>
+          <a href="menu-detail-doc.html" class="step-label">메뉴상세</a>
+          <a href="favorites-doc.html" class="step-label">즐겨찾기</a>
+          <a href="store-select-doc.html" class="step-label">매장선택</a>
+          <a href="cart-doc.html" class="step-label">장바구니</a>
+          <a href="order-doc.html" class="step-label">주문정보</a>
+          <a href="order-detail-doc.html" class="step-label">주문완료</a>
+        </div>
+        <table class="info-table" style="margin-top:16px;">
+          <tr><th>화면명</th><td>메뉴 목록 (Order List)</td></tr>
+          <tr><th>파일명</th><td><code>menu.html</code> (탭 전환)</td></tr>
+          <tr><th>역할</th><td>NEW/커피/디저트 탭별 메뉴 탐색</td></tr>
+        </table>
+      </div>
+
+      <!-- ① NEW 탭 -->
+      <div class="doc-section">
+        <h2><span class="icon">✨</span> NEW 탭 — 신메뉴 탐색</h2>
+
+        <div class="intent-box">
+          <div class="intent-title">🎯 핵심 목적</div>
+          <p>새롭게 출시된 메뉴를 한 곳에 모아 보여주어, <strong>신메뉴 발견과 시도를 촉진</strong>하는 큐레이션 전용 탭입니다.</p>
+        </div>
+
+        <h3>⚠️ 이전의 문제점</h3>
+        <ul>
+          <li><strong>신메뉴 발견성 부재</strong> — 기존 앱에서는 신메뉴가 전체 카테고리 목록에 섞여 노출되어, 사용자가 새로운 메뉴를 별도로 확인할 수 있는 전용 경로가 없었음</li>
+          <li><strong>시즌 메뉴 탐색 비효율</strong> — 시즌 한정 메뉴나 프로모션 메뉴를 발견하려면 전체 카테고리를 순회하며 직접 찾아야 했으며, 놓치는 경우가 빈번했음</li>
+          <li><strong>건강 니즈 필터 부재</strong> — 저당·저칼로리·카페인 프리 등 건강 관련 조건으로 신메뉴를 필터링할 수 있는 기능이 없어, 개인화된 탐색이 불가능했음</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>💡 UX 설계 근거</h3>
+        <ul>
+          <li><strong>NEW 전용 탭 분리</strong> — 메뉴 탐색 영역 상단에 독립적인 NEW 탭을 배치하여, 한 번의 탭으로 최신 메뉴를 모아볼 수 있는 전용 진입점 제공</li>
+          <li><strong>NEW 뱃지 시각 강조</strong> — 각 신메뉴 카드에 빨간색 NEW 뱃지를 부착하여, 시각적으로 즉시 신메뉴임을 인지할 수 있도록 설계</li>
+          <li><strong>필터 칩 시스템</strong> — 저당·저칼로리·카페인 프리 3종의 필터 칩을 탭 상단에 배치하여, 건강 관련 조건 기반 탐색 지원 — 복수 선택 가능하여 개인 니즈에 맞는 세밀한 필터링 가능</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>📋 사용자 시나리오</h3>
+        <table class="info-table">
+          <tr><th>신메뉴 탐색</th><td>Order 탭 → NEW 탭 전환 → 최신 출시 메뉴 한눈에 확인 → 관심 메뉴 선택</td></tr>
+          <tr><th>건강 필터 탐색</th><td>NEW 탭 → '저칼로리' 필터 칩 활성화 → 저칼로리 신메뉴만 필터링하여 확인</td></tr>
+          <tr><th>시즌 메뉴 발견</th><td>NEW 탭 진입 → 시즌 한정 메뉴 발견 → 상세 정보 확인 → 장바구니 추가</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>📈 기대 효과</h3>
+        <div class="intent-box" style="background:#ecfdf5; border-color:#6ee7b7;">
+          <div class="intent-title" style="color:#065f46;">✅ 기대 성과</div>
+          <ul>
+            <li><strong>신메뉴 인지율 향상</strong> — 전용 탭 진입점을 통해 신메뉴 노출 빈도를 높이고, NEW 뱃지로 시각적 주목도를 강화하여 인지율 대폭 향상</li>
+            <li><strong>시즌 메뉴 시도율 증가</strong> — 한정 메뉴를 놓치지 않고 발견할 수 있는 전용 경로 제공으로 시즌 메뉴 주문 전환율 향상 기대</li>
+            <li><strong>건강 기반 탐색 만족도 개선</strong> — 필터 칩을 통한 개인화 탐색으로 건강 관심 사용자의 탐색 효율성 및 만족도 향상</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ② 커피/음료 탭 -->
+      <div class="doc-section">
+        <h2><span class="icon">☕</span> 커피/음료 탭 — 카테고리별 메뉴 탐색</h2>
+
+        <div class="intent-box">
+          <div class="intent-title">🎯 핵심 목적</div>
+          <p>전체 음료 메뉴를 <strong>6개 서브 카테고리로 체계적으로 분류</strong>하여, 원하는 메뉴를 빠르게 찾을 수 있도록 설계한 주 카테고리 탭입니다.</p>
+        </div>
+
+        <h3>⚠️ 이전의 문제점</h3>
+        <ul>
+          <li><strong>평면적 메뉴 나열</strong> — 기존 앱에서는 모든 음료 메뉴가 단일 리스트로 나열되어, 수십 개의 메뉴 중 원하는 종류를 찾기 위해 긴 스크롤이 필요했음</li>
+          <li><strong>카테고리 세분화 부족</strong> — 커피·디카페인·음료·티·아이스크림 등 특성이 다른 메뉴가 혼합 나열되어, 특정 카테고리만 탐색하려는 사용자의 효율이 낮았음</li>
+          <li><strong>필터 기능 부재</strong> — 저당·저칼로리·카페인 프리 등 개인 선호 조건으로 메뉴를 좁혀볼 수 있는 필터 기능이 없어, 조건에 맞는 메뉴를 직접 확인해야 했음</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>💡 UX 설계 근거</h3>
+        <ul>
+          <li><strong>6개 서브 카테고리 탭</strong> — 전체·커피·디카페인·음료·티·아이스크림으로 세분화한 서브 탭을 상단에 배치하여, 1-tap으로 원하는 카테고리로 즉시 이동 가능</li>
+          <li><strong>필터 칩 시스템 연동</strong> — 각 서브 카테고리에서 저당·저칼로리·카페인 프리 필터 칩을 동일하게 지원하여, 카테고리 + 건강 조건의 교차 필터링 제공</li>
+          <li><strong>메뉴 카드 UI 통일</strong> — 썸네일·메뉴명·가격·옵션을 포함한 카드 UI를 전 카테고리에 동일하게 적용하여, 일관된 탐색 경험 유지</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>📋 사용자 시나리오</h3>
+        <table class="info-table">
+          <tr><th>카테고리 탐색</th><td>커피/음료 탭 → '디카페인' 서브 탭 → 디카페인 메뉴만 모아보기 → 선택</td></tr>
+          <tr><th>조건부 탐색</th><td>커피/음료 탭 → '커피' 서브 탭 → '저칼로리' 필터 칩 활성화 → 저칼로리 커피만 필터링</td></tr>
+          <tr><th>전체 브라우징</th><td>커피/음료 탭 → '전체' 서브 탭 → 스크롤하며 전체 메뉴 훑어보기 → 관심 메뉴 발견</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>📈 기대 효과</h3>
+        <p style="margin-bottom:12px; color:#555;">메뉴 탐색 경로 비교</p>
+        <div class="scenario-flow" style="margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:700; color:#991b1b; min-width:36px;">기존</span>
+          <div class="sf-item">전체 메뉴 리스트</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">긴 스크롤 탐색</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">메뉴 발견</div>
+        </div>
+        <div class="scenario-flow" style="margin-bottom:20px;">
+          <span style="font-size:12px; font-weight:700; color:#065f46; min-width:36px;">개선</span>
+          <div class="sf-item active">서브 카테고리 탭</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item active">필터 적용</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item active">메뉴 선택</div>
+        </div>
+
+        <div class="intent-box" style="background:#ecfdf5; border-color:#6ee7b7;">
+          <div class="intent-title" style="color:#065f46;">✅ 기대 성과</div>
+          <ul>
+            <li><strong>메뉴 탐색 시간 단축</strong> — 6개 서브 카테고리 분류로 불필요한 스크롤을 제거하고, 원하는 카테고리 내에서만 탐색하여 메뉴 발견 시간 대폭 단축</li>
+            <li><strong>탐색 이탈률 감소</strong> — 필터 칩을 통한 조건부 탐색으로 선택 피로도를 낮추고, 메뉴 탐색 중 이탈 없이 주문까지 이어지는 전환율 향상 기대</li>
+            <li><strong>디카페인·건강 메뉴 발견성 향상</strong> — 디카페인 전용 서브 탭과 건강 필터 칩을 통해 특정 니즈를 가진 사용자의 메뉴 발견 경험 개선</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ③ 디저트 탭 -->
+      <div class="doc-section">
+        <h2><span class="icon">🍰</span> 디저트 탭 — 디저트 전용 탐색</h2>
+
+        <div class="intent-box">
+          <div class="intent-title">🎯 핵심 목적</div>
+          <p>음료와 디저트를 <strong>독립된 탭으로 분리</strong>하여, 디저트 전용 브라우징 경험을 제공하고 추가 주문을 유도하는 전용 탭입니다.</p>
+        </div>
+
+        <h3>⚠️ 이전의 문제점</h3>
+        <ul>
+          <li><strong>음료·디저트 혼합 나열</strong> — 기존 앱에서는 음료와 디저트가 같은 카테고리에 혼합되어 나열되어, 디저트만 따로 탐색하기 어려웠음</li>
+          <li><strong>디저트 발견성 저하</strong> — 음료 위주의 메뉴 구조에서 디저트 항목은 하단에 밀려 노출이 적었고, 음료 주문 시 디저트 추가 주문을 유도하는 경로가 부재했음</li>
+          <li><strong>페어링 탐색 불편</strong> — 음료와 함께 즐길 디저트를 찾으려면 카테고리를 전환하며 별도로 탐색해야 했으며, 음료-디저트 페어링을 자연스럽게 유도하는 UI 동선이 없었음</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>💡 UX 설계 근거</h3>
+        <ul>
+          <li><strong>독립 탭 분리</strong> — 디저트를 음료와 동등한 레벨의 독립 탭으로 분리하여, 디저트 탐색의 명확성과 접근성을 대폭 향상 — 메뉴 탐색 시 자연스럽게 디저트 탭을 인지하도록 설계</li>
+          <li><strong>디저트 전용 메뉴 카드</strong> — 음료와 동일한 카드 UI(썸네일·메뉴명·가격)를 적용하여 일관된 경험을 유지하면서, 디저트 카테고리에 집중한 탐색 동선 제공</li>
+          <li><strong>음료 탭과의 자연스러운 전환</strong> — 커피/음료 탭에서 디저트 탭으로의 전환이 1-tap으로 가능하여, 음료 선택 후 디저트 추가 주문으로의 자연스러운 동선 유도</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>📋 사용자 시나리오</h3>
+        <table class="info-table">
+          <tr><th>디저트 탐색</th><td>디저트 탭 전환 → 전체 디저트 메뉴 브라우징 → 관심 디저트 선택 → 장바구니 추가</td></tr>
+          <tr><th>음료 + 디저트 세트</th><td>커피/음료 탭에서 음료 선택 → 디저트 탭 전환 → 페어링 디저트 추가 → 함께 주문</td></tr>
+          <tr><th>디저트만 주문</th><td>앱 진입 → 디저트 탭 직접 이동 → 디저트 선택 → 장바구니 → 결제</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>📈 기대 효과</h3>
+        <div class="intent-box" style="background:#ecfdf5; border-color:#6ee7b7;">
+          <div class="intent-title" style="color:#065f46;">✅ 기대 성과</div>
+          <ul>
+            <li><strong>디저트 추가 주문율 향상</strong> — 독립 탭 분리로 디저트 노출 빈도를 높이고, 음료 탭과의 자연스러운 전환 동선으로 추가 주문 유도</li>
+            <li><strong>객단가 향상</strong> — 음료 + 디저트 세트 주문 패턴을 활성화하여 건당 평균 주문 금액 증가 기대</li>
+            <li><strong>디저트 탐색 만족도 개선</strong> — 디저트 전용 공간에서의 집중 탐색으로 발견 효율성과 사용자 만족도 동시 향상</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 하단 허브: 다른 화면 보기 -->
+      <div class="page-hub page-hub-bottom">
+        <div class="page-hub-title">📑 다른 화면 보기</div>
+        <div class="page-hub-grid">
+          <div class="hub-group-label">진입</div>
+          <a href="store-select-doc.html"><div class="hub-icon">🏪</div><div class="hub-name">매장선택</div><div class="hub-desc">픽업 매장</div></a>
+          <div class="hub-group-label">탐색</div>
+          <a href="menu-doc.html"><div class="hub-icon">🏠</div><div class="hub-name">메뉴홈</div><div class="hub-desc">주문 진입점</div></a>
+          <div class="hub-current"><div class="hub-icon">☕</div><div class="hub-name">메뉴목록</div><div class="hub-desc">메뉴 탐색</div></div>
+          <a href="category-coffee-doc.html"><div class="hub-icon">📂</div><div class="hub-name">카테고리</div><div class="hub-desc">카테고리 탐색</div></a>
+          <a href="menu-detail-doc.html"><div class="hub-icon">📋</div><div class="hub-name">메뉴상세</div><div class="hub-desc">옵션 선택</div></a>
+          <a href="favorites-doc.html"><div class="hub-icon">⭐</div><div class="hub-name">즐겨찾기</div><div class="hub-desc">빠른 재주문</div></a>
+          <div class="hub-group-label">결제</div>
+          <a href="cart-doc.html"><div class="hub-icon">🛒</div><div class="hub-name">장바구니</div><div class="hub-desc">주문 관리</div></a>
+          <a href="order-doc.html"><div class="hub-icon">💳</div><div class="hub-name">주문정보</div><div class="hub-desc">결제 진행</div></a>
+          <div class="hub-group-label">완료</div>
+          <a href="order-detail-doc.html"><div class="hub-icon">✅</div><div class="hub-name">주문완료</div><div class="hub-desc">주문 확인</div></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="doc-common.js"></script>
+  <script>
+    (function() {
+      var pageParams = new URLSearchParams(window.location.search);
+      var activeTab = pageParams.get('tab') || 'new';
+      var tabToSyncKey = { 'new': 'newTab', 'coffee': 'coffeeTab', 'dessert': 'dessertTab' };
+      var defaultSyncKey = tabToSyncKey[activeTab] || 'newTab';
+      initScrollSync({
+        targets: [
+          { key: 'newTab' },
+          { key: 'coffeeTab' },
+          { key: 'dessertTab' }
+        ],
+        defaultKey: defaultSyncKey,
+        delayScroll: true,
+        iframeSelector: '#mockupIframe'
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,904 @@
+/* ========================================
+   투썸오더 제안서 - 공통 스타일
+   doc-common.css
+   ======================================== */
+
+/* ========================================
+   Reset & Base
+   ======================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-size: 16px;
+  color: #222;
+  background: #f0f2f5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   Page Layout
+   ======================================== */
+.doc-wrapper {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 40px;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+/* ========================================
+   Left: Phone Mockup
+   ======================================== */
+.mockup-area {
+  flex-shrink: 0;
+  position: sticky;
+  top: 32px;
+}
+
+.phone-frame {
+  width: 375px;
+  height: 812px;
+  background: #1a1a1a;
+  border-radius: 52px;
+  padding: 14px;
+  box-shadow:
+    0 0 0 2px #333,
+    0 24px 80px rgba(0,0,0,0.25),
+    0 8px 24px rgba(0,0,0,0.15),
+    inset 0 0 0 2px #2a2a2a;
+  position: relative;
+}
+
+/* Notch */
+.phone-notch {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 32px;
+  background: #1a1a1a;
+  border-radius: 0 0 20px 20px;
+  z-index: 10;
+}
+
+.phone-notch::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone-statusbar {
+  width: 100%;
+  height: 48px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.phone-screen iframe {
+  width: 100%;
+  flex: 1;
+  border: none;
+  display: block;
+}
+
+/* ========================================
+   Right: Description
+   ======================================== */
+.doc-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ========================================
+   Breadcrumb
+   ======================================== */
+.doc-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.doc-breadcrumb a {
+  color: #999;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.doc-breadcrumb a:hover {
+  color: #d42a2a;
+}
+
+.doc-breadcrumb .sep {
+  font-size: 11px;
+  color: #ccc;
+}
+
+.doc-breadcrumb .current {
+  color: #d42a2a;
+  font-weight: 600;
+}
+
+/* ========================================
+   Document Header
+   ======================================== */
+.doc-header {
+  margin-bottom: 32px;
+}
+
+.doc-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+.doc-header .subtitle {
+  font-size: 16px;
+  color: #888;
+  margin-top: 8px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.doc-badge {
+  display: inline-block;
+  background: #d42a2a;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.step-badge {
+  display: inline-block;
+  background: #222;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  margin-left: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* ========================================
+   Section Card
+   ======================================== */
+.doc-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.doc-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doc-section h2 .icon {
+  width: 28px;
+  height: 28px;
+  background: #fef2f2;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.doc-section h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #444;
+  margin: 16px 0 8px;
+}
+
+.doc-section p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.doc-section ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.doc-section ul li {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+  padding-left: 18px;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.doc-section ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background: #d42a2a;
+  border-radius: 50%;
+}
+
+/* ========================================
+   Info Table
+   ======================================== */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.info-table th,
+.info-table td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-table th {
+  background: #fafafa;
+  font-weight: 600;
+  color: #444;
+  width: 140px;
+  white-space: nowrap;
+}
+
+.info-table td {
+  color: #555;
+}
+
+.info-table td code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Consolas', monospace;
+  color: #d42a2a;
+}
+
+/* ========================================
+   Tag
+   ======================================== */
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+.tag.red {
+  background: #fef2f2;
+  color: #d42a2a;
+}
+
+/* ========================================
+   Divider
+   ======================================== */
+.doc-divider {
+  height: 1px;
+  background: #eee;
+  margin: 16px 0;
+}
+
+/* ========================================
+   Flow Diagram (inline)
+   ======================================== */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.flow-item {
+  background: #f8f8f8;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  white-space: nowrap;
+}
+
+.flow-item.active {
+  background: #d42a2a;
+  border-color: #d42a2a;
+  color: #fff;
+  font-weight: 700;
+}
+
+.flow-arrow {
+  color: #ccc;
+  font-size: 16px;
+}
+
+/* ========================================
+   Flow Map (Step Indicator)
+   ======================================== */
+.flow-map {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 4px 0;
+}
+
+.flow-map .step {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.flow-map .step a {
+  text-decoration: none;
+}
+
+.flow-map .step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  border: 2px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #aaa;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.flow-map .step a .step-dot {
+  cursor: pointer;
+}
+
+.flow-map .step a .step-dot:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.flow-map .step-dot.active {
+  background: #d42a2a;
+  border-color: #d42a2a;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(212,42,42,0.3);
+}
+
+.flow-map .step-dot.done {
+  background: #222;
+  border-color: #222;
+  color: #fff;
+}
+
+.flow-map .step-line {
+  width: 24px;
+  height: 2px;
+  background: #ddd;
+  flex-shrink: 0;
+}
+
+.flow-map .step-line.done {
+  background: #222;
+}
+
+.flow-map-labels {
+  display: flex;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.flow-map-labels .step-label {
+  width: 56px;
+  text-align: center;
+  font-size: 11px;
+  color: #999;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.flow-map-labels a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.flow-map-labels a:hover,
+.flow-map-labels a:hover .step-label {
+  color: #d42a2a;
+}
+
+.flow-map-labels .step-label.active {
+  color: #d42a2a;
+  font-weight: 700;
+}
+
+/* ========================================
+   Design Intent Box
+   ======================================== */
+.intent-box {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 12px 0;
+}
+
+.intent-box .intent-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.intent-box p {
+  font-size: 13px;
+  color: #78350f;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.intent-box ul {
+  margin-top: 8px;
+}
+
+.intent-box ul li {
+  font-size: 13px;
+  color: #78350f;
+  line-height: 1.7;
+}
+
+.intent-box ul li::before {
+  background: #f59e0b !important;
+}
+
+/* Problem box (red variant) */
+.intent-box[style*="fef2f2"] ul li::before {
+  background: #ef4444 !important;
+}
+
+/* Effect box (green variant) */
+.intent-box[style*="ecfdf5"] ul li::before {
+  background: #10b981 !important;
+}
+
+/* ========================================
+   Page Navigation (prev/next)
+   ======================================== */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.page-nav a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.page-nav a:hover {
+  border-color: #d42a2a;
+  box-shadow: 0 2px 8px rgba(212,42,42,0.1);
+}
+
+.page-nav .nav-label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.page-nav .nav-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+.page-nav .nav-next {
+  text-align: right;
+}
+
+.page-nav .nav-prev {}
+
+.page-nav a.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ========================================
+   Page Hub Navigation
+   ======================================== */
+.page-hub {
+  margin-bottom: 24px;
+}
+
+.page-hub-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #999;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.page-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.hub-group-label {
+  grid-column: 1 / -1;
+  font-size: 11px;
+  font-weight: 700;
+  color: #bbb;
+  padding: 4px 4px 2px;
+  letter-spacing: 1px;
+}
+
+.hub-group-label:not(:first-child) {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.page-hub-grid a,
+.page-hub-grid .hub-current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 6px 12px;
+  background: #fff;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.page-hub-grid a:hover {
+  border-color: #d42a2a;
+  box-shadow: 0 2px 8px rgba(212,42,42,0.1);
+  transform: translateY(-1px);
+}
+
+.page-hub-grid .hub-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  background: #f5f5f5;
+}
+
+.page-hub-grid .hub-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.3;
+}
+
+.page-hub-grid .hub-desc {
+  font-size: 10px;
+  color: #aaa;
+  line-height: 1.3;
+}
+
+.page-hub-grid .hub-current {
+  border-color: #d42a2a;
+  background: linear-gradient(135deg, #fef2f2 0%, #fff 100%);
+  position: relative;
+}
+
+.page-hub-grid .hub-current .hub-icon {
+  background: #d42a2a;
+}
+
+.page-hub-grid .hub-current .hub-name {
+  color: #d42a2a;
+}
+
+.page-hub-grid .hub-current::after {
+  content: '현재';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  background: #d42a2a;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* Bottom hub */
+.page-hub-bottom {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 2px solid #f0f0f0;
+}
+
+/* ========================================
+   Scenario Flow
+   ======================================== */
+.scenario-group {
+  margin-bottom: 24px;
+}
+
+.scenario-group:last-child {
+  margin-bottom: 0;
+}
+
+.scenario-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.scenario-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: #d42a2a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.scenario-number.blue {
+  background: #5B7FFF;
+}
+
+.scenario-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+.scenario-subtitle {
+  font-size: 13px;
+  color: #888;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.scenario-context {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #f8f9fb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.scenario-context .context-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.scenario-flow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.scenario-flow .sf-item {
+  background: #f8f8f8;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  white-space: nowrap;
+}
+
+.scenario-flow .sf-item.active {
+  background: #d42a2a;
+  border-color: #d42a2a;
+  color: #fff;
+  font-weight: 700;
+}
+
+.scenario-flow .sf-item.blue {
+  background: #5B7FFF;
+  border-color: #5B7FFF;
+  color: #fff;
+  font-weight: 700;
+}
+
+.scenario-flow .sf-item.highlight {
+  background: #fff3e0;
+  border-color: #ffb74d;
+  color: #e65100;
+  font-weight: 600;
+}
+
+.scenario-flow .sf-arrow {
+  color: #ccc;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.scenario-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 20px 0;
+}
+
+/* ========================================
+   Scroll Sync Active State
+   ======================================== */
+.doc-section.active-sync {
+  box-shadow: 0 0 0 2.5px #d42a2a, 0 4px 16px rgba(212,42,42,0.12);
+  transition: box-shadow 0.3s;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 960px) {
+  .doc-wrapper {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px;
+    gap: 32px;
+  }
+
+  .mockup-area {
+    position: static;
+  }
+
+  .phone-frame {
+    width: 320px;
+    height: 693px;
+    border-radius: 44px;
+    padding: 12px;
+  }
+
+  .phone-notch {
+    top: 12px;
+    width: 140px;
+    height: 28px;
+  }
+
+  .phone-screen {
+    border-radius: 34px;
+  }
+
+  .phone-statusbar {
+    height: 40px;
+  }
+
+  .doc-content {
+    width: 100%;
+  }
+
+  .doc-breadcrumb {
+    font-size: 12px;
+  }
+
+  .page-hub-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-frame {
+    width: 280px;
+    height: 606px;
+    border-radius: 38px;
+    padding: 10px;
+  }
+
+  .phone-notch {
+    top: 10px;
+    width: 120px;
+    height: 24px;
+  }
+
+  .phone-screen {
+    border-radius: 30px;
+  }
+
+  .phone-statusbar {
+    height: 34px;
+  }
+
+  .doc-section {
+    padding: 20px 18px;
+  }
+
+  .doc-header h1 {
+    font-size: 24px;
+  }
+
+  .page-hub-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-hub-grid .hub-name {
+    font-size: 10px;
+  }
+
+  .page-hub-grid .hub-desc {
+    font-size: 9px;
+  }
+}

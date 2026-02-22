@@ -3,701 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>투썸오더 - 메뉴 화면 설명서</title>
-  <style>
-    /* ========================================
-       Reset & Base
-       ======================================== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-      font-size: 16px;
-      color: #222;
-      background: #f0f2f5;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ========================================
-       Page Layout
-       ======================================== */
-    .doc-wrapper {
-      display: flex;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 48px 40px;
-      gap: 56px;
-      align-items: flex-start;
-    }
-
-    /* ========================================
-       Left: Phone Mockup
-       ======================================== */
-    .mockup-area {
-      flex-shrink: 0;
-      position: sticky;
-      top: 32px;
-    }
-
-    .phone-frame {
-      width: 375px;
-      height: 812px;
-      background: #1a1a1a;
-      border-radius: 52px;
-      padding: 14px;
-      box-shadow:
-        0 0 0 2px #333,
-        0 24px 80px rgba(0,0,0,0.25),
-        0 8px 24px rgba(0,0,0,0.15),
-        inset 0 0 0 2px #2a2a2a;
-      position: relative;
-    }
-
-    /* Notch */
-    .phone-notch {
-      position: absolute;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 160px;
-      height: 32px;
-      background: #1a1a1a;
-      border-radius: 0 0 20px 20px;
-      z-index: 10;
-    }
-
-    .phone-notch::before {
-      content: '';
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 6px;
-      background: #333;
-      border-radius: 3px;
-    }
-
-    .phone-screen {
-      width: 100%;
-      height: 100%;
-      border-radius: 40px;
-      overflow: hidden;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .phone-statusbar {
-      width: 100%;
-      height: 48px;
-      background: #fff;
-      flex-shrink: 0;
-    }
-
-    .phone-screen iframe {
-      width: 100%;
-      flex: 1;
-      border: none;
-      display: block;
-    }
-
-    /* ========================================
-       Right: Description
-       ======================================== */
-    .doc-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .doc-header {
-      margin-bottom: 40px;
-    }
-
-    .doc-header h1 {
-      font-size: 32px;
-      font-weight: 800;
-      color: #111;
-      letter-spacing: -0.5px;
-      line-height: 1.3;
-    }
-
-    .doc-header .subtitle {
-      font-size: 16px;
-      color: #888;
-      margin-top: 8px;
-      font-weight: 400;
-    }
-
-    .doc-badge {
-      display: inline-block;
-      background: #d42a2a;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
-    }
-
-    .step-badge {
-      display: inline-block;
-      background: #222;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      margin-left: 8px;
-      letter-spacing: 0.5px;
-    }
-
-    /* Section Card */
-    .doc-section {
-      background: #fff;
-      border-radius: 16px;
-      padding: 28px 28px;
-      margin-bottom: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-
-    .doc-section h2 {
-      font-size: 20px;
-      font-weight: 700;
-      color: #222;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .doc-section h2 .icon {
-      width: 28px;
-      height: 28px;
-      background: #fef2f2;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      flex-shrink: 0;
-    }
-
-    .doc-section h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: #444;
-      margin: 16px 0 8px;
-    }
-
-    .doc-section p {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.7;
-      margin-bottom: 8px;
-    }
-
-    .doc-section ul {
-      padding-left: 0;
-      list-style: none;
-    }
-
-    .doc-section ul li {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.7;
-      padding-left: 18px;
-      position: relative;
-      margin-bottom: 4px;
-    }
-
-    .doc-section ul li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 6px;
-      height: 6px;
-      background: #d42a2a;
-      border-radius: 50%;
-    }
-
-    /* Info Table */
-    .info-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 14px;
-    }
-
-    .info-table th,
-    .info-table td {
-      text-align: left;
-      padding: 10px 14px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .info-table th {
-      background: #fafafa;
-      font-weight: 600;
-      color: #444;
-      width: 140px;
-      white-space: nowrap;
-    }
-
-    .info-table td {
-      color: #555;
-    }
-
-    .info-table td code {
-      background: #f5f5f5;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 12px;
-      font-family: 'SF Mono', 'Consolas', monospace;
-      color: #d42a2a;
-    }
-
-    /* Tag */
-    .tag {
-      display: inline-block;
-      padding: 3px 10px;
-      background: #f5f5f5;
-      border-radius: 4px;
-      font-size: 12px;
-      color: #666;
-      font-weight: 500;
-      margin-right: 6px;
-      margin-bottom: 4px;
-    }
-
-    .tag.red {
-      background: #fef2f2;
-      color: #d42a2a;
-    }
-
-    /* Divider */
-    .doc-divider {
-      height: 1px;
-      background: #eee;
-      margin: 16px 0;
-    }
-
-    /* Flow diagram */
-    .flow {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin: 12px 0;
-    }
-
-    .flow-item {
-      background: #f8f8f8;
-      border: 1px solid #e8e8e8;
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #444;
-      white-space: nowrap;
-    }
-
-    .flow-item.active {
-      background: #d42a2a;
-      border-color: #d42a2a;
-      color: #fff;
-      font-weight: 700;
-    }
-
-    .flow-arrow {
-      color: #ccc;
-      font-size: 16px;
-    }
-
-    /* ========================================
-       Flow Map (Step Indicator)
-       ======================================== */
-    .flow-map {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-      margin: 0;
-      padding: 4px 0;
-    }
-
-    .flow-map .step {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-
-    .flow-map .step-dot {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #f0f0f0;
-      border: 2px solid #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: #aaa;
-      flex-shrink: 0;
-      transition: all 0.2s;
-    }
-
-    .flow-map .step-dot.active {
-      background: #d42a2a;
-      border-color: #d42a2a;
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(212,42,42,0.3);
-    }
-
-    .flow-map .step-dot.done {
-      background: #222;
-      border-color: #222;
-      color: #fff;
-    }
-
-    .flow-map .step-line {
-      width: 24px;
-      height: 2px;
-      background: #ddd;
-      flex-shrink: 0;
-    }
-
-    .flow-map .step-line.done {
-      background: #222;
-    }
-
-    .flow-map-labels {
-      display: flex;
-      gap: 0;
-      margin-top: 8px;
-    }
-
-    .flow-map-labels .step-label {
-      width: 56px;
-      text-align: center;
-      font-size: 11px;
-      color: #999;
-      font-weight: 500;
-      line-height: 1.3;
-    }
-
-    .flow-map-labels .step-label.active {
-      color: #d42a2a;
-      font-weight: 700;
-    }
-
-    /* ========================================
-       Design Intent Box
-       ======================================== */
-    .intent-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 12px 0;
-    }
-
-    .intent-box .intent-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #92400e;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .intent-box p {
-      font-size: 13px;
-      color: #78350f;
-      line-height: 1.7;
-      margin-bottom: 0;
-    }
-
-    .intent-box ul {
-      margin-top: 8px;
-    }
-
-    .intent-box ul li {
-      font-size: 13px;
-      color: #78350f;
-      line-height: 1.7;
-    }
-
-    .intent-box ul li::before {
-      background: #f59e0b !important;
-    }
-
-    /* Problem box (red variant) */
-    .intent-box[style*="fef2f2"] ul li::before {
-      background: #ef4444 !important;
-    }
-
-    /* Effect box (green variant) */
-    .intent-box[style*="ecfdf5"] ul li::before {
-      background: #10b981 !important;
-    }
-
-    /* ========================================
-       Page Navigation
-       ======================================== */
-    .page-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
-      gap: 16px;
-      margin-top: 12px;
-    }
-
-    .page-nav a {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 16px 20px;
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.15s;
-    }
-
-    .page-nav a:hover {
-      border-color: #d42a2a;
-      box-shadow: 0 2px 8px rgba(212,42,42,0.1);
-    }
-
-    .page-nav .nav-label {
-      font-size: 12px;
-      color: #999;
-      margin-bottom: 4px;
-    }
-
-    .page-nav .nav-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #222;
-    }
-
-    .page-nav .nav-next {
-      text-align: right;
-    }
-
-    .page-nav .nav-prev {}
-
-    .page-nav a.disabled {
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    /* ========================================
-       Scenario Flow
-       ======================================== */
-    .scenario-group {
-      margin-bottom: 24px;
-    }
-
-    .scenario-group:last-child {
-      margin-bottom: 0;
-    }
-
-    .scenario-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .scenario-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      background: #d42a2a;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 800;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .scenario-number.blue {
-      background: #5B7FFF;
-    }
-
-    .scenario-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #222;
-    }
-
-    .scenario-subtitle {
-      font-size: 13px;
-      color: #888;
-      font-weight: 400;
-      margin-left: 4px;
-    }
-
-    .scenario-context {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      background: #f8f9fb;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      font-size: 13px;
-      color: #666;
-      line-height: 1.5;
-    }
-
-    .scenario-context .context-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .scenario-flow {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .scenario-flow .sf-item {
-      background: #f8f8f8;
-      border: 1px solid #e8e8e8;
-      border-radius: 8px;
-      padding: 7px 12px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #555;
-      white-space: nowrap;
-    }
-
-    .scenario-flow .sf-item.active {
-      background: #d42a2a;
-      border-color: #d42a2a;
-      color: #fff;
-      font-weight: 700;
-    }
-
-    .scenario-flow .sf-item.blue {
-      background: #5B7FFF;
-      border-color: #5B7FFF;
-      color: #fff;
-      font-weight: 700;
-    }
-
-    .scenario-flow .sf-item.highlight {
-      background: #fff3e0;
-      border-color: #ffb74d;
-      color: #e65100;
-      font-weight: 600;
-    }
-
-    .scenario-flow .sf-arrow {
-      color: #ccc;
-      font-size: 13px;
-      flex-shrink: 0;
-    }
-
-    .scenario-divider {
-      height: 1px;
-      background: #f0f0f0;
-      margin: 20px 0;
-    }
-
-    /* ========================================
-       Responsive
-       ======================================== */
-    @media (max-width: 960px) {
-      .doc-wrapper {
-        flex-direction: column;
-        align-items: center;
-        padding: 24px 16px;
-        gap: 32px;
-      }
-
-      .mockup-area {
-        position: static;
-      }
-
-      .phone-frame {
-        width: 320px;
-        height: 693px;
-        border-radius: 44px;
-        padding: 12px;
-      }
-
-      .phone-notch {
-        top: 12px;
-        width: 140px;
-        height: 28px;
-      }
-
-      .phone-screen {
-        border-radius: 34px;
-      }
-
-      .phone-statusbar {
-        height: 40px;
-      }
-
-      .doc-content {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .phone-frame {
-        width: 280px;
-        height: 606px;
-        border-radius: 38px;
-        padding: 10px;
-      }
-
-      .phone-notch {
-        top: 10px;
-        width: 120px;
-        height: 24px;
-      }
-
-      .phone-screen {
-        border-radius: 30px;
-      }
-
-      .phone-statusbar {
-        height: 34px;
-      }
-
-      .doc-section {
-        padding: 20px 18px;
-      }
-
-      .doc-header h1 {
-        font-size: 24px;
-      }
-    }
-  </style>
+  <title>투썸오더 - 메뉴 홈 화면 설명서</title>
+  <link rel="stylesheet" href="doc-common.css">
 </head>
 <body>
 
   <div class="doc-wrapper">
 
     <!-- ========================================
-         Left: Phone Mockup
-         ======================================== -->
+        Left: Phone Mockup
+        ======================================== -->
     <div class="mockup-area">
       <div class="phone-frame">
         <div class="phone-notch"></div>
@@ -709,176 +24,245 @@
     </div>
 
     <!-- ========================================
-         Right: Description
-         ======================================== -->
+        Right: Description
+        ======================================== -->
     <div class="doc-content">
 
+      <!-- 브레드크럼 -->
+      <div class="doc-breadcrumb">
+        <a href="index.html">제안서 메인</a> <span class="sep">›</span> 화면 제안 <span class="sep">›</span> <span class="current">메뉴 홈</span>
+      </div>
+
+      <!-- 제안서 헤더 -->
       <div class="doc-header">
-        <span class="doc-badge">STEP 1 OF 8</span>
-        <span class="step-badge">앱 진입점</span>
-        <h1>메뉴 홈</h1>
-        <p class="subtitle">루틴한 주문과 다같이 주문, 두 가지 시나리오의 공통 시작점</p>
+        <span class="doc-badge">탐색</span><span class="step-badge">STEP 1 of 8</span>
+        <h1>메뉴 홈 (Order Home)</h1>
+        <p class="subtitle">앱 진입 즉시 Quick Order와 최근 주문으로 빠른 재주문을 제공하는 메인 화면</p>
+      </div>
+
+      <!-- 상단 허브: 제안서 구성 -->
+      <div class="page-hub">
+        <div class="page-hub-title">📋 제안서 구성</div>
+        <div class="page-hub-grid">
+          <div class="hub-group-label">진입</div>
+          <a href="store-select-doc.html"><div class="hub-icon">🏪</div><div class="hub-name">매장선택</div><div class="hub-desc">픽업 매장</div></a>
+          <div class="hub-group-label">탐색</div>
+          <div class="hub-current"><div class="hub-icon">🏠</div><div class="hub-name">메뉴홈</div><div class="hub-desc">주문 진입점</div></div>
+          <a href="menu-list-doc.html"><div class="hub-icon">☕</div><div class="hub-name">메뉴목록</div><div class="hub-desc">메뉴 탐색</div></a>
+          <a href="category-coffee-doc.html"><div class="hub-icon">📂</div><div class="hub-name">카테고리</div><div class="hub-desc">카테고리 탐색</div></a>
+          <a href="menu-detail-doc.html"><div class="hub-icon">📋</div><div class="hub-name">메뉴상세</div><div class="hub-desc">옵션 선택</div></a>
+          <a href="favorites-doc.html"><div class="hub-icon">⭐</div><div class="hub-name">즐겨찾기</div><div class="hub-desc">빠른 재주문</div></a>
+          <div class="hub-group-label">결제</div>
+          <a href="cart-doc.html"><div class="hub-icon">🛒</div><div class="hub-name">장바구니</div><div class="hub-desc">주문 관리</div></a>
+          <a href="order-doc.html"><div class="hub-icon">💳</div><div class="hub-name">주문정보</div><div class="hub-desc">결제 진행</div></a>
+          <div class="hub-group-label">완료</div>
+          <a href="order-detail-doc.html"><div class="hub-icon">✅</div><div class="hub-name">주문완료</div><div class="hub-desc">주문 확인</div></a>
+        </div>
+      </div>
+
+      <!-- ⓪ 플로우 맵 -->
+      <div class="doc-section">
+        <h2><span class="icon">📍</span> 전체 플로우 위치</h2>
+        <div class="flow-map">
+          <div class="step"><span class="step-dot active">1</span></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="category-coffee-doc.html"><span class="step-dot">2</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="menu-detail-doc.html"><span class="step-dot">3</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="favorites-doc.html"><span class="step-dot">4</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="store-select-doc.html"><span class="step-dot">5</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="cart-doc.html"><span class="step-dot">6</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="order-doc.html"><span class="step-dot">7</span></a></div>
+          <span class="step-line"></span>
+          <div class="step"><a href="order-detail-doc.html"><span class="step-dot">8</span></a></div>
+        </div>
+        <div class="flow-map-labels">
+          <span class="step-label active">메뉴홈</span>
+          <a href="category-coffee-doc.html" class="step-label">카테고리</a>
+          <a href="menu-detail-doc.html" class="step-label">메뉴상세</a>
+          <a href="favorites-doc.html" class="step-label">즐겨찾기</a>
+          <a href="store-select-doc.html" class="step-label">매장선택</a>
+          <a href="cart-doc.html" class="step-label">장바구니</a>
+          <a href="order-doc.html" class="step-label">주문정보</a>
+          <a href="order-detail-doc.html" class="step-label">주문완료</a>
+        </div>
+        <table class="info-table" style="margin-top:16px;">
+          <tr><th>화면명</th><td>메뉴 홈 (Order Home)</td></tr>
+          <tr><th>파일명</th><td><code>menu.html</code></td></tr>
+          <tr><th>역할</th><td>앱 메인 화면 및 빠른 주문 진입점</td></tr>
+        </table>
       </div>
 
       <!-- ① Quick Order -->
       <div class="doc-section">
         <h2><span class="icon">⚡</span> Quick Order</h2>
-        <p>이전 주문 이력 기반의 빠른 재주문 카드입니다. 메뉴 썸네일, 이름, 옵션, 가격, 가까운 매장 정보를 표시하고 "주문하기" 버튼으로 즉시 주문이 가능합니다.</p>
-
-        <div class="intent-box" style="background:#fef2f2; border-color:#fca5a5;">
-          <div class="intent-title" style="color:#991b1b;">⚠️ 이전의 문제점</div>
-          <ul>
-            <li>기존 투썸오더 앱에서는 재주문 시 메뉴 탐색 → 메뉴 선택 → 옵션 설정 → 장바구니 → 결제까지 최소 5단계 이상의 탭이 필요했음</li>
-            <li>매일 같은 메뉴를 주문하는 루틴 사용자에게도 매번 동일한 탐색 과정을 강제하여 주문 피로도를 높임</li>
-            <li>재주문에 최적화된 전용 동선이 없어, 빠른 주문을 원하는 사용자의 이탈률이 증가</li>
-          </ul>
-        </div>
 
         <div class="intent-box">
-          <div class="intent-title">🎯 설계 의도</div>
-          <ul>
-            <li>가장 최근 주문한 메뉴 1건을 카드 형태로 최상단에 배치하여, 앱 진입 즉시 1-tap 재주문이 가능하도록 설계</li>
-            <li>메뉴 썸네일·이름·옵션·가격·매장 정보를 한눈에 확인할 수 있도록 정보 밀도를 높여 별도 화면 진입 없이 의사결정 가능</li>
-            <li>"주문하기" 버튼을 카드 내에 직접 배치하여, 탐색 → 결제까지의 단계를 5단계에서 2단계(Quick Order 탭 → 결제)로 단축</li>
-          </ul>
+          <div class="intent-title">🎯 핵심 목적</div>
+          <p>매일 동일한 메뉴를 주문하는 사용자의 패턴을 바탕으로, <strong>앱 진입 즉시 1-tap 재주문</strong>이 가능하도록 설계한 핵심 기능입니다.</p>
+        </div>
+
+        <h3>⚠️ 이전의 문제점</h3>
+        <ul>
+          <li><strong>6단계 화면 전환</strong> — 기존 투썸오더 앱에서는 재주문 시 지점 선택 → 메뉴 탐색 → 메뉴 상세 → 옵션 설정 → 주문 확인 → 결제까지 6단계의 화면 전환이 필요했음</li>
+          <li><strong>동일 탐색 과정 강제</strong> — 매일 같은 메뉴를 주문하는 루틴 사용자에게도 매번 동일한 탐색 과정을 강제하여 주문 피로도를 높임</li>
+          <li><strong>TPO 기반 추천 부재</strong> — 출근길과 오후 등 시간대별로 다른 메뉴를 주문하는 패턴이 있지만, 이를 반영한 맞춤 추천이 없어 매번 처음부터 탐색해야 했음</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>💡 UX 설계 근거</h3>
+        <ul>
+          <li><strong>최상단 1-tap 재주문 카드</strong> — 가장 최근 주문한 메뉴를 카드 형태로 최상단에 배치하여, 앱 진입 즉시 1-tap 재주문이 가능하도록 설계 — 기존 5단계를 2단계(Quick Order 탭 → 결제)로 단축</li>
+          <li><strong>TPO 기반 자동 추천</strong> — 사용자의 주문 패턴과 TPO를 분석하여 상황에 맞는 메뉴를 자동 추천 — 판단 신호: ① 주문 시간대/요일 ② 최근 30일 주문 빈도 ③ 픽업 매장/위치</li>
+          <li><strong>카드 내 즉시 의사결정</strong> — 메뉴 썸네일·이름·옵션·가격을 카드 내에서 한눈에 확인할 수 있도록 구성하여, 별도 화면 진입 없이 즉시 의사결정 가능</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>📋 사용자 시나리오</h3>
+        <table class="info-table">
+          <tr><th>출근길 루틴 주문</th><td>앱 실행 → Quick Order 카드에 "아이스 아메리카노(L)" 자동 노출 → 탭 → 결제</td></tr>
+          <tr><th>시간대별 메뉴 전환</th><td>오후 3시 앱 실행 → TPO 분석으로 "스트로베리 라떼" 추천 → 탭 → 결제</td></tr>
+          <tr><th>매장 변경 주문</th><td>다른 매장에서 앱 실행 → 해당 매장 기반 최근 메뉴 노출 → 탭 → 결제</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>📈 기대 효과</h3>
+        <p style="margin-bottom:12px; color:#555;">주문 플로우 단축 비교</p>
+        <div class="scenario-flow" style="margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:700; color:#991b1b; min-width:36px;">기존</span>
+          <div class="sf-item">메뉴 탐색</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">메뉴 상세</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">옵션 설정</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">주문 확인</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">결제</div>
+        </div>
+        <div class="scenario-flow" style="margin-bottom:20px;">
+          <span style="font-size:12px; font-weight:700; color:#065f46; min-width:36px;">개선</span>
+          <div class="sf-item active">Quick Order 탭</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item active">결제</div>
         </div>
 
         <div class="intent-box" style="background:#ecfdf5; border-color:#6ee7b7;">
-          <div class="intent-title" style="color:#065f46;">📈 기대 효과</div>
+          <div class="intent-title" style="color:#065f46;">✅ 기대 성과</div>
           <ul>
-            <li>루틴 주문 사용자의 주문 완료 시간을 기존 대비 60% 이상 단축 (5단계 → 2단계)</li>
-            <li>재주문 전환율 향상 — 앱 진입 시 즉각적인 행동 유도(CTA)로 주문 완료율 증가 기대</li>
-            <li>출퇴근 시간대 등 시간이 제한된 상황에서의 사용자 만족도 및 앱 재방문율 개선</li>
+            <li><strong>주문 시간 60% 단축</strong> — 루틴 주문 사용자의 주문 완료 시간을 기존 대비 60% 이상 단축 (5단계 → 2단계)</li>
+            <li><strong>재주문 전환율 향상</strong> — 앱 진입 시 즉각적인 행동 유도(CTA)로 주문 완료율 증가 기대</li>
+            <li><strong>상황별 만족도 개선</strong> — 출근 시간대, 오후 시간대 등 특정 상황에서의 사용자 만족도 및 앱 재방문율 개선</li>
           </ul>
+          <p style="font-size:11px; color:#065f46; margin-top:10px; padding-top:8px; border-top:1px dashed #6ee7b7;">※ 산정 기준: 화면 전환(탭) 수 기준 — 기존 = 메뉴 탐색 → 메뉴 상세 → 옵션 설정 → 주문 확인 → 결제(5단계), 개선 = Quick Order 탭 → 결제(2단계)</p>
         </div>
+
+        <a href="order-doc.html" target="_top" style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:20px; padding:14px 24px; background:#d42a2a; color:#fff; font-size:15px; font-weight:700; border-radius:12px; text-decoration:none; transition:background 0.15s; box-shadow:0 2px 8px rgba(212,42,42,0.2);" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#d42a2a'">
+          Quick Order 다음 단계 확인하기 →
+        </a>
       </div>
 
       <!-- ② 최근 주문 -->
       <div class="doc-section">
         <h2><span class="icon">🕐</span> 최근 주문 (Recent Orders)</h2>
-        <p>최근 주문한 메뉴 3건을 리스트 형태로 보여줍니다. 각 항목 탭 시 메뉴 상세 화면으로 이동합니다.</p>
-
-        <div class="intent-box" style="background:#fef2f2; border-color:#fca5a5;">
-          <div class="intent-title" style="color:#991b1b;">⚠️ 이전의 문제점</div>
-          <ul>
-            <li>기존 앱에서는 과거 주문 이력을 확인하려면 마이페이지 → 주문내역으로 별도 진입해야 해서 접근성이 낮았음</li>
-            <li>주문내역 화면은 날짜·주문번호 중심의 관리 목적 UI로, 빠른 재주문 용도로 활용하기 어려웠음</li>
-            <li>"2~3일 전에 먹었던 그 메뉴"를 다시 주문하려면 전체 메뉴에서 처음부터 탐색해야 하는 비효율 발생</li>
-          </ul>
-        </div>
 
         <div class="intent-box">
-          <div class="intent-title">🎯 설계 의도</div>
-          <ul>
-            <li>Quick Order 카드 하단에 최근 주문 3건을 리스트로 노출하여, 메뉴 홈에서 바로 과거 주문에 접근 가능하도록 설계</li>
-            <li>메뉴 이미지·이름·옵션을 간결하게 표시하여, 시각적으로 빠르게 원하는 메뉴를 식별할 수 있도록 구성</li>
-            <li>각 항목 탭 시 메뉴 상세 화면으로 이동하여, 옵션 변경이 필요한 경우에도 유연하게 대응 가능</li>
-          </ul>
+          <div class="intent-title">🎯 핵심 목적</div>
+          <p>최근 주문한 메뉴 3건을 리스트 형태로 메뉴 홈에 노출하여, <strong>과거 주문 기반 재주문의 진입 허들을 제거</strong>한 보조 재주문 경로입니다.</p>
+        </div>
+
+        <h3>⚠️ 이전의 문제점</h3>
+        <ul>
+          <li><strong>별도 경로 3단계 진입</strong> — 기존 앱에서 과거 주문 이력에 접근하려면 마이페이지 → 주문내역으로 별도 진입(3단계)이 필요하여, 주문 흐름과 분리된 경로로 접근성이 낮았음</li>
+          <li><strong>관리형 UI의 시각적 한계</strong> — 주문내역 화면은 날짜·주문번호 중심의 관리형 UI로 설계되어, 메뉴 썸네일·옵션 정보가 부족해 "어떤 메뉴였는지" 시각적으로 즉시 파악하기 어려웠음</li>
+          <li><strong>2~3번째 선호 메뉴 경로 부재</strong> — "며칠 전 주문했던 메뉴"를 다시 주문하려면 기억에 의존하여 전체 카테고리에서 처음부터 탐색해야 하며, Quick Order(최근 1건)만으로는 커버하지 못하는 2~3번째 선호 메뉴의 재주문 경로가 부재했음</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>💡 UX 설계 근거</h3>
+        <ul>
+          <li><strong>메뉴 홈 직접 노출</strong> — Quick Order 카드 하단에 최근 주문 3건을 리스트로 노출하여, 별도 경로 없이 메뉴 홈에서 바로 과거 주문에 접근 가능하도록 설계 — 기존 3단계를 1단계(직접 탭)로 단축</li>
+          <li><strong>시각적 메뉴 식별</strong> — 각 항목에 메뉴 썸네일·이름·옵션을 함께 표시하여, 기억에 의존하지 않고 시각적으로 원하는 메뉴를 빠르게 식별할 수 있도록 구성</li>
+          <li><strong>Quick Order와 역할 분리</strong> — 항목 탭 시 메뉴 상세 화면으로 이동하여 옵션 변경 후 주문 가능 — Quick Order(즉시 동일 재주문)와 역할을 분리하여, 옵션 수정이 필요하거나 다른 선호 메뉴를 재주문하는 경로 제공</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>📋 사용자 시나리오</h3>
+        <table class="info-table">
+          <tr><th>과거 메뉴 재주문</th><td>메뉴 홈 → 최근 주문 리스트에서 원하는 메뉴 탭 → 메뉴 상세에서 옵션 확인/변경 → 주문</td></tr>
+          <tr><th>옵션 변경 재주문</th><td>최근 주문 리스트에서 메뉴 탭 → 사이즈·샷 등 옵션 변경 → 주문</td></tr>
+          <tr><th>Quick Order 보완</th><td>Quick Order에 없는 2~3번째 선호 메뉴 → 최근 주문에서 선택 → 주문</td></tr>
+        </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>📈 기대 효과</h3>
+        <p style="margin-bottom:12px; color:#555;">접근 경로 단축 비교</p>
+        <div class="scenario-flow" style="margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:700; color:#991b1b; min-width:36px;">기존</span>
+          <div class="sf-item">마이페이지</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">주문내역</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">재주문 탭</div>
+        </div>
+        <div class="scenario-flow" style="margin-bottom:20px;">
+          <span style="font-size:12px; font-weight:700; color:#065f46; min-width:36px;">개선</span>
+          <div class="sf-item active">메뉴 홈 최근 주문 항목 탭</div>
         </div>
 
         <div class="intent-box" style="background:#ecfdf5; border-color:#6ee7b7;">
-          <div class="intent-title" style="color:#065f46;">📈 기대 효과</div>
+          <div class="intent-title" style="color:#065f46;">✅ 기대 성과</div>
           <ul>
-            <li>과거 주문 기반 재주문의 접근 경로를 3단계(마이페이지→주문내역→재주문)에서 1단계(메뉴 홈에서 직접 탭)로 단축</li>
-            <li>Quick Order(1건)와 최근 주문(3건)의 조합으로 총 4건의 재주문 옵션을 제공하여 다양한 재주문 니즈 충족</li>
-            <li>메뉴 탐색 시간 감소로 주문 전환율 향상 및 사용자의 메뉴 선택 스트레스 완화</li>
+            <li><strong>접근 경로 67% 단축</strong> — 과거 주문 기반 재주문의 접근 경로를 3단계에서 1단계로 67% 단축하여 재주문 진입 허들 제거</li>
+            <li><strong>재주문 커버리지 확장</strong> — Quick Order(1건·즉시 재주문)와 최근 주문(3건·옵션 변경 가능)의 조합으로 총 4건의 재주문 옵션을 커버하여, 단일 루틴부터 다양한 선호 메뉴까지 폭넓은 재주문 니즈 충족</li>
+            <li><strong>주문 전환율 향상</strong> — 과거 주문 메뉴의 시각적 노출로 탐색 시간을 줄이고, 메뉴 홈 진입 직후 빠른 의사결정을 유도하여 주문 전환율 향상 기대</li>
           </ul>
+          <p style="font-size:11px; color:#065f46; margin-top:10px; padding-top:8px; border-top:1px dashed #6ee7b7;">※ 산정 기준: 접근 경로(탭) 수 기준 — 기존 = 마이페이지 → 주문내역 → 재주문 탭(3단계), 개선 = 메뉴 홈 최근 주문 항목 탭(1단계)</p>
         </div>
       </div>
 
-      <!-- 페이지 네비게이션 -->
-      <div class="doc-section" style="background:transparent;box-shadow:none;padding:0;">
-        <div class="page-nav">
-          <a class="nav-prev disabled" href="#">
-            <span class="nav-label">← 이전</span>
-            <span class="nav-title">—</span>
-          </a>
-          <a class="nav-next" href="category-coffee-doc.html">
-            <span class="nav-label">다음 →</span>
-            <span class="nav-title">카테고리 (커피/음료)</span>
-          </a>
+      <!-- 하단 허브: 다른 화면 보기 -->
+      <div class="page-hub page-hub-bottom">
+        <div class="page-hub-title">📑 다른 화면 보기</div>
+        <div class="page-hub-grid">
+          <div class="hub-group-label">진입</div>
+          <a href="store-select-doc.html"><div class="hub-icon">🏪</div><div class="hub-name">매장선택</div><div class="hub-desc">픽업 매장</div></a>
+          <div class="hub-group-label">탐색</div>
+          <div class="hub-current"><div class="hub-icon">🏠</div><div class="hub-name">메뉴홈</div><div class="hub-desc">주문 진입점</div></div>
+          <a href="menu-list-doc.html"><div class="hub-icon">☕</div><div class="hub-name">메뉴목록</div><div class="hub-desc">메뉴 탐색</div></a>
+          <a href="category-coffee-doc.html"><div class="hub-icon">📂</div><div class="hub-name">카테고리</div><div class="hub-desc">카테고리 탐색</div></a>
+          <a href="menu-detail-doc.html"><div class="hub-icon">📋</div><div class="hub-name">메뉴상세</div><div class="hub-desc">옵션 선택</div></a>
+          <a href="favorites-doc.html"><div class="hub-icon">⭐</div><div class="hub-name">즐겨찾기</div><div class="hub-desc">빠른 재주문</div></a>
+          <div class="hub-group-label">결제</div>
+          <a href="cart-doc.html"><div class="hub-icon">🛒</div><div class="hub-name">장바구니</div><div class="hub-desc">주문 관리</div></a>
+          <a href="order-doc.html"><div class="hub-icon">💳</div><div class="hub-name">주문정보</div><div class="hub-desc">결제 진행</div></a>
+          <div class="hub-group-label">완료</div>
+          <a href="order-detail-doc.html"><div class="hub-icon">✅</div><div class="hub-name">주문완료</div><div class="hub-desc">주문 확인</div></a>
         </div>
       </div>
 
     </div>
   </div>
 
+  <script src="doc-common.js"></script>
   <script>
-    (function() {
-      var iframe = document.querySelector('.phone-screen iframe');
-      var targets = [
-        { el: null, key: 'quickOrder' },
-        { el: null, key: 'recentOrder' }
-      ];
-      var currentHighlight = null;
-      var scrollTimer = null;
-
-      // doc-section 매핑
-      var sections = document.querySelectorAll('.doc-content > .doc-section');
-      if (sections[0]) targets[0].el = sections[0];
-      if (sections[1]) targets[1].el = sections[1];
-
-      // 활성 스타일
-      var style = document.createElement('style');
-      style.textContent = '.doc-section.active-sync{box-shadow:0 0 0 2.5px #d42a2a,0 4px 16px rgba(212,42,42,0.12);transition:box-shadow 0.3s;}';
-      document.head.appendChild(style);
-
-      function sendHighlight(section) {
-        if (section === currentHighlight) return;
-        currentHighlight = section;
-
-        targets.forEach(function(t) {
-          if (t.el) t.el.classList.remove('active-sync');
-        });
-        if (section) {
-          targets.forEach(function(t) {
-            if (t.key === section && t.el) t.el.classList.add('active-sync');
-          });
-        }
-
-        if (iframe && iframe.contentWindow) {
-          iframe.contentWindow.postMessage({ type: 'highlight', section: section }, '*');
-        }
-      }
-
-      // 뷰포트 중앙에 가장 가까운 섹션 찾기
-      function findClosestSection() {
-        var viewMid = window.innerHeight / 2;
-        var closest = null;
-        var closestDist = Infinity;
-
-        targets.forEach(function(t) {
-          if (!t.el) return;
-          var rect = t.el.getBoundingClientRect();
-          // 섹션이 뷰포트에 일부라도 보이는지 확인
-          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-          var sectionMid = rect.top + rect.height / 2;
-          var dist = Math.abs(sectionMid - viewMid);
-          if (dist < closestDist) {
-            closestDist = dist;
-            closest = t.key;
-          }
-        });
-
-        return closest;
-      }
-
-      function onScroll() {
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(function() {
-          var found = findClosestSection();
-          sendHighlight(found);
-        }, 80);
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      // 초기 로드
-      setTimeout(function() {
-        var found = findClosestSection();
-        sendHighlight(found || 'quickOrder');
-      }, 500);
-    })();
+    initScrollSync({
+      targets: [
+        { key: 'quickOrder' },
+        { key: 'recentOrder' }
+      ],
+      defaultKey: 'quickOrder'
+    });
   </script>
 </body>
 </html>

@@ -57,6 +57,30 @@
       </ul>
     </nav>
 
+    <!-- 즉시 실행: URL 파라미터 기반 초기 탭 active 설정 (깜빡임 방지) -->
+    <script>
+    (function() {
+      var p = new URLSearchParams(window.location.search).get('tab');
+      if (p && p !== 'order') {
+        // active 클래스를 올바른 탭으로 즉시 이동
+        var tabs = document.querySelectorAll('.category-tabs li');
+        tabs.forEach(function(li) {
+          var a = li.querySelector('a');
+          if (a && a.dataset.tab === p) li.classList.add('active');
+          else if (a && a.dataset.tab) li.classList.remove('active');
+        });
+        // ORDER 콘텐츠 즉시 숨김
+        var orderTab = document.getElementById('tabOrder');
+        if (orderTab) orderTab.style.display = 'none';
+        // 서브 카테고리 탭 즉시 노출 (커피/음료인 경우)
+        if (p === 'coffee') {
+          var subTabs = document.getElementById('subCategoryTabs');
+          if (subTabs) subTabs.style.display = '';
+        }
+      }
+    })();
+    </script>
+
     <!-- 서브 카테고리 탭 (커피/음료) -->
     <nav class="sub-category-tabs" id="subCategoryTabs" style="display:none;">
       <ul>
@@ -517,9 +541,18 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-      // ORDER 탭 초기 렌더
-      renderRecentOrders();
-      initBannerSlider();
+      // URL 파라미터로 초기 탭 결정
+      var urlParams = new URLSearchParams(window.location.search);
+      var initialTab = urlParams.get('tab') || 'order';
+
+      if (initialTab === 'order') {
+        // ORDER 탭 초기 렌더 (기본 동작)
+        renderRecentOrders();
+        initBannerSlider();
+      } else {
+        // 지정된 탭으로 시작
+        switchTab(initialTab);
+      }
 
       // 플로팅 추천 닫기
       var floatingClose = document.getElementById('floatingRecommendClose');
@@ -537,7 +570,21 @@
       document.querySelectorAll('.category-tabs a[data-tab]').forEach(function(a) {
         a.addEventListener('click', function(e) {
           e.preventDefault();
-          switchTab(this.dataset.tab);
+          var clickedTab = this.dataset.tab;
+
+          // ORDER 탭 클릭 시: 다른 탭에서 시작한 경우 menu-doc.html로 이동
+          if (clickedTab === 'order' && initialTab !== 'order') {
+            window.top.location.href = 'docs/menu-doc.html';
+            return;
+          }
+
+          // ORDER 모드에서 다른 탭 클릭 시: menu-list-doc.html로 이동 (탭 파라미터 전달)
+          if (initialTab === 'order' && clickedTab !== 'order') {
+            window.top.location.href = 'docs/menu-list-doc.html?tab=' + clickedTab;
+            return;
+          }
+
+          switchTab(clickedTab);
         });
       });
 
@@ -574,6 +621,12 @@
         el.remove();
       });
 
+      // 탭 전환 (menu-list-doc.html 스크롤 연동)
+      if (sectionKey === 'newTab') { switchTab('new'); return; }
+      if (sectionKey === 'coffeeTab') { switchTab('coffee'); return; }
+      if (sectionKey === 'dessertTab') { switchTab('dessert'); return; }
+
+      // 섹션 하이라이트 (menu-doc.html 스크롤 연동)
       var targetId = null;
       if (sectionKey === 'quickOrder') targetId = 'quickOrderSection';
       else if (sectionKey === 'recentOrder') targetId = 'recentOrderSection';

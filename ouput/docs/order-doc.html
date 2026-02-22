@@ -4,564 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>투썸오더 - 주문 정보 입력 화면 설명서</title>
-  <style>
-    /* ========================================
-       Reset & Base
-       ======================================== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-      font-size: 16px;
-      color: #222;
-      background: #f0f2f5;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ========================================
-       Page Layout
-       ======================================== */
-    .doc-wrapper {
-      display: flex;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 48px 40px;
-      gap: 56px;
-      align-items: flex-start;
-    }
-
-    /* ========================================
-       Left: Phone Mockup
-       ======================================== */
-    .mockup-area {
-      flex-shrink: 0;
-      position: sticky;
-      top: 32px;
-    }
-
-    .phone-frame {
-      width: 375px;
-      height: 812px;
-      background: #1a1a1a;
-      border-radius: 52px;
-      padding: 14px;
-      box-shadow:
-        0 0 0 2px #333,
-        0 24px 80px rgba(0,0,0,0.25),
-        0 8px 24px rgba(0,0,0,0.15),
-        inset 0 0 0 2px #2a2a2a;
-      position: relative;
-    }
-
-    /* Notch */
-    .phone-notch {
-      position: absolute;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 160px;
-      height: 32px;
-      background: #1a1a1a;
-      border-radius: 0 0 20px 20px;
-      z-index: 10;
-    }
-
-    .phone-notch::before {
-      content: '';
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 6px;
-      background: #333;
-      border-radius: 3px;
-    }
-
-    .phone-screen {
-      width: 100%;
-      height: 100%;
-      border-radius: 40px;
-      overflow: hidden;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .phone-statusbar {
-      width: 100%;
-      height: 48px;
-      background: #fff;
-      flex-shrink: 0;
-    }
-
-    .phone-screen iframe {
-      width: 100%;
-      flex: 1;
-      border: none;
-      display: block;
-    }
-
-    /* ========================================
-       Right: Description
-       ======================================== */
-    .doc-content {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .doc-header {
-      margin-bottom: 40px;
-    }
-
-    .doc-header h1 {
-      font-size: 32px;
-      font-weight: 800;
-      color: #111;
-      letter-spacing: -0.5px;
-      line-height: 1.3;
-    }
-
-    .doc-header .subtitle {
-      font-size: 16px;
-      color: #888;
-      margin-top: 8px;
-      font-weight: 400;
-    }
-
-    .doc-badge {
-      display: inline-block;
-      background: #d42a2a;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
-    }
-
-    .step-badge {
-      display: inline-block;
-      background: #222;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      margin-left: 8px;
-      letter-spacing: 0.5px;
-    }
-
-    /* Section Card */
-    .doc-section {
-      background: #fff;
-      border-radius: 16px;
-      padding: 28px 28px;
-      margin-bottom: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-
-    .doc-section h2 {
-      font-size: 20px;
-      font-weight: 700;
-      color: #222;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .doc-section h2 .icon {
-      width: 28px;
-      height: 28px;
-      background: #fef2f2;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      flex-shrink: 0;
-    }
-
-    .doc-section h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: #444;
-      margin: 16px 0 8px;
-    }
-
-    .doc-section p {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.7;
-      margin-bottom: 8px;
-    }
-
-    .doc-section ul {
-      padding-left: 0;
-      list-style: none;
-    }
-
-    .doc-section ul li {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.7;
-      padding-left: 18px;
-      position: relative;
-      margin-bottom: 4px;
-    }
-
-    .doc-section ul li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 6px;
-      height: 6px;
-      background: #d42a2a;
-      border-radius: 50%;
-    }
-
-    /* Info Table */
-    .info-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 14px;
-    }
-
-    .info-table th,
-    .info-table td {
-      text-align: left;
-      padding: 10px 14px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .info-table th {
-      background: #fafafa;
-      font-weight: 600;
-      color: #444;
-      width: 140px;
-      white-space: nowrap;
-    }
-
-    .info-table td {
-      color: #555;
-    }
-
-    .info-table td code {
-      background: #f5f5f5;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 12px;
-      font-family: 'SF Mono', 'Consolas', monospace;
-      color: #d42a2a;
-    }
-
-    /* Tag */
-    .tag {
-      display: inline-block;
-      padding: 3px 10px;
-      background: #f5f5f5;
-      border-radius: 4px;
-      font-size: 12px;
-      color: #666;
-      font-weight: 500;
-      margin-right: 6px;
-      margin-bottom: 4px;
-    }
-
-    .tag.red {
-      background: #fef2f2;
-      color: #d42a2a;
-    }
-
-    /* Divider */
-    .doc-divider {
-      height: 1px;
-      background: #eee;
-      margin: 16px 0;
-    }
-
-    /* Flow diagram */
-    .flow {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin: 12px 0;
-    }
-
-    .flow-item {
-      background: #f8f8f8;
-      border: 1px solid #e8e8e8;
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #444;
-      white-space: nowrap;
-    }
-
-    .flow-item.active {
-      background: #d42a2a;
-      border-color: #d42a2a;
-      color: #fff;
-      font-weight: 700;
-    }
-
-    .flow-arrow {
-      color: #ccc;
-      font-size: 16px;
-    }
-
-    /* ========================================
-       Flow Map (Step Indicator)
-       ======================================== */
-    .flow-map {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-      margin: 0;
-      padding: 4px 0;
-    }
-
-    .flow-map .step {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-
-    .flow-map .step-dot {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #f0f0f0;
-      border: 2px solid #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: #aaa;
-      flex-shrink: 0;
-      transition: all 0.2s;
-    }
-
-    .flow-map .step-dot.active {
-      background: #d42a2a;
-      border-color: #d42a2a;
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(212,42,42,0.3);
-    }
-
-    .flow-map .step-dot.done {
-      background: #222;
-      border-color: #222;
-      color: #fff;
-    }
-
-    .flow-map .step-line {
-      width: 24px;
-      height: 2px;
-      background: #ddd;
-      flex-shrink: 0;
-    }
-
-    .flow-map .step-line.done {
-      background: #222;
-    }
-
-    .flow-map-labels {
-      display: flex;
-      gap: 0;
-      margin-top: 8px;
-    }
-
-    .flow-map-labels .step-label {
-      width: 56px;
-      text-align: center;
-      font-size: 11px;
-      color: #999;
-      font-weight: 500;
-      line-height: 1.3;
-    }
-
-    .flow-map-labels .step-label.active {
-      color: #d42a2a;
-      font-weight: 700;
-    }
-
-    /* ========================================
-       Design Intent Box
-       ======================================== */
-    .intent-box {
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 12px 0;
-    }
-
-    .intent-box .intent-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #92400e;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .intent-box p {
-      font-size: 13px;
-      color: #78350f;
-      line-height: 1.7;
-      margin-bottom: 0;
-    }
-
-    .intent-box ul {
-      margin-top: 8px;
-    }
-
-    .intent-box ul li {
-      font-size: 13px;
-      color: #78350f;
-      line-height: 1.7;
-    }
-
-    .intent-box ul li::before {
-      background: #f59e0b !important;
-    }
-
-    /* ========================================
-       Page Navigation
-       ======================================== */
-    .page-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
-      gap: 16px;
-      margin-top: 12px;
-    }
-
-    .page-nav a {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 16px 20px;
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.15s;
-    }
-
-    .page-nav a:hover {
-      border-color: #d42a2a;
-      box-shadow: 0 2px 8px rgba(212,42,42,0.1);
-    }
-
-    .page-nav .nav-label {
-      font-size: 12px;
-      color: #999;
-      margin-bottom: 4px;
-    }
-
-    .page-nav .nav-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #222;
-    }
-
-    .page-nav .nav-next {
-      text-align: right;
-    }
-
-    .page-nav .nav-prev {}
-
-    .page-nav a.disabled {
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    /* ========================================
-       Responsive
-       ======================================== */
-    @media (max-width: 960px) {
-      .doc-wrapper {
-        flex-direction: column;
-        align-items: center;
-        padding: 24px 16px;
-        gap: 32px;
-      }
-
-      .mockup-area {
-        position: static;
-      }
-
-      .phone-frame {
-        width: 320px;
-        height: 693px;
-        border-radius: 44px;
-        padding: 12px;
-      }
-
-      .phone-notch {
-        top: 12px;
-        width: 140px;
-        height: 28px;
-      }
-
-      .phone-screen {
-        border-radius: 34px;
-      }
-
-      .phone-statusbar {
-        height: 40px;
-      }
-
-      .doc-content {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .phone-frame {
-        width: 280px;
-        height: 606px;
-        border-radius: 38px;
-        padding: 10px;
-      }
-
-      .phone-notch {
-        top: 10px;
-        width: 120px;
-        height: 24px;
-      }
-
-      .phone-screen {
-        border-radius: 30px;
-      }
-
-      .phone-statusbar {
-        height: 34px;
-      }
-
-      .doc-section {
-        padding: 20px 18px;
-      }
-
-      .doc-header h1 {
-        font-size: 24px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="doc-common.css">
 </head>
 <body>
 
@@ -585,77 +28,140 @@
          ======================================== -->
     <div class="doc-content">
 
-      <div class="doc-header">
-        <span class="doc-badge">STEP 7 OF 8</span>
-        <span class="step-badge">결제 단계</span>
-        <h1>주문 정보 입력</h1>
-        <p class="subtitle">결제수단 선택, 쿠폰 적용, 포장 여부 등 최종 주문 정보를 입력하는 화면</p>
+      <!-- Breadcrumb -->
+      <div class="doc-breadcrumb">
+        <a href="index.html">제안서 메인</a> <span class="sep">›</span> 화면 제안 <span class="sep">›</span> <span class="current">주문정보</span>
       </div>
 
-      <!-- 1. 전체 플로우 위치 -->
+      <!-- 제안서 헤더 -->
+      <div class="doc-header">
+        <span class="doc-badge">결제</span><span class="step-badge">STEP 7 of 8</span>
+        <h1>주문 정보 입력 (Order)</h1>
+        <div class="subtitle">결제 관련 정보를 한 화면에서 입력하고 결제를 완료하는 최종 게이트웨이</div>
+      </div>
+
+      <!-- 상단 허브: 제안서 구성 -->
+      <div class="page-hub">
+        <div class="page-hub-title">📋 제안서 구성</div>
+        <div class="page-hub-grid">
+          <div class="hub-group-label">진입</div>
+          <a href="store-select-doc.html"><div class="hub-icon">🏪</div><div class="hub-name">매장선택</div><div class="hub-desc">픽업 매장</div></a>
+          <div class="hub-group-label">탐색</div>
+          <a href="menu-doc.html"><div class="hub-icon">🏠</div><div class="hub-name">메뉴홈</div><div class="hub-desc">주문 진입점</div></a>
+          <a href="menu-list-doc.html"><div class="hub-icon">☕</div><div class="hub-name">메뉴목록</div><div class="hub-desc">메뉴 탐색</div></a>
+          <a href="category-coffee-doc.html"><div class="hub-icon">📂</div><div class="hub-name">카테고리</div><div class="hub-desc">카테고리 탐색</div></a>
+          <a href="menu-detail-doc.html"><div class="hub-icon">📋</div><div class="hub-name">메뉴상세</div><div class="hub-desc">옵션 선택</div></a>
+          <a href="favorites-doc.html"><div class="hub-icon">⭐</div><div class="hub-name">즐겨찾기</div><div class="hub-desc">빠른 재주문</div></a>
+          <div class="hub-group-label">결제</div>
+          <a href="cart-doc.html"><div class="hub-icon">🛒</div><div class="hub-name">장바구니</div><div class="hub-desc">주문 관리</div></a>
+          <div class="hub-current"><div class="hub-icon">💳</div><div class="hub-name">주문정보</div><div class="hub-desc">결제 진행</div></div>
+          <div class="hub-group-label">완료</div>
+          <a href="order-detail-doc.html"><div class="hub-icon">✅</div><div class="hub-name">주문완료</div><div class="hub-desc">주문 확인</div></a>
+        </div>
+      </div>
+
+      <!-- 0 플로우 맵 (NEW) -->
       <div class="doc-section">
-        <h2><span class="icon">&#x1F4CD;</span> 전체 플로우 위치</h2>
+        <h2><span class="icon">🗺️</span> 플로우 맵</h2>
+
         <div class="flow-map">
-          <div class="step"><span class="step-dot done">1</span></div>
-          <span class="step-line done"></span>
-          <div class="step"><span class="step-dot done">2</span></div>
-          <span class="step-line done"></span>
-          <div class="step"><span class="step-dot done">3</span></div>
-          <span class="step-line done"></span>
-          <div class="step"><span class="step-dot done">4</span></div>
-          <span class="step-line done"></span>
-          <div class="step"><span class="step-dot done">5</span></div>
-          <span class="step-line done"></span>
-          <div class="step"><span class="step-dot done">6</span></div>
-          <span class="step-line done"></span>
-          <div class="step"><span class="step-dot active">7</span></div>
-          <span class="step-line"></span>
-          <div class="step"><span class="step-dot">8</span></div>
+          <div class="step"><a href="menu-doc.html"><div class="step-dot done">1</div></a><div class="step-line done"></div></div>
+          <div class="step"><a href="category-coffee-doc.html"><div class="step-dot done">2</div></a><div class="step-line done"></div></div>
+          <div class="step"><a href="menu-detail-doc.html"><div class="step-dot done">3</div></a><div class="step-line done"></div></div>
+          <div class="step"><a href="favorites-doc.html"><div class="step-dot done">4</div></a><div class="step-line done"></div></div>
+          <div class="step"><a href="store-select-doc.html"><div class="step-dot done">5</div></a><div class="step-line done"></div></div>
+          <div class="step"><a href="cart-doc.html"><div class="step-dot done">6</div></a><div class="step-line done"></div></div>
+          <div class="step"><div class="step-dot active">7</div><div class="step-line"></div></div>
+          <div class="step"><a href="order-detail-doc.html"><div class="step-dot">8</div></a></div>
         </div>
         <div class="flow-map-labels">
-          <span class="step-label">메뉴홈</span>
-          <span class="step-label">카테고리</span>
-          <span class="step-label">메뉴상세</span>
-          <span class="step-label">즐겨찾기</span>
-          <span class="step-label">매장선택</span>
-          <span class="step-label">장바구니</span>
+          <a href="menu-doc.html" class="step-label">메뉴홈</a>
+          <a href="category-coffee-doc.html" class="step-label">카테고리</a>
+          <a href="menu-detail-doc.html" class="step-label">메뉴상세</a>
+          <a href="favorites-doc.html" class="step-label">즐겨찾기</a>
+          <a href="store-select-doc.html" class="step-label">매장선택</a>
+          <a href="cart-doc.html" class="step-label">장바구니</a>
           <span class="step-label active">주문정보</span>
-          <span class="step-label">주문완료</span>
+          <a href="order-detail-doc.html" class="step-label">주문완료</a>
         </div>
-        <table class="info-table" style="margin-top:16px;">
-          <tr><th>화면명</th><td>주문 정보 입력 (Order Info)</td></tr>
+
+        <table class="info-table" style="margin-top:20px;">
+          <tr><th>화면명</th><td>주문 정보 입력 (Order)</td></tr>
           <tr><th>파일명</th><td><code>order.html</code></td></tr>
-          <tr><th>역할</th><td>주문 최종 확인 및 결제 정보 입력</td></tr>
+          <tr><th>역할</th><td>결제 정보 입력 및 결제 완료</td></tr>
         </table>
       </div>
 
-      <!-- 2. 설계 의도 -->
+      <!-- 1. 설계 의도 -->
       <div class="doc-section">
-        <h2><span class="icon">&#x1F4A1;</span> 설계 의도</h2>
+        <h2><span class="icon">✅</span> 주문 정보 입력</h2>
+
         <div class="intent-box">
-          <div class="intent-title">&#x1F3AF; 이 화면의 핵심 목적</div>
+          <div class="intent-title">🎯 핵심 목적</div>
           <p>주문 직전 모든 결제 관련 정보를 한 화면에서 입력 및 확인하고 결제를 완료하는 <strong>최종 게이트웨이</strong>입니다. 이탈을 최소화하면서도 필요한 모든 정보를 수집하는 밸런스가 핵심입니다.</p>
         </div>
 
-        <h3>UX 설계 근거</h3>
+        <h3>⚠️ 이전의 문제점</h3>
         <ul>
-          <li><strong>주문정보 섹션(접기/펼치기)</strong> &#8212; 선택한 메뉴를 재확인할 수 있도록 토글 구조를 제공하여, 정보 과부하 없이 필요 시 상세 내역을 확인할 수 있습니다</li>
-          <li><strong>프로모션/쿠폰 사용 진입점 노출</strong> &#8212; 결제 전 할인 기회를 인지시켜 사용자 만족도를 높이고, 쿠폰 미사용으로 인한 결제 후 불만을 방지합니다</li>
-          <li><strong>포장 여부 라디오 버튼</strong> &#8212; 간단한 2택(전체 포장/포장 안 함) 선택으로 의사결정 부담을 최소화합니다</li>
-          <li><strong>T우주패스/기프트카드 등 다양한 결제수단 지원</strong> &#8212; 멤버십과 선불카드를 먼저 차감하여 실결제 금액을 줄이는 전략적 배치입니다</li>
-          <li><strong>결제수단 그리드(3x2)</strong> &#8212; 투썸페이/신용카드/간편결제 등 6종을 시각적으로 한눈에 비교 선택할 수 있습니다</li>
-          <li><strong>최종 결제금액 강조 표시</strong> &#8212; 할인 적용 후 실결제 금액을 굵은 폰트로 강조하여 결제 전 최종 확인을 유도합니다</li>
-          <li><strong>유의사항 동의</strong> &#8212; 접기/펼치기 구조로 법적 요건을 충족하면서도 화면 공간을 효율적으로 사용합니다</li>
+          <li><strong>결제 정보 분산 입력</strong> — 기존 투썸오더 앱에서는 쿠폰 적용, 포장 여부, 결제수단 선택이 각각 별도 화면으로 분리되어 있어, 결제 완료까지 3~4회의 화면 전환이 필요했음</li>
+          <li><strong>할인 적용 확인 불편</strong> — 쿠폰이나 멤버십 할인이 최종 금액에 반영된 결과를 결제 직전에 한눈에 확인하기 어려워, 결제 후 "할인이 제대로 적용됐나" 불안감 유발</li>
+          <li><strong>주문 내역 재확인 경로 부재</strong> — 결제 단계에서 주문한 메뉴를 다시 확인하려면 뒤로 이동해야 하여, 불필요한 이탈과 주문 포기로 이어지는 경우 발생</li>
         </ul>
 
         <div class="doc-divider"></div>
 
-        <h3>사용자 시나리오</h3>
+        <h3>💡 UX 설계 근거</h3>
+        <ul>
+          <li><strong>주문정보 섹션(접기/펼치기)</strong> — 선택한 메뉴를 재확인할 수 있도록 토글 구조를 제공하여, 정보 과부하 없이 필요 시 상세 내역을 확인할 수 있습니다</li>
+          <li><strong>프로모션/쿠폰 사용 진입점 노출</strong> — 결제 전 할인 기회를 인지시켜 사용자 만족도를 높이고, 쿠폰 미사용으로 인한 결제 후 불만을 방지합니다</li>
+          <li><strong>포장 여부 라디오 버튼</strong> — 간단한 2택(전체 포장/포장 안 함) 선택으로 의사결정 부담을 최소화합니다</li>
+          <li><strong>T우주패스/기프트카드 등 다양한 결제수단 지원</strong> — 멤버십과 선불카드를 먼저 차감하여 실결제 금액을 줄이는 전략적 배치입니다</li>
+          <li><strong>결제수단 그리드(3x2)</strong> — 투썸페이/신용카드/간편결제 등 6종을 시각적으로 한눈에 비교 선택할 수 있습니다</li>
+          <li><strong>최종 결제금액 강조 표시</strong> — 할인 적용 후 실결제 금액을 굵은 폰트로 강조하여 결제 전 최종 확인을 유도합니다</li>
+          <li><strong>유의사항 동의</strong> — 접기/펼치기 구조로 법적 요건을 충족하면서도 화면 공간을 효율적으로 사용합니다</li>
+        </ul>
+
+        <div class="doc-divider"></div>
+
+        <h3>📋 사용자 시나리오</h3>
         <table class="info-table">
-          <tr><th>표준 결제</th><td>주문정보 확인 &#8594; 결제수단 선택(신용카드) &#8594; 결제하기</td></tr>
-          <tr><th>쿠폰 적용</th><td>프로모션 쿠폰 사용 &#8594; 할인 적용 &#8594; 결제</td></tr>
-          <tr><th>멤버십 활용</th><td>T우주패스 적용 &#8594; 기프트카드 잔액 사용 &#8594; 잔액 카드결제</td></tr>
+          <tr><th>표준 결제</th><td>주문정보 확인 → 결제수단 선택(신용카드) → 결제하기</td></tr>
+          <tr><th>쿠폰 적용</th><td>프로모션 쿠폰 사용 → 할인 적용 → 결제</td></tr>
+          <tr><th>멤버십 활용</th><td>T우주패스 적용 → 기프트카드 잔액 사용 → 잔액 카드결제</td></tr>
         </table>
+
+        <div class="doc-divider"></div>
+
+        <h3>📈 기대 효과</h3>
+        <p style="margin-bottom:12px; color:#555;">결제 정보 입력 플로우 비교</p>
+        <div class="scenario-flow" style="margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:700; color:#991b1b; min-width:36px;">기존</span>
+          <div class="sf-item">쿠폰 화면</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">포장 선택</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">결제수단</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">금액 확인</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item">결제</div>
+        </div>
+        <div class="scenario-flow" style="margin-bottom:20px;">
+          <span style="font-size:12px; font-weight:700; color:#065f46; min-width:36px;">개선</span>
+          <div class="sf-item active">한 화면에서 전체 입력</div>
+          <div class="sf-arrow">→</div>
+          <div class="sf-item active">결제</div>
+        </div>
+
+        <div class="intent-box" style="background:#ecfdf5; border-color:#6ee7b7;">
+          <div class="intent-title" style="color:#065f46;">✅ 기대 성과</div>
+          <ul>
+            <li><strong>결제 단계 60% 단축</strong> — 쿠폰·포장·결제수단·금액 확인을 한 화면에 통합하여 기존 5단계를 2단계로 단축, 결제 이탈률 감소 기대</li>
+            <li><strong>할인 적용 투명성 확보</strong> — 최종 결제금액을 실시간으로 강조 표시하여 할인이 정확히 반영되었음을 시각적으로 확인, 결제 후 불만 감소</li>
+            <li><strong>주문 포기율 감소</strong> — 주문 내역 접기/펼치기로 화면 이탈 없이 메뉴를 재확인할 수 있어, 결제 단계에서의 주문 포기율 감소 기대</li>
+          </ul>
+          <p style="font-size:11px; color:#065f46; margin-top:10px; padding-top:8px; border-top:1px dashed #6ee7b7;">※ 산정 기준: 화면 전환(탭) 수 기준 — 기존 = 쿠폰 화면 → 포장 선택 → 결제수단 → 금액 확인 → 결제(5단계), 개선 = 한 화면에서 전체 입력 → 결제(2단계)</p>
+        </div>
       </div>
 
       <!-- 3. 화면 구성요소 -->
@@ -822,22 +328,40 @@
         <span class="tag red">모바일 퍼스트</span>
       </div>
 
-      <!-- 6. 페이지 네비게이션 -->
-      <div class="doc-section" style="background:transparent;box-shadow:none;padding:0;">
-        <div class="page-nav">
-          <a class="nav-prev" href="cart-doc.html">
-            <span class="nav-label">&larr; 이전</span>
-            <span class="nav-title">장바구니</span>
-          </a>
-          <a class="nav-next" href="order-detail-doc.html">
-            <span class="nav-label">다음 &rarr;</span>
-            <span class="nav-title">주문 완료</span>
-          </a>
+      <!-- 하단 허브: 다른 화면 보기 -->
+      <div class="page-hub page-hub-bottom" style="margin-top:40px; padding-top:32px; border-top:2px solid #f0f0f0;">
+        <div class="page-hub-title">📑 다른 화면 보기</div>
+        <div class="page-hub-grid">
+          <div class="hub-group-label">진입</div>
+          <a href="store-select-doc.html"><div class="hub-icon">🏪</div><div class="hub-name">매장선택</div><div class="hub-desc">픽업 매장</div></a>
+          <div class="hub-group-label">탐색</div>
+          <a href="menu-doc.html"><div class="hub-icon">🏠</div><div class="hub-name">메뉴홈</div><div class="hub-desc">주문 진입점</div></a>
+          <a href="menu-list-doc.html"><div class="hub-icon">☕</div><div class="hub-name">메뉴목록</div><div class="hub-desc">메뉴 탐색</div></a>
+          <a href="category-coffee-doc.html"><div class="hub-icon">📂</div><div class="hub-name">카테고리</div><div class="hub-desc">카테고리 탐색</div></a>
+          <a href="menu-detail-doc.html"><div class="hub-icon">📋</div><div class="hub-name">메뉴상세</div><div class="hub-desc">옵션 선택</div></a>
+          <a href="favorites-doc.html"><div class="hub-icon">⭐</div><div class="hub-name">즐겨찾기</div><div class="hub-desc">빠른 재주문</div></a>
+          <div class="hub-group-label">결제</div>
+          <a href="cart-doc.html"><div class="hub-icon">🛒</div><div class="hub-name">장바구니</div><div class="hub-desc">주문 관리</div></a>
+          <div class="hub-current"><div class="hub-icon">💳</div><div class="hub-name">주문정보</div><div class="hub-desc">결제 진행</div></div>
+          <div class="hub-group-label">완료</div>
+          <a href="order-detail-doc.html"><div class="hub-icon">✅</div><div class="hub-name">주문완료</div><div class="hub-desc">주문 확인</div></a>
         </div>
       </div>
 
     </div>
   </div>
 
+  <script src="doc-common.js"></script>
+  <script>
+    initScrollSync({
+      targets: [
+        { key: 'orderDesign' },
+        { key: 'orderComponents' },
+        { key: 'orderInteraction' },
+        { key: 'orderTech' }
+      ],
+      defaultKey: 'orderDesign'
+    });
+  </script>
 </body>
 </html>

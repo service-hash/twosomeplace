@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>투썸오더 UX 제안서</title>
+  <link rel="stylesheet" href="doc-common.css">
+  <style>
+    /* ========================================
+       Index Page - Cover
+       ======================================== */
+    .index-wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    .cover {
+      text-align: center;
+      padding: 80px 40px 64px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d1a1a 50%, #3d1a1a 100%);
+      border-radius: 24px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(212,42,42,0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(212,42,42,0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .cover-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      background: #d42a2a;
+      border-radius: 16px;
+      font-size: 28px;
+      margin-bottom: 24px;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(212,42,42,0.4);
+    }
+
+    .cover h1 {
+      font-size: 42px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .cover .cover-subtitle {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .cover-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    .cover-meta span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .cover-meta .divider {
+      width: 1px;
+      height: 14px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ========================================
+       Index Page - Overview
+       ======================================== */
+    .overview-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .overview-section h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .overview-section h2 .icon {
+      width: 32px;
+      height: 32px;
+      background: #fef2f2;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .overview-section p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+
+    .overview-section p strong {
+      color: #333;
+    }
+
+    .challenge-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+
+    .challenge-box .challenge-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #991b1b;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .challenge-box p {
+      font-size: 14px;
+      color: #7f1d1d;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    /* ========================================
+       Index Page - KPI Cards
+       ======================================== */
+    .kpi-section {
+      margin-bottom: 24px;
+    }
+
+    .kpi-section h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .kpi-section h2 .icon {
+      width: 32px;
+      height: 32px;
+      background: #fef2f2;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .kpi-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #d42a2a;
+    }
+
+    .kpi-icon {
+      width: 48px;
+      height: 48px;
+      background: #fef2f2;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .kpi-number {
+      font-size: 36px;
+      font-weight: 800;
+      color: #d42a2a;
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -1px;
+    }
+
+    .kpi-unit {
+      font-size: 18px;
+      font-weight: 700;
+      color: #d42a2a;
+    }
+
+    .kpi-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 10px;
+    }
+
+    .kpi-desc {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       Index Page - Journey Map
+       ======================================== */
+    .journey-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .journey-section h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .journey-section h2 .icon {
+      width: 32px;
+      height: 32px;
+      background: #fef2f2;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .journey-subtitle {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 28px;
+    }
+
+    .journey-flow {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+
+    .journey-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      transition: transform 0.2s;
+      width: 100px;
+    }
+
+    .journey-node:hover {
+      transform: translateY(-3px);
+    }
+
+    .journey-dot {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #f0f0f0;
+      border: 2.5px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      margin-bottom: 8px;
+    }
+
+    .journey-node:hover .journey-dot {
+      border-color: #d42a2a;
+      box-shadow: 0 2px 12px rgba(212,42,42,0.25);
+      background: #fef2f2;
+    }
+
+    .journey-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .journey-node:hover .journey-label {
+      color: #d42a2a;
+    }
+
+    .journey-connector {
+      display: flex;
+      align-items: center;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .journey-connector .line {
+      width: 24px;
+      height: 2px;
+      background: #ddd;
+    }
+
+    .journey-connector .arrow {
+      color: #ccc;
+      font-size: 12px;
+      margin-left: -2px;
+    }
+
+    .journey-phase-labels {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .journey-phase {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 14px;
+    }
+
+    .phase-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .phase-dot.entry { background: #6366f1; }
+    .phase-dot.explore { background: #d42a2a; }
+    .phase-dot.checkout { background: #f59e0b; }
+    .phase-dot.complete { background: #10b981; }
+
+    .phase-text {
+      font-size: 12px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    /* Phase-colored dots */
+    .journey-node[data-phase="entry"] .journey-dot {
+      border-color: #c7d2fe;
+      background: #eef2ff;
+    }
+    .journey-node[data-phase="explore"] .journey-dot {
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+    .journey-node[data-phase="checkout"] .journey-dot {
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+    .journey-node[data-phase="complete"] .journey-dot {
+      border-color: #a7f3d0;
+      background: #ecfdf5;
+    }
+
+    /* ========================================
+       Index Page - Screen Grid
+       ======================================== */
+    .screen-section {
+      margin-bottom: 40px;
+    }
+
+    .screen-section > h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .screen-section > h2 .icon {
+      width: 32px;
+      height: 32px;
+      background: #fef2f2;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .screen-phase-group {
+      margin-bottom: 24px;
+    }
+
+    .screen-phase-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #444;
+      margin-bottom: 14px;
+      padding: 6px 14px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .screen-phase-label .phase-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .screen-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .screen-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      background: #fff;
+      border: 1.5px solid #e8e8e8;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .screen-card:hover {
+      border-color: #d42a2a;
+      box-shadow: 0 4px 16px rgba(212,42,42,0.12);
+      transform: translateY(-2px);
+    }
+
+    .screen-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .screen-card:hover .screen-card-icon {
+      background: #fef2f2;
+    }
+
+    .screen-card-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .screen-card-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 3px;
+    }
+
+    .screen-card-desc {
+      font-size: 12px;
+      color: #999;
+      line-height: 1.4;
+    }
+
+    .screen-card-arrow {
+      font-size: 14px;
+      color: #ccc;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+
+    .screen-card:hover .screen-card-arrow {
+      color: #d42a2a;
+    }
+
+    /* ========================================
+       Responsive
+       ======================================== */
+    @media (max-width: 960px) {
+      .index-wrapper {
+        padding: 24px 16px;
+      }
+
+      .cover {
+        padding: 56px 24px 48px;
+      }
+
+      .cover h1 {
+        font-size: 32px;
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .kpi-card {
+        padding: 24px 20px;
+      }
+
+      .kpi-number {
+        font-size: 30px;
+      }
+
+      .journey-flow {
+        gap: 4px;
+      }
+
+      .journey-node {
+        width: 72px;
+      }
+
+      .journey-dot {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+      }
+
+      .journey-connector .line {
+        width: 12px;
+      }
+
+      .journey-label {
+        font-size: 10px;
+      }
+
+      .screen-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .overview-section,
+      .journey-section {
+        padding: 28px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cover h1 {
+        font-size: 26px;
+      }
+
+      .cover .cover-subtitle {
+        font-size: 14px;
+      }
+
+      .cover-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .cover-meta .divider {
+        display: none;
+      }
+
+      .journey-flow {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="index-wrapper">
+
+    <!-- ========================================
+        1. Cover Section
+        ======================================== -->
+    <section class="cover">
+      <div class="cover-logo">&#9749;</div>
+      <h1>투썸오더 UX 제안서</h1>
+      <p class="cover-subtitle">투썸플레이스 모바일 주문 앱 UX/UI 개선 제안</p>
+      <div class="cover-meta">
+        <span>2026.02</span>
+        <div class="divider"></div>
+        <span>v1.0</span>
+      </div>
+    </section>
+
+    <!-- ========================================
+        2. Project Overview
+        ======================================== -->
+    <section class="overview-section">
+      <h2><span class="icon">&#128196;</span> 프로젝트 개요</h2>
+      <p>
+        본 제안서는 <strong>투썸플레이스 모바일 주문 앱</strong>의 사용자 경험 개선을 위한 UI/UX 제안입니다.
+        기존 앱의 복잡한 주문 동선을 분석하고, 사용자 행동 패턴을 기반으로
+        <strong>재주문, 메뉴 탐색, 결제</strong> 경험을 최적화하는 방안을 제시합니다.
+      </p>
+      <p>
+        주문 흐름을 8단계 화면으로 구성하여, 각 화면별 문제점 진단과 개선안을 제안합니다.
+        Quick Order 1-tap 재주문, 최근 주문 메뉴 홈 노출, 인라인 수량 조정과 디저트 추천 등
+        핵심 개선 포인트를 통해 주문 전환율 향상과 사용자 만족도 개선을 목표로 합니다.
+      </p>
+      <div class="challenge-box">
+        <div class="challenge-label">&#9888;&#65039; 핵심 과제</div>
+        <p>
+          기존 앱의 복잡한 주문 동선을 단순화하고, 재주문/탐색/결제 경험을 최적화하여
+          사용자가 최소한의 단계로 원하는 메뉴를 주문할 수 있도록 전체 주문 여정을 재설계합니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================
+        3. KPI Cards
+        ======================================== -->
+    <section class="kpi-section">
+      <h2><span class="icon">&#128200;</span> 핵심 성과 지표</h2>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon">&#9889;</div>
+          <div class="kpi-number">60<span class="kpi-unit">%</span></div>
+          <div class="kpi-label">주문시간 단축</div>
+          <div class="kpi-desc">Quick Order 1-tap 재주문으로<br>기존 5단계를 2단계로 단축</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">&#128269;</div>
+          <div class="kpi-number">67<span class="kpi-unit">%</span></div>
+          <div class="kpi-label">접근경로 단축</div>
+          <div class="kpi-desc">최근 주문 메뉴를 홈에 노출하여<br>3단계 접근을 1단계로 단축</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">&#128722;</div>
+          <div class="kpi-number">40<span class="kpi-unit">%</span></div>
+          <div class="kpi-label">장바구니 단축</div>
+          <div class="kpi-desc">인라인 수량 조정 + 디저트 추천으로<br>장바구니 소요 시간 단축</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+        4. User Journey Map
+        ======================================== -->
+    <section class="journey-section">
+      <h2><span class="icon">&#128507;</span> 사용자 여정 맵</h2>
+      <p class="journey-subtitle">전체 주문 흐름을 8단계로 구성하여 각 화면별 개선안을 제안합니다. 각 단계를 클릭하면 해당 화면의 상세 설명서로 이동합니다.</p>
+
+      <div class="flow-map" style="justify-content:center;">
+        <!-- Step 1: 매장선택 -->
+        <div class="step">
+          <a href="store-select-doc.html"><div class="step-dot done">1</div></a>
+        </div>
+        <div class="step-line done"></div>
+        <!-- Step 2: 메뉴홈 -->
+        <div class="step">
+          <a href="menu-doc.html"><div class="step-dot done">2</div></a>
+        </div>
+        <div class="step-line done"></div>
+        <!-- Step 3: 메뉴목록 -->
+        <div class="step">
+          <a href="menu-list-doc.html"><div class="step-dot done">3</div></a>
+        </div>
+        <div class="step-line done"></div>
+        <!-- Step 4: 카테고리 -->
+        <div class="step">
+          <a href="category-coffee-doc.html"><div class="step-dot done">4</div></a>
+        </div>
+        <div class="step-line done"></div>
+        <!-- Step 5: 메뉴상세 -->
+        <div class="step">
+          <a href="menu-detail-doc.html"><div class="step-dot done">5</div></a>
+        </div>
+        <div class="step-line done"></div>
+        <!-- Step 6: 즐겨찾기 -->
+        <div class="step">
+          <a href="favorites-doc.html"><div class="step-dot done">6</div></a>
+        </div>
+        <div class="step-line done"></div>
+        <!-- Step 7: 장바구니 -->
+        <div class="step">
+          <a href="cart-doc.html"><div class="step-dot done">7</div></a>
+        </div>
+        <div class="step-line done"></div>
+        <!-- Step 8: 주문완료 -->
+        <div class="step">
+          <a href="order-detail-doc.html"><div class="step-dot active">8</div></a>
+        </div>
+      </div>
+      <div class="flow-map-labels" style="justify-content:center;">
+        <div class="step-label"><a href="store-select-doc.html">매장선택</a></div>
+        <div class="step-label"><a href="menu-doc.html">메뉴홈</a></div>
+        <div class="step-label"><a href="menu-list-doc.html">메뉴목록</a></div>
+        <div class="step-label"><a href="category-coffee-doc.html">카테고리</a></div>
+        <div class="step-label"><a href="menu-detail-doc.html">메뉴상세</a></div>
+        <div class="step-label"><a href="favorites-doc.html">즐겨찾기</a></div>
+        <div class="step-label"><a href="cart-doc.html">장바구니</a></div>
+        <div class="step-label"><a href="order-detail-doc.html">주문완료</a></div>
+      </div>
+
+      <div style="margin-top:24px; display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
+        <div class="journey-phase">
+          <div class="phase-dot entry"></div>
+          <span class="phase-text">진입</span>
+        </div>
+        <div class="journey-phase">
+          <div class="phase-dot explore"></div>
+          <span class="phase-text">탐색</span>
+        </div>
+        <div class="journey-phase">
+          <div class="phase-dot checkout"></div>
+          <span class="phase-text">결제</span>
+        </div>
+        <div class="journey-phase">
+          <div class="phase-dot complete"></div>
+          <span class="phase-text">완료</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+        5. Screen Proposals Grid
+        ======================================== -->
+    <section class="screen-section">
+      <h2><span class="icon">&#128241;</span> 화면별 제안서</h2>
+
+      <!-- 진입 -->
+      <div class="screen-phase-group">
+        <div class="screen-phase-label">
+          <span class="phase-indicator" style="background:#6366f1;"></span>
+          진입
+        </div>
+        <div class="screen-cards">
+          <a href="store-select-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#128205;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">매장선택</div>
+              <div class="screen-card-desc">주문할 매장을 검색하고 선택하는 진입 화면</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 탐색 -->
+      <div class="screen-phase-group">
+        <div class="screen-phase-label">
+          <span class="phase-indicator" style="background:#d42a2a;"></span>
+          탐색
+        </div>
+        <div class="screen-cards">
+          <a href="menu-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#127968;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">메뉴홈</div>
+              <div class="screen-card-desc">Quick Order, 최근 주문 등 주문 진입점</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+          <a href="menu-list-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#9749;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">메뉴목록</div>
+              <div class="screen-card-desc">NEW/커피/디저트 탭별 메뉴 탐색</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+          <a href="category-coffee-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#128218;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">카테고리</div>
+              <div class="screen-card-desc">서브 카테고리별 메뉴 필터링</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+          <a href="menu-detail-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#128203;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">메뉴상세</div>
+              <div class="screen-card-desc">옵션 선택, 영양정보, 장바구니 추가</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+          <a href="favorites-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#10084;&#65039;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">즐겨찾기</div>
+              <div class="screen-card-desc">자주 주문하는 메뉴 바로가기</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 결제 -->
+      <div class="screen-phase-group">
+        <div class="screen-phase-label">
+          <span class="phase-indicator" style="background:#f59e0b;"></span>
+          결제
+        </div>
+        <div class="screen-cards">
+          <a href="cart-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#128722;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">장바구니</div>
+              <div class="screen-card-desc">수량 조정, 디저트 추천, 결제 진행</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+          <a href="order-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#128179;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">주문정보</div>
+              <div class="screen-card-desc">주문 확인 및 결제 수단 선택</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- 완료 -->
+      <div class="screen-phase-group">
+        <div class="screen-phase-label">
+          <span class="phase-indicator" style="background:#10b981;"></span>
+          완료
+        </div>
+        <div class="screen-cards">
+          <a href="order-detail-doc.html" class="screen-card">
+            <div class="screen-card-icon">&#9989;</div>
+            <div class="screen-card-info">
+              <div class="screen-card-name">주문완료</div>
+              <div class="screen-card-desc">주문 접수 확인 및 진행 상태 추적</div>
+            </div>
+            <div class="screen-card-arrow">&#8594;</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>
